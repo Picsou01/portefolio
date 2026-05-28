@@ -1,0 +1,74 @@
+/* Variables — change tes couleurs et tailles ici */
+:root {
+    --couleur-fond: #0a0a0a;
+    --couleur-texte: #f5f5f5;
+    --couleur-accent: #00d9ff;
+    --espacement: 2rem;
+    --largeur-max: 1200px;
+    --police: system-ui, -apple-system, sans-serif;
+}
+
+/* Reset minimal — vire les marges par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base du body */
+body {
+    font-family: var(--police);
+    background: var(--couleur-fond);
+    color: var(--couleur-texte);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Header et navigation */
+header {
+    padding: var(--espacement);
+}
+
+nav {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+nav a {
+    color: var(--couleur-texte);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--couleur-accent);
+}
+
+/* Contenu principal */
+main {
+    max-width: var(--largeur-max);
+    margin: 0 auto;
+    padding: var(--espacement);
+}
+
+section {
+    min-height: 80vh;
+    padding: var(--espacement) 0;
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: 1rem;
+}
+
+footer {
+    text-align: center;
+    padding: var(--espacement);
+    opacity: 0.6;
+}

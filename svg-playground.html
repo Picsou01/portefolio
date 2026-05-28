@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terrain de jeu SVG — Apprentissage</title>
+
+<!-- ================================================================
+     TOUT LE CSS EST ICI POUR QUE LE FICHIER SOIT AUTONOME.
+     Quand tu auras compris, tu déplaceras ce CSS dans style.css
+     ================================================================ -->
+<style>
+    :root {
+        --fond: #0d0d12;
+        --carte: #16161f;
+        --texte: #e8e8ed;
+        --gris: #8a8a99;
+        --accent: #00d9ff;
+        --accent2: #ff006e;
+        --jaune: #ffbe0b;
+        --violet: #8338ec;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: system-ui, sans-serif;
+        background: var(--fond);
+        color: var(--texte);
+        line-height: 1.6;
+        padding: 2rem;
+    }
+
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .intro { color: var(--gris); margin-bottom: 3rem; max-width: 700px; }
+
+    /* Grille de cartes : chaque carte = 1 concept SVG */
+    .grille {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .carte {
+        background: var(--carte);
+        border: 1px solid #26262f;
+        border-radius: 12px;
+        padding: 1.5rem;
+    }
+
+    .carte h2 {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+        color: var(--accent);
+    }
+
+    .carte p {
+        font-size: 0.85rem;
+        color: var(--gris);
+        margin-bottom: 1rem;
+    }
+
+    .carte svg {
+        width: 100%;
+        height: 160px;
+        background: #0a0a0f;
+        border-radius: 8px;
+    }
+
+    code {
+        background: #0a0a0f;
+        padding: 0.1rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        color: var(--jaune);
+    }
+
+    /* ============================================================
+       ANIMATIONS CSS APPLIQUÉES AUX ÉLÉMENTS SVG
+       Principe clé : CSS anime les balises SVG comme du HTML
+       ============================================================ */
+
+    /* 1. Pulsation */
+    .pulse {
+        transform-origin: center;
+        animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50%      { transform: scale(1.25); opacity: 0.5; }
+    }
+
+    /* 2. Rotation */
+    .rotation {
+        transform-origin: center;
+        animation: rotation 4s linear infinite;
+    }
+    @keyframes rotation {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+    }
+
+    /* 3. Tracé qui se dessine — la technique stroke-dasharray
+       On cache le trait (offset = longueur), puis on le révèle (offset = 0) */
+    .trace {
+        stroke-dasharray: 300;       /* longueur approximative du chemin */
+        stroke-dashoffset: 300;      /* on décale = trait caché */
+        animation: dessiner 3s ease forwards infinite;
+    }
+    @keyframes dessiner {
+        from { stroke-dashoffset: 300; }  /* caché */
+        to   { stroke-dashoffset: 0; }    /* dessiné */
+    }
+
+    /* 4. Survol : le cercle grossit et change de couleur */
+    .interactif {
+        transition: all 0.4s ease;
+        transform-origin: center;
+        cursor: pointer;
+    }
+    .interactif:hover {
+        fill: var(--accent2);
+        transform: scale(1.2);
+    }
+
+    /* 5. Cible cliquée en JS (classe ajoutée par script.js) */
+    .cible {
+        transition: fill 0.5s ease, transform 0.5s ease;
+        transform-origin: center;
+        cursor: pointer;
+    }
+    .cible.active {
+        fill: var(--jaune);
+        transform: rotate(45deg) scale(1.1);
+    }
+</style>
+</head>
+<body>
+
+<h1>Terrain de jeu SVG</h1>
+<p class="intro">
+    Chaque carte montre un concept. Ouvre ce fichier dans PhpStorm, lis les
+    commentaires dans le code, modifie les valeurs et recharge la page pour voir
+    l'effet. C'est en bidouillant les chiffres que tu vas comprendre.
+</p>
+
+<div class="grille">
+
+    <!-- ============================================================
+         CARTE 1 : LE SYSTÈME DE COORDONNÉES (viewBox)
+         ============================================================ -->
+    <div class="carte">
+        <h2>1. viewBox & coordonnées</h2>
+        <p><code>viewBox="0 0 100 100"</code> = origine en haut à gauche, y vers le bas.</p>
+        <svg viewBox="0 0 100 100">
+            <!-- Les axes pour visualiser le repère -->
+            <line x1="0" y1="0" x2="100" y2="0" stroke="#333" stroke-width="0.5"/>
+            <line x1="0" y1="0" x2="0" y2="100" stroke="#333" stroke-width="0.5"/>
+            <!-- Point à l'origine (0,0) -->
+            <circle cx="0" cy="0" r="3" fill="var(--accent2)"/>
+            <text x="5" y="10" fill="#888" font-size="6">0,0 en haut à gauche</text>
+            <!-- Point au centre (50,50) -->
+            <circle cx="50" cy="50" r="3" fill="var(--accent)"/>
+            <text x="30" y="65" fill="#888" font-size="6">50,50 centre</text>
+            <!-- Point en bas à droite (100,100) -->
+            <circle cx="100" cy="100" r="3" fill="var(--jaune)"/>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 2 : LES FORMES DE BASE
+         ============================================================ -->
+    <div class="carte">
+        <h2>2. Formes de base</h2>
+        <p>rect, circle, ellipse, line — les briques élémentaires.</p>
+        <svg viewBox="0 0 200 100">
+            <!-- rect : x,y = coin haut-gauche ; rx = coins arrondis -->
+            <rect x="10" y="20" width="40" height="40" rx="5" fill="var(--accent)"/>
+            <!-- circle : cx,cy = centre ; r = rayon -->
+            <circle cx="90" cy="40" r="20" fill="var(--accent2)"/>
+            <!-- ellipse : rx et ry = rayons horizontal et vertical -->
+            <ellipse cx="150" cy="40" rx="25" ry="15" fill="var(--jaune)"/>
+            <!-- line : du point 1 au point 2 ; stroke obligatoire pour la voir -->
+            <line x1="10" y1="80" x2="190" y2="80" stroke="var(--violet)" stroke-width="3"/>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 3 : LE PATH — LIGNES DROITES
+         La balise la plus puissante. Mini-langage de commandes.
+         ============================================================ -->
+    <div class="carte">
+        <h2>3. Path — lignes</h2>
+        <p><code>M</code> move, <code>L</code> line, <code>Z</code> ferme le tracé.</p>
+        <svg viewBox="0 0 100 100">
+            <!-- M 20 20 : on déplace le crayon en (20,20)
+                 L 80 20 : on trace une ligne jusqu'à (80,20)
+                 L 50 80 : ligne jusqu'à (50,80)
+                 Z       : on ferme (retour au départ) -->
+            <path d="M 20 20 L 80 20 L 50 80 Z"
+                  fill="var(--accent)" stroke="white" stroke-width="2"/>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 4 : LE PATH — COURBES
+         ============================================================ -->
+    <div class="carte">
+        <h2>4. Path — courbes</h2>
+        <p><code>Q</code> courbe quadratique, <code>C</code> courbe de Bézier.</p>
+        <svg viewBox="0 0 100 100">
+            <!-- Q px py x y : point de contrôle (px,py) puis point final (x,y) -->
+            <path d="M 10 70 Q 50 10 90 70"
+                  stroke="var(--accent2)" stroke-width="3" fill="none"/>
+            <!-- C : deux points de contrôle pour une courbe en S -->
+            <path d="M 10 40 C 30 0, 70 80, 90 40"
+                  stroke="var(--jaune)" stroke-width="3" fill="none"/>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 5 : FILL, STROKE, OPACITY
+         ============================================================ -->
+    <div class="carte">
+        <h2>5. Remplissage & contour</h2>
+        <p>fill, stroke, stroke-width, opacity, stroke-dasharray.</p>
+        <svg viewBox="0 0 200 100">
+            <!-- Rempli sans contour -->
+            <circle cx="40" cy="50" r="25" fill="var(--accent)"/>
+            <!-- Contour sans remplissage (fill="none") -->
+            <circle cx="100" cy="50" r="25" fill="none"
+                    stroke="var(--accent2)" stroke-width="4"/>
+            <!-- Contour en pointillés + semi-transparent -->
+            <circle cx="160" cy="50" r="25" fill="var(--jaune)" opacity="0.5"
+                    stroke="white" stroke-width="3" stroke-dasharray="8 4"/>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 6 : LES DÉGRADÉS
+         Se définissent dans <defs> puis se référencent par id
+         ============================================================ -->
+    <div class="carte">
+        <h2>6. Dégradés</h2>
+        <p>Définis dans <code>&lt;defs&gt;</code>, appelés via <code>url(#id)</code>.</p>
+        <svg viewBox="0 0 200 100">
+            <defs>
+                <!-- Dégradé linéaire -->
+                <linearGradient id="degLineaire" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="var(--accent)"/>
+                    <stop offset="100%" stop-color="var(--violet)"/>
+                </linearGradient>
+                <!-- Dégradé radial (du centre vers l'extérieur) -->
+                <radialGradient id="degRadial">
+                    <stop offset="0%" stop-color="var(--jaune)"/>
+                    <stop offset="100%" stop-color="var(--accent2)"/>
+                </radialGradient>
+            </defs>
+            <rect x="10" y="25" width="80" height="50" rx="8" fill="url(#degLineaire)"/>
+            <circle cx="150" cy="50" r="30" fill="url(#degRadial)"/>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 7 : ANIMATION CSS — PULSE
+         ============================================================ -->
+    <div class="carte">
+        <h2>7. Animation : pulse</h2>
+        <p>Classe CSS <code>.pulse</code> avec <code>@keyframes</code> + scale.</p>
+        <svg viewBox="0 0 100 100">
+            <circle class="pulse" cx="50" cy="50" r="25" fill="var(--accent)"/>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 8 : ANIMATION CSS — ROTATION
+         ============================================================ -->
+    <div class="carte">
+        <h2>8. Animation : rotation</h2>
+        <p>Astuce : <code>transform-origin: center</code> pour tourner au centre.</p>
+        <svg viewBox="0 0 100 100">
+            <!-- Un groupe <g> permet d'animer plusieurs formes ensemble -->
+            <g class="rotation">
+                <rect x="40" y="15" width="20" height="20" fill="var(--accent2)"/>
+                <rect x="40" y="65" width="20" height="20" fill="var(--jaune)"/>
+                <rect x="15" y="40" width="20" height="20" fill="var(--accent)"/>
+                <rect x="65" y="40" width="20" height="20" fill="var(--violet)"/>
+            </g>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 9 : TRACÉ QUI SE DESSINE (stroke-dasharray)
+         L'effet "signature" le plus impressionnant pour un portfolio
+         ============================================================ -->
+    <div class="carte">
+        <h2>9. Tracé qui se dessine</h2>
+        <p>Technique <code>stroke-dasharray</code> + <code>stroke-dashoffset</code>.</p>
+        <svg viewBox="0 0 100 100">
+            <path class="trace" d="M 20 50 Q 50 10 80 50 T 20 50"
+                  stroke="var(--accent)" stroke-width="3" fill="none"
+                  stroke-linecap="round"/>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 10 : INTERACTIVITÉ CSS (:hover)
+         ============================================================ -->
+    <div class="carte">
+        <h2>10. Survol (CSS pur)</h2>
+        <p>Passe la souris sur le cercle. Aucun JS, juste <code>:hover</code>.</p>
+        <svg viewBox="0 0 100 100">
+            <circle class="interactif" cx="50" cy="50" r="25" fill="var(--violet)"/>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 11 : INTERACTIVITÉ JS (clic)
+         Le pattern roi : JS ajoute une classe, CSS fait l'animation
+         ============================================================ -->
+    <div class="carte">
+        <h2>11. Clic (JavaScript)</h2>
+        <p>Clique le carré. Le JS bascule la classe <code>.active</code>.</p>
+        <svg viewBox="0 0 100 100">
+            <rect class="cible" x="30" y="30" width="40" height="40" rx="6"
+                  fill="var(--accent)"/>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 12 : FILTRES SVG
+         Effets visuels avancés (flou, ombre, texture organique)
+         ============================================================ -->
+    <div class="carte">
+        <h2>12. Filtres</h2>
+        <p>feGaussianBlur (flou), feTurbulence (texture organique).</p>
+        <svg viewBox="0 0 200 100">
+            <defs>
+                <!-- Flou gaussien -->
+                <filter id="flou">
+                    <feGaussianBlur stdDeviation="3"/>
+                </filter>
+                <!-- Bruit organique : génère une texture, utile pour des effets -->
+                <filter id="bruit">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3"/>
+                    <feColorMatrix values="0 0 0 0 0
+                                           0.8 0.8 0.8 0 0
+                                           1 1 1 0 0
+                                           0 0 0 1 0"/>
+                </filter>
+            </defs>
+            <circle cx="55" cy="50" r="30" fill="var(--accent2)" filter="url(#flou)"/>
+            <rect x="110" y="20" width="60" height="60" rx="8" filter="url(#bruit)"/>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 13 : TEXTE
+         ============================================================ -->
+    <div class="carte">
+        <h2>13. Texte</h2>
+        <p>Le texte SVG se stylise et s'anime comme une forme.</p>
+        <svg viewBox="0 0 200 100">
+            <text x="100" y="55" fill="var(--accent)" font-size="28"
+                  font-weight="bold" text-anchor="middle">SVG</text>
+            <!-- text-anchor="middle" centre le texte sur x -->
+            <text x="100" y="80" fill="var(--gris)" font-size="10"
+                  text-anchor="middle">stylable & animable</text>
+        </svg>
+    </div>
+
+    <!-- ============================================================
+         CARTE 14 : MINI-PROJET — un logo animé complet
+         Combine groupe, dégradé, rotation et tracé
+         ============================================================ -->
+    <div class="carte">
+        <h2>14. Mini-logo animé</h2>
+        <p>Combinaison de tout : dégradé + rotation + pulse.</p>
+        <svg viewBox="0 0 100 100">
+            <defs>
+                <linearGradient id="logoDeg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="var(--accent)"/>
+                    <stop offset="100%" stop-color="var(--accent2)"/>
+                </linearGradient>
+            </defs>
+            <circle class="pulse" cx="50" cy="50" r="35" fill="none"
+                    stroke="url(#logoDeg)" stroke-width="2" opacity="0.4"/>
+            <g class="rotation">
+                <path d="M 50 25 L 65 50 L 50 75 L 35 50 Z" fill="url(#logoDeg)"/>
+            </g>
+        </svg>
+    </div>
+
+</div>
+
+<!-- ================================================================
+     TOUT LE JS EST ICI. Quand tu auras compris, déplace dans script.js
+     ================================================================ -->
+<script>
+    // On attend que le HTML soit chargé avant de manipuler les éléments
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // CARTE 11 : on récupère le carré "cible"
+        const cible = document.querySelector('.cible');
+
+        // On écoute le clic et on bascule la classe .active
+        // (CSS s'occupe de l'animation, JS ne fait que basculer la classe)
+        cible.addEventListener('click', () => {
+            cible.classList.toggle('active');
+        });
+
+        console.log('Terrain de jeu SVG prêt — modifie le code et recharge !');
+    });
+</script>
+
+</body>
+</html>
