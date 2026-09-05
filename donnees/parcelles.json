@@ -63,27 +63,32 @@
         {
           "titre": "Cahier des charges fonctionnel",
           "type": "Document",
-          "etat": "a-deposer"
+          "etat": "en-ligne",
+          "href": "assets/preuves/prixy-cahier-des-charges-fonctionnel.pdf"
         },
         {
           "titre": "Cahier des charges technique",
           "type": "Document",
-          "etat": "a-deposer"
+          "etat": "en-ligne",
+          "href": "assets/preuves/prixy-cahier-des-charges-technique.pdf"
         },
         {
           "titre": "Documentation technique",
           "type": "Document",
-          "etat": "a-deposer"
+          "etat": "en-ligne",
+          "href": "assets/preuves/prixy-documentation-technique.pdf"
         },
         {
           "titre": "Document de maquettes - 13 écrans",
           "type": "Maquettes",
-          "etat": "a-deposer"
+          "etat": "en-ligne",
+          "href": "assets/preuves/prixy-document-de-maquettes.pdf"
         },
         {
-          "titre": "Planning et comptes rendus de suivi",
+          "titre": "Planning réalisé comparé au planning prévu",
           "type": "Suivi de projet",
-          "etat": "a-deposer"
+          "etat": "en-ligne",
+          "href": "assets/preuves/prixy-planning-realise-vs-planifie.pdf"
         }
       ],
       "prouve": [
@@ -140,14 +145,16 @@
           "href": "https://virealys.labo.infochartreux.fr"
         },
         {
-          "titre": "Captures d'écran du site",
-          "type": "Captures",
-          "etat": "a-deposer"
+          "titre": "Dossier de rendu final - conception, référencement et validation des consignes",
+          "type": "Document",
+          "etat": "en-ligne",
+          "href": "assets/preuves/virealys-dossier-de-rendu.pdf"
         },
         {
-          "titre": "Procédure de déploiement",
-          "type": "Document",
-          "etat": "a-deposer"
+          "titre": "Dépôt public du thème - historique des commits",
+          "type": "Dépôt",
+          "etat": "en-ligne",
+          "href": "https://github.com/Picsou01/theme-personnalise-wordpress"
         }
       ],
       "prouve": [
@@ -231,9 +238,10 @@
           "etat": "a-deposer"
         },
         {
-          "titre": "CV et profil professionnel",
+          "titre": "CV - version publique, coordonnées personnelles retirées",
           "type": "Identité",
-          "etat": "a-deposer"
+          "etat": "en-ligne",
+          "href": "assets/preuves/cv-mael-davidenko.pdf"
         },
         {
           "titre": "Compte rendu de veille technologique",
@@ -414,11 +422,6 @@
           "href": "assets/preuves/journal-de-suivi-quotidien.pdf"
         },
         {
-          "titre": "Compte rendu d'intervention - vidéosurveillance",
-          "type": "Compte rendu",
-          "etat": "a-deposer"
-        },
-        {
           "titre": "Organigramme de la mairie et position du stagiaire",
           "type": "Schéma",
           "etat": "en-ligne",
@@ -555,21 +558,10 @@
           "note": "L'administration du site : le guide en six missions et l'assistant d'installation."
         },
         {
-          "titre": "Cahier des charges validé avec le comité de communication",
-          "type": "Document",
-          "etat": "a-deposer"
-        },
-        {
-          "titre": "Modèles validés par le maire - 26 juin 2026",
-          "type": "Maquettes",
-          "etat": "a-deposer"
-        },
-        {
-          "titre": "Historique des commits du thème douvres-enfant",
-          "type": "Dépôt",
-          "etat": "en-ligne",
-          "note": "Dépôt public. Le code du thème communal reste chez la mairie ; celui de ce portfolio est ici.",
-          "href": "https://github.com/Picsou01/portefolio"
+          "titre": "Thème douvres-enfant - code remis à la commune",
+          "type": "Livrable",
+          "etat": "livre",
+          "note": "Dépôt public. Le code du thème communal reste chez la mairie ; celui de ce portfolio est ici."
         },
         {
           "titre": "Support de soutenance finale",
@@ -637,14 +629,10 @@
       ],
       "preuves": [
         {
-          "titre": "Modèle de lettre d'information municipale",
-          "type": "Livrable",
-          "etat": "a-deposer"
-        },
-        {
-          "titre": "Proposition de newsletter numérique",
-          "type": "Document",
-          "etat": "a-deposer"
+          "titre": "Rapport de stage - section « Les autres missions confiées »",
+          "type": "Rapport",
+          "etat": "en-ligne",
+          "href": "assets/preuves/rapport-de-stage.pdf"
         }
       ],
       "prouve": [
@@ -737,12 +725,6 @@
           "etat": "en-ligne",
           "href": "assets/preuves/rapport-de-stage.pdf",
           "note": "Annexe 1 du rapport de stage, avec le compte rendu du test de restauration."
-        },
-        {
-          "titre": "Compte rendu de formation du personnel",
-          "type": "Compte rendu",
-          "etat": "a-deposer",
-          "note": "À produire à l'issue de la prolongation de stage."
         }
       ],
       "prouve": [

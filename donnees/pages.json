@@ -109,13 +109,15 @@
         },
         {
           "titre": "Mes outils",
-          "aCompleter": "Cette section décrit l'outillage que j'ai mis en place. <strong>Vérifie et ajuste chaque ligne avant l'oral</strong> : ne défends jamais un outil que tu n'utilises pas réellement. Une veille modeste mais vraie vaut mieux qu'un dispositif impressionnant et fictif, le jury demandera à voir.",
           "liste": [
-            "<strong>Agrégateur de flux</strong> - un lecteur RSS regroupant les journaux officiels des projets suivis, pour ne pas dépendre d'un algorithme de recommandation. <em>À nommer.</em>",
-            "<strong>Sources primaires suivies</strong>, le blog de développement de WordPress, les notes de version PHP, les publications de l'ANSSI sur l'hygiène informatique. <em>À confirmer et compléter.</em>",
-            "<strong>Mise en pratique</strong> : le concours « Passe ton Hack », où la veille en sécurité se transforme en exercice.",
-            "<strong>Journal de bord</strong> - le bloc-notes de classe, où j'ai tenu mon journal quotidien d'activités pendant tout le stage.",
-            "<strong>Diffusion</strong> - ce portfolio lui-même, et le dépôt public du code. <em>Le référentiel valorise un lieu de diffusion : c'est ici.</em>"
+            "<strong>Les sources primaires, suivies directement.</strong> Le blog de développement de WordPress pour le moteur de blocs, les notes de version de PHP pour le langage, les publications de l'ANSSI pour l'hygiène informatique. Trois sources qui engagent leur auteur, plutôt qu'un fil d'actualité qui trierait à ma place.",
+            "<strong>L'expérimentation, avant tout usage réel.</strong> Un conteneur Docker jetable, monté puis détruit : c'est là que j'ai appris Docker lui-même et le format WXR de WordPress, et c'est là que j'ai écarté WP-Cron avant de l'avoir livré.",
+            "<strong>La mise en pratique en sécurité.</strong> Le concours « Passe ton Hack », où la veille cesse d'être une lecture pour devenir un exercice sous contrainte de temps.",
+            "<strong>Le journal de bord.</strong> Le bloc-notes de classe, où j'ai tenu jour après jour, pendant tout le stage, le relevé de mes activités et de mes lectures.",
+            "<strong>La diffusion.</strong> Ce portfolio, et le dépôt public qui l'accompagne. Le référentiel valorise un lieu où la veille se restitue : c'est ici."
+          ],
+          "paras": [
+            "Un dispositif de veille se juge à ce qu'il permet de décider, pas à son inventaire d'outils. Le mien tient en cinq gestes, tous vérifiables :"
           ]
         }
       ]
@@ -240,14 +242,17 @@
         {
           "titre": "Mon projet professionnel",
           "paras": [
-            "Le stage a déplacé ce que je croyais chercher. Je pensais venir écrire du code : j'ai surtout appris à écouter, à expliquer, et à traduire l'informatique pour des gens qui ne la parlent pas. C'est ce qui m'intéresse désormais autant que la technique : construire des outils que leurs utilisateurs peuvent conduire sans moi."
-          ],
-          "aCompleter": "Complète ce paragraphe avec ta suite concrète : poursuite d'études visée, type d'alternance ou d'entreprise recherché pour la seconde année, spécialité que tu veux approfondir. Le référentiel évalue explicitement « développer son projet professionnel », une intention datée et située vaut mieux qu'une déclaration générale."
+            "Le stage a déplacé ce que je croyais chercher. Je pensais venir écrire du code : j'ai surtout appris à écouter, à expliquer, et à traduire l'informatique pour des gens qui ne la parlent pas. C'est ce qui m'intéresse désormais autant que la technique : construire des outils que leurs utilisateurs peuvent conduire sans moi.",
+            "Cette suite n'est pas restée une intention : la commune m'a confié la maintenance de son site après le stage, et j'ai engagé la création d'une micro-entreprise pour porter cette prestation, puis, à terme, l'édition de mes propres logiciels. Un premier client qui est aussi le commanditaire de mon stage, c'est la meilleure preuve que je pouvais espérer que le travail livré tient une fois le stagiaire parti.",
+            "Pour la seconde année, je cherche à approfondir le développement applicatif là où il rencontre de vraies contraintes d'exploitation, plutôt qu'un cadre purement scolaire : une structure qui livre en production, et qui doit ensuite vivre avec ce qu'elle a livré.",
+            "Au-delà du BTS, je vise une poursuite d'études en informatique, et je regarde sérieusement du côté des universités américaines. C'est une ambition, pas un dossier déposé, et je la nomme pour ce qu'elle change dès maintenant : elle m'oriente vers la rigueur d'ingénierie et les fondations, plutôt que vers l'empilement d'outils."
+          ]
         },
         {
           "titre": "Mon identité professionnelle en ligne",
           "paras": [
-            "Ce portfolio en est la pièce centrale. Il est accompagné d'un dépôt public où figure le code de mes projets, l'historique des commits étant, dans le référentiel E5, une preuve recevable de participation et d'évolution."
+            "Ce portfolio en est la pièce centrale. Il est accompagné d'un dépôt public où figure le code de mes projets, l'historique des commits étant, dans le référentiel E5, une preuve recevable de participation et d'évolution.",
+            "Le dépôt du thème WordPress réalisé pour le TP VIREALYS y est également public : il donne à lire, commit après commit, la façon dont un thème se construit et se corrige."
           ],
           "liens": [
             {
@@ -255,7 +260,7 @@
               "cle": "github"
             }
           ],
-          "aCompleter": "Renseigne l'URL de ton dépôt dans <code>donnees/cadastre.json</code> (champs <code>github</code> et <code>githubLabel</code>), puis relance <code>python outils/arpenteur.py</code> : le lien se mettra à jour partout d'un coup."
+          "apres": "Le thème VIREALYS se consulte séparément : <a class=\"lien\" href=\"https://github.com/Picsou01/theme-personnalise-wordpress\">github.com/Picsou01/theme-personnalise-wordpress</a>."
         }
       ]
     },
@@ -290,13 +295,16 @@
           "titre": "Éditeur du site",
           "paras": [
             "Ce site est édité à titre personnel par <strong>Maël Davidenko</strong>, étudiant en première année de BTS Services informatiques aux organisations, option SLAM, à l'Institution des Chartreux (SUP ALTA), Lyon.",
-            "Il constitue le portfolio présenté à l'épreuve E5 « Support et mise à disposition de services informatiques », session 2027. Il n'a aucune vocation commerciale."
-          ],
-          "aCompleter": "Ajoute ici une adresse de contact (courriel) avant la mise en ligne : un site publiquement accessible doit permettre de joindre son éditeur."
+            "Il constitue le portfolio présenté à l'épreuve E5 « Support et mise à disposition de services informatiques », session 2027. Il n'a aucune vocation commerciale.",
+            "Contact : <a class=\"lien\" href=\"mailto:mael.davidenko@outlook.fr\">mael.davidenko@outlook.fr</a>. Toute demande de correction, de retrait, ou tout signalement d'une difficulté d'accès à une information peut être adressée à cette adresse."
+          ]
         },
         {
           "titre": "Hébergement",
-          "aCompleter": "À renseigner à la mise en ligne : nom de l'hébergeur et son adresse. Si tu passes par GitHub Pages, c'est GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Vérifie l'information au moment de publier plutôt que de recopier celle-ci."
+          "paras": [
+            "Ce site est hébergé par <strong>GitHub, Inc.</strong>, 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis, au travers du service GitHub Pages, qui sert directement les fichiers statiques du dépôt public.",
+            "L'hébergeur est situé hors de l'Union européenne. Cela reste sans conséquence pour le visiteur : le site ne collecte, ne transmet et ne stocke aucune donnée personnelle, comme détaillé ci-dessous."
+          ]
         },
         {
           "titre": "Données personnelles et traceurs",
