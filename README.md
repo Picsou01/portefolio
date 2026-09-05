@@ -3,6 +3,8 @@
 Portfolio de **Maël Davidenko**, BTS SIO option SLAM, session 2027.
 Épreuve **E5 : Support et mise à disposition de services informatiques**.
 
+**En ligne : <https://picsou01.github.io/portefolio/>**
+
 Le site présente les neuf réalisations professionnelles du tableau de synthèse
 officiel et les six compétences du bloc 1, sous la forme d'un **plan cadastral
 arpentable** : chaque croix du tableau est une borne cliquable qui mène à la
@@ -156,6 +158,25 @@ accompagne ce portfolio :
   apposition après une virgule.
 - **Espaces insécables** avant `: ; ! ?` et autour des guillemets, pour qu'aucun
   signe ne se retrouve orphelin en début de ligne.
+
+---
+
+## Mise en ligne
+
+Le site est publié par GitHub Pages depuis la branche `main`, à la racine du
+dépôt. Un fichier `.nojekyll` demande à Pages de servir les fichiers tels
+quels, sans les passer par Jekyll.
+
+Tous les chemins du site sont relatifs, jamais absolus : le site fonctionne
+donc aussi bien à la racine d'un domaine que dans un sous-dossier comme
+`/portefolio/`, et en ouvrant `index.html` en local.
+
+Publier une mise à jour :
+
+```bash
+python outils/arpenteur.py
+git add -A && git commit -m "..." && git push
+```
 
 ---
 
