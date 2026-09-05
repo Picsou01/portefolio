@@ -21,8 +21,8 @@
     "phrase": "Je ne pars pas en laissant des promesses, je reste pour les tenir.",
     "phraseSource": "Conclusion du rapport de stage - juillet 2026",
     "accroche": [
-      "J'ai commencé par écrire des jeux en Python sur une calculatrice. Sur un écran de cette taille, on apprend vite que ce n'est pas la puissance de la machine qui compte, mais la clarté de ce qu'on lui demande. C'est ce qui m'a conduit en SLAM, et c'est encore ce qui guide ma façon de construire : des outils que d'autres peuvent reprendre et faire vivre sans moi.",
-      "Le reste tient à une curiosité qui ne se range pas. Elle m'a fait choisir une mairie plutôt qu'une agence pour mon premier stage : un système d'information complet, aucun informaticien, et des questions qui n'étaient pas seulement techniques. J'y ai écrit moins de code que je ne l'imaginais, et j'y ai appris à écouter, à expliquer, et à traduire l'informatique pour ceux qui ne la parlent pas."
+      "J'ai commencé par écrire des jeux en Python sur une calculatrice. Sur un écran de cette taille, on apprend vite que ce n'est pas la puissance de la machine qui compte, mais la clarté de ce qu'on lui demande. C'est ce qui m'a conduit en SLAM, et c'est encore ce qui guide ma façon de construire : des outils que d'autres peuvent reprendre et faire vivre sans moi.",
+      "Le reste tient à une curiosité qui ne se range pas. Elle m'a fait choisir une mairie plutôt qu'une agence pour mon premier stage : un système d'information complet, aucun informaticien, et des questions qui n'étaient pas seulement techniques. J'y ai écrit moins de code que je ne l'imaginais, et j'y ai appris à écouter, à expliquer, et à traduire l'informatique pour ceux qui ne la parlent pas."
     ],
     "siteUrl": "https://picsou01.github.io/portefolio/"
   },
@@ -208,7 +208,7 @@
     {
       "num": "II",
       "titre": "Par réalisation",
-      "texte": "Les neuf travaux, du besoin au résultat : le contexte, la démarche suivie, ce qui a été livré et ce que j'en retiens.",
+      "texte": "Les neuf travaux, du besoin au résultat : le contexte, la démarche suivie, ce qui a été livré et ce que j'en retiens.",
       "href": "#realisations",
       "cible": "Voir les réalisations"
     },

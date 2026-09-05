@@ -7,7 +7,7 @@
       "titre": "Veille technologique",
       "sousTitre": "Ce que je surveille, comment, et ce que ça a changé",
       "numero": "1.6",
-      "description": "Stratégie de veille informationnelle : thèmes suivis, sources, méthode de sélection et exemples de décisions techniques issues de la veille.",
+      "description": "Stratégie de veille informationnelle : thèmes suivis, sources, méthode de sélection et exemples de décisions techniques issues de la veille.",
       "resume": "Une veille ne se prouve pas par une liste de flux RSS. Elle se prouve par des décisions. Cette page expose mes thèmes, mes sources et ma méthode, puis deux cas où une recherche a directement changé un choix technique.",
       "cartouche": [
         [
@@ -31,31 +31,31 @@
         {
           "titre": "Ma méthode, en trois temps",
           "paras": [
-            "Je m'en tiens à une méthode que j'applique depuis le début de ma formation, et que j'ai appliquée telle quelle en stage sur deux technologies que je ne connaissais pas, Docker et le format WXR de WordPress :"
+            "Je m'en tiens à une méthode que j'applique depuis le début de ma formation, et que j'ai appliquée telle quelle en stage sur deux technologies que je ne connaissais pas, Docker et le format WXR de WordPress :"
           ],
           "liste": [
-            "<strong>La documentation officielle d'abord.</strong> Avant tout tutoriel, la source primaire : la documentation de l'éditeur ou du projet. C'est la seule qui soit à jour et qui engage son auteur.",
+            "<strong>La documentation officielle d'abord.</strong> Avant tout tutoriel, la source primaire : la documentation de l'éditeur ou du projet. C'est la seule qui soit à jour et qui engage son auteur.",
             "<strong>L'expérimentation en local ensuite.</strong> Un conteneur Docker jetable, ou un environnement de test isolé. On casse, on recommence, sans conséquence.",
             "<strong>La mise en pratique sur le vrai projet enfin.</strong> Et seulement à ce moment-là."
           ],
-          "apres": "Cette progression n'est pas une lenteur, c'est une assurance : je n'introduis jamais dans un projet réel une technologie que je n'ai pas d'abord cassée ailleurs."
+          "apres": "Cette progression n'est pas une lenteur, c'est une assurance : je n'introduis jamais dans un projet réel une technologie que je n'ai pas d'abord cassée ailleurs."
         },
         {
           "titre": "Comment je choisis une source",
           "paras": [
-            "Le volume d'information disponible sur un sujet technique est infini ; la qualité, non. J'applique quatre critères de tri, dans cet ordre :"
+            "Le volume d'information disponible sur un sujet technique est infini ; la qualité, non. J'applique quatre critères de tri, dans cet ordre :"
           ],
           "liste": [
-            "<strong>L'auteur engage-t-il sa responsabilité ?</strong> La documentation d'un éditeur, l'avis d'une agence nationale ou le billet d'un mainteneur de projet valent mieux qu'un article anonyme optimisé pour le référencement.",
-            "<strong>La source est-elle datée, et récente ?</strong> Un article WordPress de 2018 décrit un moteur qui n'existe plus : le Full Site Editing a tout changé.",
-            "<strong>L'information est-elle vérifiable ailleurs ?</strong> Un mécanisme cité par une seule source se teste avant d'être cru.",
-            "<strong>Puis-je la reproduire ?</strong> Une source qui ne permet pas de refaire l'expérience n'est pas une source, c'est une opinion."
+            "<strong>L'auteur engage-t-il sa responsabilité ?</strong> La documentation d'un éditeur, l'avis d'une agence nationale ou le billet d'un mainteneur de projet valent mieux qu'un article anonyme optimisé pour le référencement.",
+            "<strong>La source est-elle datée, et récente ?</strong> Un article WordPress de 2018 décrit un moteur qui n'existe plus : le Full Site Editing a tout changé.",
+            "<strong>L'information est-elle vérifiable ailleurs ?</strong> Un mécanisme cité par une seule source se teste avant d'être cru.",
+            "<strong>Puis-je la reproduire ?</strong> Une source qui ne permet pas de refaire l'expérience n'est pas une source, c'est une opinion."
           ]
         },
         {
           "titre": "Mes quatre thèmes de veille",
           "paras": [
-            "Ils ne sont pas choisis par curiosité générale : chacun correspond à un besoin né d'un projet réel."
+            "Ils ne sont pas choisis par curiosité générale : chacun correspond à un besoin né d'un projet réel."
           ],
           "tableau": {
             "colonnes": [
@@ -71,7 +71,7 @@
               ],
               [
                 "Sécurité des applications web et des CMS",
-                "WordPress fait tourner plus de 40 % des sites du monde : sa popularité en fait une cible. Mon audit a mis en évidence des dépendances tierces à risque.",
+                "WordPress fait tourner plus de 40 % des sites du monde : sa popularité en fait une cible. Mon audit a mis en évidence des dépendances tierces à risque.",
                 "Vulnérabilités des extensions, hygiène des mises à jour, gestion des habilitations et des mots de passe."
               ],
               [
@@ -81,7 +81,7 @@
               ],
               [
                 "Intelligence artificielle et confidentialité des données",
-                "Mission explicite de ma lettre de mission en mairie : une collectivité détient les données de ses administrés.",
+                "Mission explicite de ma lettre de mission en mairie : une collectivité détient les données de ses administrés.",
                 "Modes d'hébergement, engagements sur la non-réutilisation des données, cadre réglementaire."
               ]
             ]
@@ -92,18 +92,18 @@
           "paras": [
             "<strong>Le besoin.</strong> Sur le nouveau site de la commune, les actualités anciennes doivent basculer seules en archives après un certain délai. Aucune intervention humaine ne doit être nécessaire.",
             "<strong>La solution évidente.</strong> WordPress propose WP-Cron, son planificateur de tâches intégré. C'est la première réponse de tous les tutoriels.",
-            "<strong>Ce que la documentation officielle m'a appris.</strong> WP-Cron n'est pas un vrai cron système : il ne se déclenche <em>qu'à la visite d'un internaute</em>. Sur le site d'un village à faible trafic, une tâche planifiée peut donc ne jamais partir, ou partir avec plusieurs jours de retard.",
-            "<strong>La décision.</strong> J'ai écarté WP-Cron au profit d'un <strong>transient</strong> (une valeur mise en cache avec une durée de vie) qui sert de garde-fou : il évite de relancer une requête lourde à chaque chargement de page tout en repassant régulièrement les vieilles actualités en archives, sans dépendre du trafic.",
+            "<strong>Ce que la documentation officielle m'a appris.</strong> WP-Cron n'est pas un vrai cron système : il ne se déclenche <em>qu'à la visite d'un internaute</em>. Sur le site d'un village à faible trafic, une tâche planifiée peut donc ne jamais partir, ou partir avec plusieurs jours de retard.",
+            "<strong>La décision.</strong> J'ai écarté WP-Cron au profit d'un <strong>transient</strong> (une valeur mise en cache avec une durée de vie) qui sert de garde-fou : il évite de relancer une requête lourde à chaque chargement de page tout en repassant régulièrement les vieilles actualités en archives, sans dépendre du trafic.",
             "<strong>Ce que ça prouve.</strong> Sans cette lecture, j'aurais livré à la mairie une fonctionnalité qui aurait semblé marcher en test et échoué en production, au moment exact où plus personne n'aurait été là pour la corriger."
           ]
         },
         {
           "titre": "Cas n° 2 - la veille a produit une note d'opportunité",
           "paras": [
-            "<strong>Le besoin.</strong> Ma lettre de mission demandait d'étudier l'usage de l'intelligence artificielle dans le fonctionnement communal. Deux usages sont ressortis : la production d'images pour la communication, et l'appui à la rédaction pour le secrétariat.",
-            "<strong>La contrainte, posée avant la recherche.</strong> Une mairie détient les données de ses administrés. Toute solution exposant des données nominatives à un tiers non maîtrisé était écartée d'emblée. La veille ne portait donc pas sur « quelle IA est la meilleure », mais sur <em>où vont les données</em>.",
-            "<strong>La solution retenue.</strong> L'offre d'Orange, opérateur dont la mairie est déjà cliente, ce qui évite d'ajouter un prestataire, conformément aux conclusions de mon audit. Son intérêt est son rôle de passerelle : accès à différents types d'IA, documents stockés chez l'opérateur, et données non utilisées à des fins d'entraînement.",
-            "<strong>Ce que ça prouve.</strong> Le référentiel E5 cite explicitement la « note d'opportunité sur l'intégration d'une technologie » comme preuve de veille. Celle-ci a été remise et figure dans mon rapport de stage."
+            "<strong>Le besoin.</strong> Ma lettre de mission demandait d'étudier l'usage de l'intelligence artificielle dans le fonctionnement communal. Deux usages sont ressortis : la production d'images pour la communication, et l'appui à la rédaction pour le secrétariat.",
+            "<strong>La contrainte, posée avant la recherche.</strong> Une mairie détient les données de ses administrés. Toute solution exposant des données nominatives à un tiers non maîtrisé était écartée d'emblée. La veille ne portait donc pas sur « quelle IA est la meilleure », mais sur <em>où vont les données</em>.",
+            "<strong>La solution retenue.</strong> L'offre d'Orange, opérateur dont la mairie est déjà cliente, ce qui évite d'ajouter un prestataire, conformément aux conclusions de mon audit. Son intérêt est son rôle de passerelle : accès à différents types d'IA, documents stockés chez l'opérateur, et données non utilisées à des fins d'entraînement.",
+            "<strong>Ce que ça prouve.</strong> Le référentiel E5 cite explicitement la « note d'opportunité sur l'intégration d'une technologie » comme preuve de veille. Celle-ci a été remise et figure dans mon rapport de stage."
           ],
           "lienParcelle": "p09-etude-ia"
         },
@@ -111,13 +111,13 @@
           "titre": "Mes outils",
           "liste": [
             "<strong>Les sources primaires, suivies directement.</strong> Le blog de développement de WordPress pour le moteur de blocs, les notes de version de PHP pour le langage, les publications de l'ANSSI pour l'hygiène informatique. Trois sources qui engagent leur auteur, plutôt qu'un fil d'actualité qui trierait à ma place.",
-            "<strong>L'expérimentation, avant tout usage réel.</strong> Un conteneur Docker jetable, monté puis détruit : c'est là que j'ai appris Docker lui-même et le format WXR de WordPress, et c'est là que j'ai écarté WP-Cron avant de l'avoir livré.",
-            "<strong>La mise en pratique en sécurité.</strong> Le concours « Passe ton Hack », où la veille cesse d'être une lecture pour devenir un exercice sous contrainte de temps.",
+            "<strong>L'expérimentation, avant tout usage réel.</strong> Un conteneur Docker jetable, monté puis détruit : c'est là que j'ai appris Docker lui-même et le format WXR de WordPress, et c'est là que j'ai écarté WP-Cron avant de l'avoir livré.",
+            "<strong>La mise en pratique en sécurité.</strong> Le concours « Passe ton Hack », où la veille cesse d'être une lecture pour devenir un exercice sous contrainte de temps.",
             "<strong>Le journal de bord.</strong> Le bloc-notes de classe, où j'ai tenu jour après jour, pendant tout le stage, le relevé de mes activités et de mes lectures.",
-            "<strong>La diffusion.</strong> Ce portfolio, et le dépôt public qui l'accompagne. Le référentiel valorise un lieu où la veille se restitue : c'est ici."
+            "<strong>La diffusion.</strong> Ce portfolio, et le dépôt public qui l'accompagne. Le référentiel valorise un lieu où la veille se restitue : c'est ici."
           ],
           "paras": [
-            "Un dispositif de veille se juge à ce qu'il permet de décider, pas à son inventaire d'outils. Le mien tient en cinq gestes, tous vérifiables :"
+            "Un dispositif de veille se juge à ce qu'il permet de décider, pas à son inventaire d'outils. Le mien tient en cinq gestes, tous vérifiables :"
           ]
         }
       ]
@@ -128,7 +128,7 @@
       "titre": "Parcours et identité professionnelle",
       "sousTitre": "D'une calculatrice à la mairie d'un village",
       "numero": "00",
-      "description": "Parcours de Maël Davidenko, étudiant en BTS SIO option SLAM : formation, certifications Python, environnement de travail et projet professionnel.",
+      "description": "Parcours de Maël Davidenko, étudiant en BTS SIO option SLAM : formation, certifications Python, environnement de travail et projet professionnel.",
       "resume": "J'ai commencé à programmer sur une calculatrice. Cinq ans plus tard, je refondais le système d'information d'une commune. Entre les deux, une option choisie sans hésiter et une méthode de travail qui n'a pas changé.",
       "cartouche": [
         [
@@ -156,16 +156,16 @@
         {
           "titre": "Le point de départ",
           "paras": [
-            "Mon premier environnement de développement tenait dans une poche : une <strong>calculatrice Casio 90+E</strong>, sur laquelle j'écrivais des jeux en Python. Un écran minuscule, une mémoire dérisoire, aucun outil de débogage. On y apprend vite une chose : ce n'est pas la puissance de la machine qui compte, mais la clarté de ce qu'on lui demande.",
+            "Mon premier environnement de développement tenait dans une poche : une <strong>calculatrice Casio 90+E</strong>, sur laquelle j'écrivais des jeux en Python. Un écran minuscule, une mémoire dérisoire, aucun outil de débogage. On y apprend vite une chose : ce n'est pas la puissance de la machine qui compte, mais la clarté de ce qu'on lui demande.",
             "C'est ce qui m'a fait choisir l'option <strong>SLAM, Solutions Logicielles et Applications Métiers</strong> plutôt que SISR. Non par élimination, mais parce que c'est le prolongement direct de ce qui m'a fait commencer."
           ]
         },
         {
           "titre": "Pourquoi une mairie",
           "paras": [
-            "Choisir une mairie pour un stage de SLAM n'a rien d'évident. C'est pourtant cohérent avec ce qui me caractérise : une curiosité qui cherche à comprendre le plus de choses possibles, et à découvrir la diversité du monde réel plutôt qu'un seul de ses coins.",
+            "Choisir une mairie pour un stage de SLAM n'a rien d'évident. C'est pourtant cohérent avec ce qui me caractérise : une curiosité qui cherche à comprendre le plus de choses possibles, et à découvrir la diversité du monde réel plutôt qu'un seul de ses coins.",
             "Une commune, c'est un système d'information complet (état civil dématérialisé, urbanisme en ligne, comptabilité publique, vidéosurveillance), avec de vraies questions de confidentialité et d'intégrité, et <em>aucun informaticien</em>. Mon apport y avait donc un sens immédiat.",
-            "Il se trouve que cette commune est mon village natal. J'ai eu la chance rare de rendre service là où je suis né, et d'y découvrir en même temps un monde que je ne connaissais pas : les conseils municipaux, la réunion des Sages, les voisins vigilants, un salon du handicap, une réunion avec un sénateur. Ce n'était pas du temps perdu : cela m'a appris pour qui je travaillais vraiment."
+            "Il se trouve que cette commune est mon village natal. J'ai eu la chance rare de rendre service là où je suis né, et d'y découvrir en même temps un monde que je ne connaissais pas : les conseils municipaux, la réunion des Sages, les voisins vigilants, un salon du handicap, une réunion avec un sénateur. Ce n'était pas du temps perdu : cela m'a appris pour qui je travaillais vraiment."
           ]
         },
         {
@@ -221,7 +221,7 @@
               "intitule": "Python for Data Science, AI & Development",
               "plateforme": "Coursera",
               "date": "30 janvier 2026",
-              "note": "Parcours long : fondamentaux du langage, structures de données, manipulation de données et appels d'API."
+              "note": "Parcours long : fondamentaux du langage, structures de données, manipulation de données et appels d'API."
             },
             {
               "organisme": "W3Schools",
@@ -235,24 +235,24 @@
         {
           "titre": "Ma méthode de travail",
           "paras": [
-            "Elle n'a pas varié, et je l'ai vérifiée sous pression pendant le stage : <strong>la documentation officielle d'abord, l'expérimentation en local ensuite, la mise en pratique sur le vrai projet enfin.</strong>",
-            "Le stage y a ajouté une règle que je ne connaissais pas et qui ne figure dans aucune documentation : <strong>alerter ne suffit pas, il faut savoir demander une décision</strong>. J'avais prévenu qu'un design de compromis ne satisferait personne. J'avais raison, et j'ai quand même perdu trois semaines, parce que j'ai attendu trop longtemps avant d'exiger un arbitrage. Le soir où je l'ai demandé, tout s'est débloqué."
+            "Elle n'a pas varié, et je l'ai vérifiée sous pression pendant le stage : <strong>la documentation officielle d'abord, l'expérimentation en local ensuite, la mise en pratique sur le vrai projet enfin.</strong>",
+            "Le stage y a ajouté une règle que je ne connaissais pas et qui ne figure dans aucune documentation : <strong>alerter ne suffit pas, il faut savoir demander une décision</strong>. J'avais prévenu qu'un design de compromis ne satisferait personne. J'avais raison, et j'ai quand même perdu trois semaines, parce que j'ai attendu trop longtemps avant d'exiger un arbitrage. Le soir où je l'ai demandé, tout s'est débloqué."
           ]
         },
         {
           "titre": "Mon projet professionnel",
           "paras": [
-            "Le stage a déplacé ce que je croyais chercher. Je pensais venir écrire du code : j'ai surtout appris à écouter, à expliquer, et à traduire l'informatique pour des gens qui ne la parlent pas. C'est ce qui m'intéresse désormais autant que la technique : construire des outils que leurs utilisateurs peuvent conduire sans moi.",
-            "Cette suite n'est pas restée une intention : la commune m'a confié la maintenance de son site après le stage, et j'ai engagé la création d'une micro-entreprise pour porter cette prestation, puis, à terme, l'édition de mes propres logiciels. Un premier client qui est aussi le commanditaire de mon stage, c'est la meilleure preuve que je pouvais espérer que le travail livré tient une fois le stagiaire parti.",
-            "Pour la seconde année, je cherche à approfondir le développement applicatif là où il rencontre de vraies contraintes d'exploitation, plutôt qu'un cadre purement scolaire : une structure qui livre en production, et qui doit ensuite vivre avec ce qu'elle a livré.",
-            "Au-delà du BTS, je vise une poursuite d'études en informatique, et je regarde sérieusement du côté des universités américaines. C'est une ambition, pas un dossier déposé, et je la nomme pour ce qu'elle change dès maintenant : elle m'oriente vers la rigueur d'ingénierie et les fondations, plutôt que vers l'empilement d'outils."
+            "Le stage a déplacé ce que je croyais chercher. Je pensais venir écrire du code : j'ai surtout appris à écouter, à expliquer, et à traduire l'informatique pour des gens qui ne la parlent pas. C'est ce qui m'intéresse désormais autant que la technique : construire des outils que leurs utilisateurs peuvent conduire sans moi.",
+            "Cette suite n'est pas restée une intention : la commune m'a confié la maintenance de son site après le stage, et j'ai engagé la création d'une micro-entreprise pour porter cette prestation, puis, à terme, l'édition de mes propres logiciels. Un premier client qui est aussi le commanditaire de mon stage, c'est la meilleure preuve que je pouvais espérer que le travail livré tient une fois le stagiaire parti.",
+            "Pour la seconde année, je cherche à approfondir le développement applicatif là où il rencontre de vraies contraintes d'exploitation, plutôt qu'un cadre purement scolaire : une structure qui livre en production, et qui doit ensuite vivre avec ce qu'elle a livré.",
+            "Au-delà du BTS, je vise une poursuite d'études en informatique, et je regarde sérieusement du côté des universités américaines. C'est une ambition, pas un dossier déposé, et je la nomme pour ce qu'elle change dès maintenant : elle m'oriente vers la rigueur d'ingénierie et les fondations, plutôt que vers l'empilement d'outils."
           ]
         },
         {
           "titre": "Mon identité professionnelle en ligne",
           "paras": [
             "Ce portfolio en est la pièce centrale. Il est accompagné d'un dépôt public où figure le code de mes projets, l'historique des commits étant, dans le référentiel E5, une preuve recevable de participation et d'évolution.",
-            "Le dépôt du thème WordPress réalisé pour le TP VIREALYS y est également public : il donne à lire, commit après commit, la façon dont un thème se construit et se corrige."
+            "Le dépôt du thème WordPress réalisé pour le TP VIREALYS y est également public : il donne à lire, commit après commit, la façon dont un thème se construit et se corrige."
           ],
           "liens": [
             {
@@ -260,7 +260,7 @@
               "cle": "github"
             }
           ],
-          "apres": "Le thème VIREALYS se consulte séparément : <a class=\"lien\" href=\"https://github.com/Picsou01/theme-personnalise-wordpress\">github.com/Picsou01/theme-personnalise-wordpress</a>."
+          "apres": "Le thème VIREALYS se consulte séparément : <a class=\"lien\" href=\"https://github.com/Picsou01/theme-personnalise-wordpress\">github.com/Picsou01/theme-personnalise-wordpress</a>."
         }
       ]
     },
@@ -270,8 +270,8 @@
       "titre": "Mentions légales",
       "sousTitre": "Éditeur, hébergement, données et accessibilité",
       "numero": "-",
-      "description": "Mentions légales du portfolio de Maël Davidenko : éditeur, hébergeur, traitement des données et déclaration d'accessibilité.",
-      "resume": "Le référentiel de la compétence 1.3 évalue si « les mentions légales sont accessibles et conformes à la législation ». Il aurait été malvenu d'en tenir compte pour le site d'une commune et de les oublier sur le mien.",
+      "description": "Mentions légales du portfolio de Maël Davidenko : éditeur, hébergeur, traitement des données et déclaration d'accessibilité.",
+      "resume": "Le référentiel de la compétence 1.3 évalue si « les mentions légales sont accessibles et conformes à la législation ». Il aurait été malvenu d'en tenir compte pour le site d'une commune et de les oublier sur le mien.",
       "cartouche": [
         [
           "Nature du site",
@@ -295,46 +295,46 @@
           "titre": "Éditeur du site",
           "paras": [
             "Ce site est édité à titre personnel par <strong>Maël Davidenko</strong>, étudiant en première année de BTS Services informatiques aux organisations, option SLAM, à l'Institution des Chartreux (SUP ALTA), Lyon.",
-            "Il constitue le portfolio présenté à l'épreuve E5 « Support et mise à disposition de services informatiques », session 2027. Il n'a aucune vocation commerciale.",
-            "Contact : <a class=\"lien\" href=\"mailto:mael.davidenko@outlook.fr\">mael.davidenko@outlook.fr</a>. Toute demande de correction, de retrait, ou tout signalement d'une difficulté d'accès à une information peut être adressée à cette adresse."
+            "Il constitue le portfolio présenté à l'épreuve E5 « Support et mise à disposition de services informatiques », session 2027. Il n'a aucune vocation commerciale.",
+            "Contact : <a class=\"lien\" href=\"mailto:mael.davidenko@outlook.fr\">mael.davidenko@outlook.fr</a>. Toute demande de correction, de retrait, ou tout signalement d'une difficulté d'accès à une information peut être adressée à cette adresse."
           ]
         },
         {
           "titre": "Hébergement",
           "paras": [
             "Ce site est hébergé par <strong>GitHub, Inc.</strong>, 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis, au travers du service GitHub Pages, qui sert directement les fichiers statiques du dépôt public.",
-            "L'hébergeur est situé hors de l'Union européenne. Cela reste sans conséquence pour le visiteur : le site ne collecte, ne transmet et ne stocke aucune donnée personnelle, comme détaillé ci-dessous."
+            "L'hébergeur est situé hors de l'Union européenne. Cela reste sans conséquence pour le visiteur : le site ne collecte, ne transmet et ne stocke aucune donnée personnelle, comme détaillé ci-dessous."
           ]
         },
         {
           "titre": "Données personnelles et traceurs",
           "paras": [
-            "<strong>Ce site ne collecte aucune donnée personnelle.</strong> Il n'utilise ni cookie, ni outil de mesure d'audience, ni service tiers de suivi. Aucune information n'est transmise à un serveur : le site est composé de fichiers statiques.",
-            "Une seule donnée est conservée, <strong>dans votre navigateur et nulle part ailleurs</strong> : le « carnet de relevé », qui retient les fiches que vous avez déjà ouvertes afin de les signaler. Elle est stockée en <code>localStorage</code>, ne quitte jamais votre appareil, et le bouton « Effacer » du carnet la supprime immédiatement.",
-            "Le site charge ses polices de caractères depuis Google Fonts. Cette requête transmet votre adresse IP à Google. Si vous souhaitez l'éviter, les polices peuvent être hébergées localement : les styles prévoient des polices de repli et le site reste parfaitement lisible sans elles."
+            "<strong>Ce site ne collecte aucune donnée personnelle.</strong> Il n'utilise ni cookie, ni outil de mesure d'audience, ni service tiers de suivi. Aucune information n'est transmise à un serveur : le site est composé de fichiers statiques.",
+            "Une seule donnée est conservée, <strong>dans votre navigateur et nulle part ailleurs</strong> : le « carnet de relevé », qui retient les fiches que vous avez déjà ouvertes afin de les signaler. Elle est stockée en <code>localStorage</code>, ne quitte jamais votre appareil, et le bouton « Effacer » du carnet la supprime immédiatement.",
+            "Le site charge ses polices de caractères depuis Google Fonts. Cette requête transmet votre adresse IP à Google. Si vous souhaitez l'éviter, les polices peuvent être hébergées localement : les styles prévoient des polices de repli et le site reste parfaitement lisible sans elles."
           ]
         },
         {
           "titre": "Propriété intellectuelle et confidentialité",
           "paras": [
             "Les textes, le code et les visuels de ce site sont l'œuvre de leur auteur, sauf mention contraire.",
-            "Les réalisations décrites ont été menées dans le cadre d'une formation et d'un stage. <strong>Certains documents ne sont pas publiés</strong> : le tableur d'analyse des coûts et le rapport de synthèse de l'audit de la Mairie de Douvres relèvent du secret professionnel. Ils sont signalés comme confidentiels dans les fiches concernées et restent consultables sur demande auprès de la Mairie de Douvres.",
+            "Les réalisations décrites ont été menées dans le cadre d'une formation et d'un stage. <strong>Certains documents ne sont pas publiés</strong> : le tableur d'analyse des coûts et le rapport de synthèse de l'audit de la Mairie de Douvres relèvent du secret professionnel. Ils sont signalés comme confidentiels dans les fiches concernées et restent consultables sur demande auprès de la Mairie de Douvres.",
             "Les constats détaillés de l'audit de sécurité ne figurent ni dans mon rapport de stage, ni ici, pour la même raison."
           ]
         },
         {
           "titre": "Accessibilité",
           "paras": [
-            "Ce site vise une consultation confortable pour tous. Ce qui a été mis en œuvre :"
+            "Ce site vise une consultation confortable pour tous. Ce qui a été mis en œuvre :"
           ],
           "liste": [
-            "Structure sémantique : titres hiérarchisés, tableau de synthèse en véritable <code>&lt;table&gt;</code> avec en-têtes de ligne et de colonne déclarés.",
+            "Structure sémantique : titres hiérarchisés, tableau de synthèse en véritable <code>&lt;table&gt;</code> avec en-têtes de ligne et de colonne déclarés.",
             "Navigation complète au clavier, lien d'évitement, indicateurs de focus visibles.",
-            "Le site reste entièrement lisible et navigable <strong>sans JavaScript</strong> : le script n'ajoute que du confort.",
-            "Respect du réglage système <code>prefers-reduced-motion</code> : les animations sont désactivées pour qui en fait la demande.",
+            "Le site reste entièrement lisible et navigable <strong>sans JavaScript</strong> : le script n'ajoute que du confort.",
+            "Respect du réglage système <code>prefers-reduced-motion</code> : les animations sont désactivées pour qui en fait la demande.",
             "Thème clair et thème sombre, avec des contrastes vérifiés dans les deux."
           ],
-          "apres": "Aucun audit RGAA formel n'a été conduit sur ce site : je ne revendique donc pas de niveau de conformité. Si vous rencontrez une difficulté d'accès à une information, signalez-la : elle sera corrigée."
+          "apres": "Aucun audit RGAA formel n'a été conduit sur ce site : je ne revendique donc pas de niveau de conformité. Si vous rencontrez une difficulté d'accès à une information, signalez-la : elle sera corrigée."
         }
       ]
     }
