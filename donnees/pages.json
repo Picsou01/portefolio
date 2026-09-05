@@ -113,7 +113,7 @@
           "liste": [
             "<strong>Agrégateur de flux</strong> - un lecteur RSS regroupant les journaux officiels des projets suivis, pour ne pas dépendre d'un algorithme de recommandation. <em>À nommer.</em>",
             "<strong>Sources primaires suivies</strong>, le blog de développement de WordPress, les notes de version PHP, les publications de l'ANSSI sur l'hygiène informatique. <em>À confirmer et compléter.</em>",
-            "<strong>Plateformes de pratique</strong>, TryHackMe et Root-Me, cités comme preuves dans mon tableau de synthèse : la veille en sécurité s'y transforme en exercice.",
+            "<strong>Mise en pratique</strong> : le concours « Passe ton Hack », où la veille en sécurité se transforme en exercice.",
             "<strong>Journal de bord</strong> - le bloc-notes de classe, où j'ai tenu mon journal quotidien d'activités pendant tout le stage.",
             "<strong>Diffusion</strong> - ce portfolio lui-même, et le dépôt public du code. <em>Le référentiel valorise un lieu de diffusion : c'est ici.</em>"
           ]
@@ -198,7 +198,7 @@
               [
                 "Sécurité",
                 "Habilitations et moindre privilège, politique de mots de passe, plan de sauvegarde et test de restauration",
-                "Mise en service du site communal, TryHackMe, Root-Me"
+                "Mise en service du site communal, concours Passe ton Hack"
               ],
               [
                 "Conduite de projet",

@@ -15,7 +15,7 @@ Déposer les fichiers dans `assets/preuves/`, puis passer l'état de `"a-deposer
 - [ ] **Parcelle 01 · PRIXY** : Planning et comptes rendus de suivi *(Suivi de projet)*
 - [ ] **Parcelle 02 · VIREALYS** : Captures d'écran du site *(Captures)*
 - [ ] **Parcelle 02 · VIREALYS** : Procédure de déploiement *(Document)*
-- [ ] **Parcelle 03 · Environnement & identité** : Profils TryHackMe et Root-Me *(Profils)*
+- [ ] **Parcelle 03 · Environnement & identité** : Participation au concours Passe ton Hack *(Concours)*
 - [ ] **Parcelle 03 · Environnement & identité** : CV et profil professionnel *(Identité)*
 - [ ] **Parcelle 05 · Assistance aux services** : Compte rendu d'intervention - vidéosurveillance *(Compte rendu)*
 - [ ] **Parcelle 06 · Refonte du site communal** : Cahier des charges validé avec le comité de communication *(Document)*

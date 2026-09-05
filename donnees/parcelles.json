@@ -187,7 +187,7 @@
           ],
           "liste": [
             "<strong>Certifications</strong> - deux parcours achevés et évalués, en Python (voir ci-dessous).",
-            "<strong>Plateformes d'entraînement</strong>, TryHackMe et Root-Me, pour la pratique de la sécurité offensive et défensive.",
+            "<strong>Concours de cybersécurité</strong> : participation à « Passe ton Hack ». La sécurité s'y apprend en cherchant, pas en lisant.",
             "<strong>Environnement de développement</strong>, PhpStorm, Docker et Portainer pour isoler chaque projet, Git pour l'historique.",
             "<strong>Identité professionnelle</strong>, CV et profil sur réseau professionnel, tenus à jour et cohérents avec ce portfolio."
           ]
@@ -208,8 +208,7 @@
         "Docker",
         "PhpStorm",
         "Git",
-        "TryHackMe",
-        "Root-Me"
+        "Passe ton Hack"
       ],
       "preuves": [
         {
@@ -227,8 +226,8 @@
           "href": "https://verify.w3schools.com/1QT8SVQI86"
         },
         {
-          "titre": "Profils TryHackMe et Root-Me",
-          "type": "Profils",
+          "titre": "Participation au concours Passe ton Hack",
+          "type": "Concours",
           "etat": "a-deposer"
         },
         {
