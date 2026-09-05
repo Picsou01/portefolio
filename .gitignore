@@ -1,6 +1,7 @@
-# Editeurs
+# Editeurs et outils locaux
 .idea/
 .vscode/
+.claude/
 *.swp
 
 # Systeme
@@ -18,9 +19,15 @@ __pycache__/
 assets/preuves/confidentiel/
 *-confidentiel.*
 
+# Notes de travail : le depot public ne montre pas ses coutures.
+# A-FAIRE.md est regenere localement a chaque passage de l'arpenteur.
+A-FAIRE.md
+
 # Rendus de travail hors depot
 *.tmp
 *.bak
+_to_delete/
+bac-a-sable/
 
 # Rien de ce qui touche a l'audit de la Mairie de Douvres ne doit
 # remonter ici : tableur d'analyse des couts et rapport de synthese

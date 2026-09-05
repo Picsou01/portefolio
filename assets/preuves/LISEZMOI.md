@@ -7,9 +7,12 @@ de formation.
 Puis, dans `donnees/parcelles.json`, pour la preuve concernée :
 
     "etat": "en-ligne",
-    "href": "../assets/preuves/mon-fichier.pdf"
+    "href": "assets/preuves/mon-fichier.pdf"
 
-et relancer `python outils/arpenteur.py`.
+Le chemin est déclaré depuis la racine du site, sans `../` : le générateur le
+préfixe lui-même selon la page qui l'affiche.
+
+Enfin, relancer `python outils/arpenteur.py`.
 
 ## Ce qui ne va PAS ici
 

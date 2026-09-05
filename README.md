@@ -64,7 +64,8 @@ couverture est recalculé, le carnet de relevé passe de /9 à /10, et les liens
 
 **Déposer une preuve** : placer le fichier dans `assets/preuves/`, puis dans
 `donnees/parcelles.json` passer `"etat": "a-deposer"` à `"en-ligne"` et ajouter
-`"href": "../assets/preuves/mon-fichier.pdf"`.
+`"href": "assets/preuves/mon-fichier.pdf"`, chemin déclaré depuis la racine du
+site.
 
 **Renseigner le dépôt public** : champs `github` et `githubLabel` de
 `donnees/cadastre.json`. Le lien se met à jour sur les vingt pages d'un coup.
@@ -101,8 +102,6 @@ js/cadastre.js              la visée, les deux vues, le filtre, l'altimètre
 js/carnet.js                le carnet de relevé
 js/parcelles.js             généré : index des parcelles
 assets/                     relief (SVG et JSON), rose des vents, marque, preuves
-bac-a-sable/                anciens fichiers d'apprentissage SVG, hors site
-A-FAIRE.md                  généré : ce qu'il reste à déposer et à rédiger
 ```
 
 ---
@@ -186,4 +185,5 @@ Les preuves qui manquent portent l'étiquette « Non publié », sans commentair
 ni encadré : le site public ne montre pas ses coutures. Les notes de travail
 vivent uniquement dans `A-FAIRE.md`, régénéré à chaque build, qui liste les
 preuves à déposer, les passages à rédiger et les documents confidentiels à ne
-jamais publier.
+jamais publier. Ce fichier est délibérément exclu du dépôt par `.gitignore` :
+il est un outil de chantier, pas une pièce du dossier.
