@@ -1,0 +1,267 @@
+{
+  "_lisezmoi": "SOURCE DE VERITE UNIQUE du portfolio. On modifie ici, puis on relance : python outils/arpenteur.py",
+  "candidat": {
+    "nom": "DAVIDENKO",
+    "prenom": "Maël",
+    "nomComplet": "Maël Davidenko",
+    "diplome": "BTS Services informatiques aux organisations",
+    "option": "SLAM",
+    "optionLongue": "Solutions Logicielles et Applications Métiers",
+    "annee": "1re année",
+    "session": "2027",
+    "centre": "Institution des Chartreux (SUP ALTA) - Lyon",
+    "epreuve": "E5 - Support et mise à disposition de services informatiques",
+    "bloc": "Bloc 1",
+    "baseline": "géomètre de systèmes d'information",
+    "lieu": "Douvres · Ain",
+    "coordonnees": "45°57′ N · 5°21′ E",
+    "altitude": "premiers contreforts du Jura",
+    "github": "https://github.com/Picsou01/portefolio",
+    "githubLabel": "github.com/Picsou01/portefolio",
+    "phrase": "Je ne pars pas en laissant des promesses, je reste pour les tenir.",
+    "phraseSource": "Conclusion du rapport de stage - juillet 2026",
+    "accroche": [
+      "J'ai commencé par écrire des jeux en Python sur une calculatrice. Sur un écran de cette taille, on apprend vite que ce n'est pas la puissance de la machine qui compte, mais la clarté de ce qu'on lui demande. C'est ce qui m'a conduit en SLAM, et c'est encore ce qui guide ma façon de construire : des outils que d'autres peuvent reprendre et faire vivre sans moi.",
+      "Le reste tient à une curiosité qui ne se range pas. Elle m'a fait choisir une mairie plutôt qu'une agence pour mon premier stage : un système d'information complet, aucun informaticien, et des questions qui n'étaient pas seulement techniques. J'y ai écrit moins de code que je ne l'imaginais, et j'y ai appris à écouter, à expliquer, et à traduire l'informatique pour ceux qui ne la parlent pas."
+    ],
+    "siteUrl": "https://picsou01.github.io/portefolio/"
+  },
+  "chiffres": [
+    {
+      "valeur": "9",
+      "unite": "",
+      "libelle": "réalisations professionnelles",
+      "detail": "portées au tableau de synthèse officiel de l'épreuve E5"
+    },
+    {
+      "valeur": "6",
+      "unite": " / 6",
+      "libelle": "compétences couvertes",
+      "detail": "les six du bloc 1, chacune adossée à une réalisation et à ses preuves"
+    },
+    {
+      "valeur": "2",
+      "unite": "",
+      "libelle": "certifications Python",
+      "detail": "IBM sur Coursera, et W3Schools niveau Professional"
+    },
+    {
+      "valeur": "13 500",
+      "unite": " €/an",
+      "libelle": "d'économies identifiées",
+      "detail": "sur le budget informatique d'une commune de 1 100 habitants que j'ai auditée"
+    }
+  ],
+  "competences": [
+    {
+      "code": "1.1",
+      "slug": "c1-1-patrimoine",
+      "titre": "Gérer le patrimoine informatique",
+      "court": "Patrimoine",
+      "devise": "Savoir ce que l'on possède avant de décider ce que l'on garde.",
+      "sous": [
+        "Recenser et identifier les ressources numériques",
+        "Exploiter des référentiels, normes et standards adoptés par le prestataire informatique",
+        "Mettre en place et vérifier les niveaux d'habilitation associés à un service",
+        "Vérifier les conditions de la continuité d'un service informatique",
+        "Gérer des sauvegardes",
+        "Vérifier le respect des règles d'utilisation des ressources numériques"
+      ],
+      "indicateurs": [
+        "Le recensement du patrimoine informatique est exhaustif.",
+        "Les référentiels, normes et standards sont mobilisés de façon pertinente.",
+        "Les droits mis en place correspondent aux habilitations des acteurs.",
+        "Les conditions de continuité et de reprise d'un service sont vérifiées et les manquements sont signalés.",
+        "Les sauvegardes sont réalisées dans les conditions prévues conformément au plan de sauvegarde.",
+        "Les restaurations sont testées et opérationnelles.",
+        "Les écarts par rapport aux règles d'utilisation des ressources numériques sont détectés et signalés."
+      ]
+    },
+    {
+      "code": "1.2",
+      "slug": "c1-2-incidents",
+      "titre": "Répondre aux incidents et aux demandes d'assistance et d'évolution",
+      "court": "Incidents",
+      "devise": "Le dépannage du jour est le service rendu le plus immédiat.",
+      "sous": [
+        "Collecter, suivre et orienter des demandes",
+        "Traiter des demandes concernant les services réseau et système, applicatifs",
+        "Traiter des demandes concernant les applications"
+      ],
+      "indicateurs": [
+        "Les demandes d'assistance ont été prises en compte, correctement diagnostiquées et leur traitement correspond aux attentes.",
+        "La réponse à une demande d'assistance est conforme à la procédure et adaptée à l'utilisateur.",
+        "La méthode de diagnostic de résolution d'un incident est adéquate et efficiente.",
+        "Une solution à l'incident est trouvée et mise en œuvre.",
+        "Le compte rendu d'intervention est clair et explicite.",
+        "La communication écrite et orale est adaptée à l'interlocuteur."
+      ]
+    },
+    {
+      "code": "1.3",
+      "slug": "c1-3-presence-en-ligne",
+      "titre": "Développer la présence en ligne de l'organisation",
+      "court": "Présence en ligne",
+      "devise": "Un site public n'appartient pas à celui qui l'a codé, mais à ceux qui le font vivre.",
+      "sous": [
+        "Participer à la valorisation de l'image de l'organisation sur les médias numériques en tenant compte du cadre juridique et des enjeux économiques",
+        "Référencer les services en ligne de l'organisation et mesurer leur visibilité",
+        "Participer à l'évolution d'un site Web exploitant les données de l'organisation"
+      ],
+      "indicateurs": [
+        "L'image de l'organisation est conforme aux attentes et valorisée.",
+        "Les enjeux économiques liés à l'image de l'organisation sont identifiés et les obligations juridiques sont respectées.",
+        "Les mentions légales sont accessibles et conformes à la législation.",
+        "La visibilité des services en ligne de l'organisation est satisfaisante.",
+        "Le site Web a évolué conformément au besoin exprimé."
+      ]
+    },
+    {
+      "code": "1.4",
+      "slug": "c1-4-mode-projet",
+      "titre": "Travailler en mode projet",
+      "court": "Mode projet",
+      "devise": "Un projet sans capitaine dérive. J'ai payé trois semaines pour l'apprendre.",
+      "sous": [
+        "Analyser les objectifs et les modalités d'organisation d'un projet",
+        "Planifier les activités",
+        "Évaluer les indicateurs de suivi d'un projet et analyser les écarts"
+      ],
+      "indicateurs": [
+        "Les objectifs et les modalités d'organisation du projet sont explicités.",
+        "L'analyse des besoins et de l'existant est pertinente.",
+        "Les activités personnelles sont planifiées selon une méthodologie donnée.",
+        "Le découpage en tâches est réaliste.",
+        "Les livrables sont conformes et le projet est documenté.",
+        "Un compte rendu clair et concis est réalisé et les écarts sont justifiés.",
+        "La communication écrite et orale est adaptée à l'interlocuteur."
+      ]
+    },
+    {
+      "code": "1.5",
+      "slug": "c1-5-mise-a-disposition",
+      "titre": "Mettre à disposition des utilisateurs un service informatique",
+      "court": "Mise à disposition",
+      "devise": "Un service n'est déployé que le jour où quelqu'un d'autre sait s'en servir.",
+      "sous": [
+        "Réaliser les tests d'intégration et d'acceptation d'un service",
+        "Déployer un service",
+        "Accompagner les utilisateurs dans la mise en place d'un service"
+      ],
+      "indicateurs": [
+        "Des tests pertinents d'intégration et d'acceptation sont rédigés et effectués.",
+        "Les outils de test sont utilisés de manière appropriée.",
+        "Un rapport de test du service est produit.",
+        "Un support d'information est disponible.",
+        "Les modalités d'accompagnement sont définies.",
+        "Le service déployé est opérationnel et donne satisfaction à l'utilisateur."
+      ]
+    },
+    {
+      "code": "1.6",
+      "slug": "c1-6-developpement-professionnel",
+      "titre": "Organiser son développement professionnel",
+      "court": "Développement pro.",
+      "devise": "La documentation officielle d'abord, l'expérimentation ensuite, le vrai projet enfin.",
+      "sous": [
+        "Mettre en place son environnement d'apprentissage personnel",
+        "Mettre en œuvre des outils et stratégies de veille informationnelle",
+        "Gérer son identité professionnelle",
+        "Développer son projet professionnel"
+      ],
+      "indicateurs": [
+        "Les besoins de formation sont identifiés pour assurer le support ou mettre à disposition un service.",
+        "L'identité professionnelle est pertinente et visible sur un réseau social professionnel.",
+        "L'environnement d'apprentissage personnel est délimité et expliqué.",
+        "La veille est régulière et vise à repérer les technologies émergentes, approfondir la recherche d'information et renforcer ses compétences."
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "formation",
+      "titre": "Réalisations en cours de formation",
+      "note": "Ateliers de professionnalisation et travail personnel, année scolaire 2025-2026",
+      "court": "En formation"
+    },
+    {
+      "id": "pro1",
+      "titre": "Réalisations en milieu professionnel - première année",
+      "note": "Stage à la Mairie de Douvres (Ain), du 01/06/26 au 03/07/26, prolongé de deux semaines à la demande du maire",
+      "court": "Première année"
+    },
+    {
+      "id": "pro2",
+      "titre": "Réalisations en milieu professionnel - seconde année",
+      "note": "Parcelles non encore bornées, réservées à l'année scolaire 2026-2027",
+      "court": "Seconde année"
+    }
+  ],
+  "portes": [
+    {
+      "num": "I",
+      "titre": "Par compétence",
+      "texte": "Le tableau de synthèse de l'épreuve, rendu arpentable. Six colonnes, neuf lignes, neuf bornes qui mènent chacune à une preuve.",
+      "href": "#plan",
+      "cible": "Ouvrir le plan"
+    },
+    {
+      "num": "II",
+      "titre": "Par réalisation",
+      "texte": "Les neuf travaux, du besoin au résultat : le contexte, la démarche suivie, ce qui a été livré et ce que j'en retiens.",
+      "href": "#realisations",
+      "cible": "Voir les réalisations"
+    },
+    {
+      "num": "III",
+      "titre": "Par la personne",
+      "texte": "Mon parcours, mes certifications, ma méthode de travail et la veille technologique qui l'alimente.",
+      "href": "parcours.html",
+      "cible": "Lire le parcours"
+    }
+  ],
+  "dossier": [
+    {
+      "titre": "Tableau de synthèse officiel",
+      "type": "PDF signé",
+      "fichier": "assets/preuves/tableau-de-synthese-e5.pdf",
+      "note": "Le document remis à la commission, dont ce site est la version arpentable."
+    },
+    {
+      "titre": "Tableau de synthèse officiel",
+      "type": "Classeur source",
+      "fichier": "assets/preuves/tableau-de-synthese-e5.xlsx",
+      "note": "Format Excel, tel que demandé par le référentiel."
+    },
+    {
+      "titre": "Rapport de stage",
+      "type": "PDF, 26 pages",
+      "fichier": "assets/preuves/rapport-de-stage.pdf",
+      "note": "Contexte, déroulé, conclusion et les cinq annexes, dont la documentation technique et la documentation utilisateur."
+    },
+    {
+      "titre": "Rapport de mi-stage",
+      "type": "PDF, 10 pages",
+      "fichier": "assets/preuves/rapport-mi-stage.pdf",
+      "note": "Rendu du 18 juin 2026, la veille de la décision de tout reprendre à zéro."
+    },
+    {
+      "titre": "Soutenance finale",
+      "type": "Présentation",
+      "fichier": "assets/preuves/soutenance-finale.pptx",
+      "note": "Support de la présentation de dix minutes du 3 juillet 2026."
+    },
+    {
+      "titre": "Soutenance de mi-stage",
+      "type": "Présentation",
+      "fichier": "assets/preuves/soutenance-mi-stage.pptx",
+      "note": "Support de la présentation de cinq minutes du 19 juin 2026."
+    },
+    {
+      "titre": "Journal de suivi quotidien",
+      "type": "PDF, 24 pages",
+      "fichier": "assets/preuves/journal-de-suivi-quotidien.pdf",
+      "note": "Une page par jour de stage, du 1er juin au 2 juillet 2026."
+    }
+  ]
+}

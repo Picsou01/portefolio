@@ -1,0 +1,115 @@
+/* =====================================================================
+   LE CADASTRE - impression
+   Un plan doit pouvoir sortir sur papier. La commission peut imprimer
+   le tableau de synthèse ou une fiche : ces règles garantissent que ce
+   qui sort de l'imprimante reste lisible et complet.
+
+   À l'impression, le site repasse de force en encre sur papier blanc :
+   un fond noir coûte une cartouche et ne se lit pas mieux.
+   ===================================================================== */
+
+@media print {
+    @page { size: A4; margin: 14mm 12mm; }
+    @page :first { margin-top: 10mm; }
+
+    :root, :root[data-theme="nuit"], :root[data-theme="papier"] {
+        --fond-0: #fff;  --fond-1: #fff;  --fond-2: #fff;  --fond-3: #fff;
+        --encre: #000;   --encre-2: #222;  --encre-3: #444;
+        --trait: #999;   --trait-vif: #555;
+        --or: #6b4508;   --or-clair: #4a2f00; --or-sourd: #8a6420;
+        --or-10: transparent; --or-18: transparent; --or-32: #bbb;
+        --braise: #8a2f0c; --releve: #123f5c; --alerte: #8a2f0c;
+        --halo-or: none; --halo-or-fort: none; --halo-releve: none;
+        --ombre-plaque: none;
+    }
+
+    body {
+        background: #fff !important;
+        color: #000;
+        font-size: 10.5pt;
+        line-height: 1.45;
+    }
+
+    /* Le décor, les commandes et les repères d'écran ne s'impriment pas */
+    .scene, .rail, .rose, .descendre, .outils, .nav, .evitement,
+    .carnet__panneau, .plan-barre, .voisines, .visee,
+    .chiffre__fond, .competence-carte__fond, .parcelle__lustre { display: none !important; }
+
+    /* Plus de chanfreins ni de lueurs : des filets nets */
+    .plaque, .plaque > .plaque__i, .bouton, .etat, .evitement,
+    .parcelle__comp, .couverture__qualite .marqueur {
+        clip-path: none !important;
+        filter: none !important;
+        box-shadow: none !important;
+    }
+    .plaque { background: none !important; padding: 0 !important; border: .5pt solid #999; }
+    .plaque > .plaque__i { background: none !important; }
+    .plaque::before, .plaque::after { display: none !important; }
+
+    .entete {
+        position: static;
+        height: auto;
+        padding-block: 4mm;
+        border-bottom: 1pt solid #444;
+        background: none !important;
+        backdrop-filter: none;
+    }
+
+    /* Aucune animation, aucun contenu masqué en attente de script */
+    .revele, .js .revele, .js .revele--decale > *,
+    .couverture__releve, .couverture__nom, .couverture__qualite,
+    .couverture__accroche, .couverture__citation, .chiffres {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    /* Le nom en dégradé redevient de l'encre */
+    .couverture__nom .grand, .section-titre h2 {
+        background: none !important;
+        -webkit-background-clip: border-box !important;
+        background-clip: border-box !important;
+        color: #000 !important;
+        filter: none !important;
+    }
+    .couverture__nom .grand::after { display: none !important; }
+    .fiche__numero, .parcelle__num {
+        -webkit-text-stroke: 0 !important;
+        color: #555 !important;
+    }
+
+    /* Les liens révèlent leur destination : un portfolio imprimé reste navigable */
+    main a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-family: monospace; font-size: 8pt; color: #555; word-break: break-all;
+    }
+    main a[href^="#"]::after, .fil a::after, .plan a::after, .pied a::after { content: ""; }
+
+    /* Le plan doit tenir d'un bloc */
+    .plan-defile { overflow: visible !important; }
+    .plan { min-width: 0 !important; font-size: 8pt; page-break-inside: avoid;
+            border-collapse: collapse; }
+    .plan th, .plan td { border: .5pt solid #999 !important; }
+    .plan__coin, .plan__ligne-titre { position: static; }
+    .plan__case:not(.plan__case--borne) { background-image: none; }
+    .plan__long { display: inline !important; }
+    .plan__court { display: none !important; }
+    .borne { min-height: 0; padding: 2mm 0; }
+    .borne__reticule { width: 13px; height: 13px; }
+    .borne__anneau { animation: none !important; }
+    .relief { display: none; }
+
+    /* Coupes de page */
+    .fiche__tete { page-break-after: avoid; }
+    .bloc, .preuves, .encart, .enseignement, .cartouche, .certif,
+    .parcelle, .competence-carte, .chiffre, .tableau-cadre { page-break-inside: avoid; }
+    h1, h2, h3 { page-break-after: avoid; }
+
+    .fiche { display: block; }
+    .fiche__marge { position: static; margin-top: 6mm; }
+    .parcelles, .terrain, .chiffres { display: block; }
+    .parcelle, .competence-carte, .chiffre { margin-bottom: 3mm; }
+
+    .pied { background: none !important; border-top: 1pt solid #444; }
+    .couverture { min-height: 0; display: block; }
+}

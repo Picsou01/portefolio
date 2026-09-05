@@ -1,0 +1,1279 @@
+/* =====================================================================
+   LE CADASTRE - les composants
+   La couverture, le plan de compétences, les parcelles, les fiches.
+   Dépend des jetons et primitives de style.css
+   ===================================================================== */
+
+/* =====================================================================
+   1. LA COUVERTURE
+   ===================================================================== */
+.couverture {
+    position: relative;
+    min-height: min(92vh, 62rem);
+    display: flex;
+    align-items: center;
+    padding-block: clamp(3rem, 9vh, 7rem) clamp(3rem, 8vh, 6rem);
+    overflow: hidden;
+}
+
+/* --- Le relevé d'en-tête : coordonnées, planche, altitude ------------- */
+.couverture__releve {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem 1.4rem;
+    margin-bottom: clamp(1.4rem, 3.5vw, 2.4rem);
+    opacity: 0;
+    animation: monter .9s cubic-bezier(.2,.8,.2,1) .15s forwards;
+}
+.couverture__releve span { display: inline-flex; align-items: center; gap: .5rem; }
+.couverture__releve span:not(:last-child)::after {
+    content: "";
+    width: 4px; height: 4px;
+    rotate: 45deg;
+    background: var(--trait-vif);
+    margin-left: .9rem;
+}
+
+/* --- Le nom : la pièce maîtresse -------------------------------------- */
+.couverture__nom {
+    position: relative;
+    font-size: var(--t-geant);
+    line-height: .86;
+    letter-spacing: -.045em;
+    font-weight: 600;
+    font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 144;
+    margin-bottom: 1.4rem;
+    opacity: 0;
+    animation: monter 1.1s cubic-bezier(.2,.8,.2,1) .3s forwards;
+}
+.couverture__nom .sur {
+    display: block;
+    font-size: .19em;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: .02em;
+    color: var(--encre-3);
+    margin-bottom: .5em;
+    font-variation-settings: "SOFT" 40, "WONK" 0;
+}
+.couverture__nom .grand {
+    display: block;
+    background: linear-gradient(168deg,
+        var(--or-clair) 0%, var(--encre) 32%, var(--encre) 58%, var(--or-sourd) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 34px rgba(255, 176, 58, .18));
+}
+:root[data-theme="papier"] .couverture__nom .grand {
+    background: linear-gradient(168deg, var(--or) 0%, var(--encre) 34%, var(--encre) 62%, var(--or) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    filter: none;
+}
+
+/* La baseline : la métaphore, assumée comme telle, juste sous le nom */
+.couverture__baseline {
+    font-family: var(--f-titre);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.15rem, .95rem + .9vw, 1.85rem);
+    line-height: 1.2;
+    color: var(--or);
+    letter-spacing: -.01em;
+    margin-bottom: .9rem;
+    font-variation-settings: "SOFT" 40, "WONK" 1;
+    text-shadow: 0 0 30px var(--or-32);
+    opacity: 0;
+    animation: monter 1s cubic-bezier(.2,.8,.2,1) .38s forwards;
+}
+
+/* Le double gravé : une copie en contour, très légèrement décalée */
+.couverture__nom .grand[data-texte]::after {
+    content: attr(data-texte);
+    position: absolute;
+    inset: 0;
+    -webkit-text-stroke: 1px var(--or-18);
+    color: transparent;
+    background: none;
+    transform: translate(3px, 3px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.couverture__qualite {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem .9rem;
+    padding-bottom: clamp(1.4rem, 3.5vw, 2.2rem);
+    opacity: 0;
+    animation: monter 1s cubic-bezier(.2,.8,.2,1) .45s forwards;
+}
+.couverture__qualite .marqueur {
+    padding: .22rem .55rem;
+    border: 1px solid var(--or-32);
+    color: var(--or);
+    clip-path: var(--chanfrein-petit);
+    background: var(--or-10);
+}
+
+.couverture__corps {
+    display: grid;
+    gap: clamp(2rem, 4.5vw, 4rem);
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--trait);
+    padding-top: clamp(1.6rem, 4vw, 2.6rem);
+}
+@media (min-width: 64rem) {
+    .couverture__corps { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); align-items: start; }
+}
+
+.couverture__accroche {
+    font-size: var(--t-lead);
+    line-height: 1.6;
+    color: var(--encre-2);
+    max-width: 33em;
+    opacity: 0;
+    animation: monter 1s cubic-bezier(.2,.8,.2,1) .6s forwards;
+}
+.couverture__accroche p:first-child::first-letter {
+    font-family: var(--f-titre);
+    font-size: 3.4em;
+    float: left;
+    line-height: .8;
+    padding: .07em .14em 0 0;
+    color: var(--or);
+    font-weight: 600;
+    text-shadow: 0 0 26px var(--or-32);
+}
+
+.couverture__citation {
+    position: relative;
+    margin-top: 1.8rem;
+    padding: 1rem 0 1rem 1.4rem;
+    border-left: 1px solid var(--or-32);
+    opacity: 0;
+    animation: monter 1s cubic-bezier(.2,.8,.2,1) .72s forwards;
+}
+.couverture__citation::before {
+    content: "";
+    position: absolute;
+    left: -1px; top: 0;
+    width: 1px; height: 2.2rem;
+    background: var(--or);
+    box-shadow: 0 0 10px var(--or);
+}
+.couverture__citation p {
+    font-family: var(--f-titre);
+    font-style: italic;
+    font-size: var(--t-h3);
+    line-height: 1.35;
+    color: var(--encre);
+    font-variation-settings: "SOFT" 30, "WONK" 1;
+}
+.couverture__citation footer { margin-top: .6rem; }
+
+@keyframes monter {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* --- Les chiffres : quatre relevés d'instrument ------------------------ */
+.chiffres {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    opacity: 0;
+    animation: monter 1s cubic-bezier(.2,.8,.2,1) .8s forwards;
+}
+@media (min-width: 30rem) { .chiffres { grid-template-columns: 1fr 1fr; } }
+
+.chiffre { --coupe: 11px; }
+.chiffre > .plaque__i {
+    padding: 1.1rem 1.2rem 1.2rem;
+    display: grid;
+    align-content: start;
+    gap: .22rem;
+    overflow: hidden;
+}
+.chiffre::before, .chiffre::after { opacity: .45; }
+.chiffre:hover::before, .chiffre:hover::after { opacity: 1; width: 34px; height: 34px; }
+.chiffre:hover { background: var(--or-sourd); }
+.chiffre:hover > .plaque__i { background: var(--fond-3); }
+
+/* la ligne de niveau qui traverse la plaque, en fond */
+.chiffre__fond {
+    position: absolute;
+    inset: auto -10% -12% -10%;
+    height: 62%;
+    opacity: .16;
+    background: var(--releve-topo) center / 200% auto no-repeat;
+    pointer-events: none;
+    transition: opacity .4s ease, transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.chiffre:hover .chiffre__fond { opacity: .3; transform: translateY(-8%); }
+
+.chiffre__valeur {
+    position: relative;
+    font-family: var(--f-titre);
+    font-size: clamp(2rem, 1.2rem + 2.6vw, 3.1rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -.04em;
+    color: var(--encre);
+    font-variant-numeric: lining-nums tabular-nums;
+    text-shadow: 0 0 30px rgba(255, 176, 58, .16);
+}
+.chiffre__valeur small {
+    font-family: var(--f-hud);
+    font-size: .3em;
+    font-weight: 600;
+    color: var(--or);
+    letter-spacing: .04em;
+    margin-left: .12em;
+}
+.chiffre__libelle { color: var(--or-sourd); margin-top: .35rem; }
+.chiffre__detail { font-size: var(--t-petit); color: var(--encre-3); line-height: 1.45; }
+
+/* --- La rose des vents ------------------------------------------------- */
+.rose {
+    position: absolute;
+    top: clamp(1rem, 6vh, 5rem);
+    right: clamp(-6rem, -2vw, 0rem);
+    width: clamp(15rem, 32vw, 30rem);
+    aspect-ratio: 1;
+    opacity: .5;
+    pointer-events: none;
+    z-index: 0;
+    color: var(--or);
+    animation: rosace 190s linear infinite;
+    filter: drop-shadow(0 0 40px rgba(255, 176, 58, .1));
+}
+.rose svg { width: 100%; height: 100%; }
+@keyframes rosace { to { rotate: 360deg; } }
+@media (max-width: 64rem) { .rose { opacity: .22; top: 2rem; right: -25%; width: 24rem; } }
+
+/* --- L'invitation à descendre ------------------------------------------ */
+.descendre {
+    display: inline-flex;
+    align-items: center;
+    gap: .85rem;
+    margin-top: 2.4rem;
+    text-decoration: none;
+    color: var(--encre-3);
+    transition: color .25s ease;
+    opacity: 0;
+    animation: monter 1s cubic-bezier(.2,.8,.2,1) .95s forwards;
+}
+.descendre:hover { color: var(--or); }
+.descendre__cible {
+    position: relative;
+    width: 2.3rem; height: 2.3rem;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+}
+.descendre__cible::before,
+.descendre__cible::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid currentColor;
+    rotate: 45deg;
+}
+.descendre__cible::after { animation: pulseCible 2.8s ease-out infinite; }
+@keyframes pulseCible {
+    0%   { transform: scale(1);   opacity: .7; }
+    70%  { transform: scale(1.7); opacity: 0; }
+    100% { transform: scale(1.7); opacity: 0; }
+}
+.descendre svg { position: relative; z-index: 1; }
+
+/* =====================================================================
+   2. LE PLAN, la matrice, traitée comme un instrument
+   ===================================================================== */
+.plan-cadre {
+    --coupe: 18px;
+    position: relative;
+    box-shadow: var(--ombre-plaque);
+}
+.plan-cadre > .plaque__i { overflow: hidden; }
+
+.plan-barre {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .7rem 1.2rem;
+    padding: .85rem 1.1rem;
+    border-bottom: 1px solid var(--trait);
+    background: linear-gradient(var(--fond-3), var(--fond-2));
+}
+.plan-barre__etat { margin-right: auto; }
+.plan-barre__etat strong { color: var(--or); font-variant-numeric: tabular-nums; }
+
+.plan-defile {
+    position: relative;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+}
+
+/* --- La visée : deux fils lumineux qui suivent la case survolée -------- */
+.visee {
+    position: absolute;
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0;
+    transition: opacity .18s ease, transform .13s cubic-bezier(.3,.9,.3,1);
+}
+.visee--h {
+    left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--or) 12%, var(--or) 88%, transparent);
+    box-shadow: 0 0 10px var(--or-32);
+}
+.visee--v {
+    top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(180deg, transparent, var(--or) 10%, var(--or) 92%, transparent);
+    box-shadow: 0 0 10px var(--or-32);
+}
+.plan-defile[data-visee="oui"] .visee { opacity: .75; }
+
+.plan {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    min-width: 58rem;
+    font-variant-numeric: lining-nums tabular-nums;
+}
+.plan caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.plan th, .plan td {
+    border-right: 1px solid var(--trait);
+    border-bottom: 1px solid var(--trait);
+    vertical-align: top;
+    transition: background .2s ease;
+}
+.plan tr > *:last-child { border-right: 0; }
+
+/* --- L'angle mort ------------------------------------------------------ */
+.plan__coin {
+    width: 30%;
+    min-width: 17rem;
+    background: var(--fond-3);
+    text-align: left;
+    padding: .95rem 1.1rem;
+    position: sticky;
+    left: 0;
+    z-index: 3;
+}
+.plan__coin span { display: block; }
+
+
+/* --- Les six compétences en tête de colonne ---------------------------- */
+.plan__col { padding: 0; background: var(--fond-3); position: relative; }
+.plan__col a {
+    display: grid;
+    gap: .35rem;
+    padding: .85rem .7rem .8rem;
+    text-decoration: none;
+    height: 100%;
+    align-content: start;
+    text-align: left;
+    position: relative;
+    transition: background .25s ease;
+}
+.plan__col a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 2px;
+    background: var(--or);
+    box-shadow: 0 0 12px var(--or);
+    transform: scaleX(0);
+    transition: transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.plan__col a:hover { background: var(--or-10); }
+.plan__col a:hover::after, .plan__col.est-visee a::after { transform: scaleX(1); }
+
+.plan__code {
+    font-family: var(--f-hud);
+    font-size: var(--t-petit);
+    font-weight: 700;
+    letter-spacing: .12em;
+    color: var(--or);
+}
+.plan__nom {
+    font-family: var(--f-corps);
+    font-size: var(--t-petit);
+    line-height: 1.3;
+    color: var(--encre-2);
+    transition: color .25s ease;
+}
+.plan__col a:hover .plan__nom, .plan__col.est-visee .plan__nom { color: var(--encre); }
+.plan__compte { font-family: var(--f-hud); font-size: var(--t-nano); letter-spacing: .16em;
+    text-transform: uppercase; color: var(--encre-3); }
+
+/* Le relief de couverture : une barre par réalisation */
+.relief { display: flex; align-items: flex-end; gap: 3px; height: 14px; margin-top: .1rem; }
+.relief i {
+    display: block;
+    width: 12px;
+    background: linear-gradient(var(--or), var(--or-sourd));
+    box-shadow: 0 0 8px var(--or-32);
+    transition: height .4s cubic-bezier(.2,.8,.2,1), filter .3s ease;
+}
+.relief i:nth-child(1) { height: 6px; }
+.relief i:nth-child(2) { height: 11px; }
+.relief i:nth-child(3) { height: 14px; }
+.plan__col a:hover .relief i { filter: brightness(1.35); }
+
+/* --- Les intertitres de section ---------------------------------------- */
+.plan__section th {
+    background: linear-gradient(90deg, var(--fond-1), var(--fond-0));
+    text-align: left;
+    padding: 1rem 1.1rem .7rem;
+    border-right: 0;
+    font-weight: 400;
+    position: relative;
+}
+.plan__section th::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(var(--or), transparent);
+}
+.plan__section-titre { display: block; color: var(--or-clair); }
+.plan__section-note { display: block; font-family: var(--f-corps); font-size: var(--t-petit);
+    color: var(--encre-3); margin-top: .25rem; }
+
+/* --- Les lignes de parcelle -------------------------------------------- */
+.plan__ligne-titre {
+    padding: 0;
+    text-align: left;
+    font-weight: 400;
+    background: var(--fond-2);
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+.plan__ligne-titre a {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: .15rem .8rem;
+    padding: .85rem 1.1rem;
+    text-decoration: none;
+    position: relative;
+    transition: background .25s ease, padding-left .25s ease;
+}
+.plan__ligne-titre a::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--or);
+    box-shadow: 0 0 12px var(--or);
+    transform: scaleY(0);
+    transform-origin: center;
+    transition: transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.plan__ligne.est-visee .plan__ligne-titre a::before,
+.plan__ligne-titre a:hover::before { transform: scaleY(1); }
+.plan__ligne-titre a:hover { background: var(--fond-3); padding-left: 1.35rem; }
+
+.plan__num {
+    font-family: var(--f-hud);
+    font-weight: 700;
+    font-size: var(--t-petit);
+    letter-spacing: .06em;
+    color: var(--or-sourd);
+    grid-row: span 2;
+    padding-top: .15rem;
+    transition: color .25s ease, text-shadow .25s ease;
+}
+.plan__ligne.est-visee .plan__num, .plan__ligne-titre a:hover .plan__num {
+    color: var(--or); text-shadow: 0 0 10px var(--or-32);
+}
+.plan__intitule { font-size: var(--t-petit); line-height: 1.4; color: var(--encre); }
+.plan__periode { font-family: var(--f-hud); font-size: var(--t-nano); letter-spacing: .14em;
+    text-transform: uppercase; color: var(--encre-3); }
+
+/* --- Les cases --------------------------------------------------------- */
+.plan__case {
+    padding: 0;
+    text-align: center;
+    background-image: repeating-linear-gradient(45deg,
+        transparent 0 6px, color-mix(in srgb, var(--trait) 80%, transparent) 6px 7px);
+}
+.plan__case--borne { background-image: none; background-color: var(--fond-2); }
+
+/* --- LA BORNE : un réticule de visée ----------------------------------- */
+.borne {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: 4rem;
+    text-decoration: none;
+    color: var(--or);
+    position: relative;
+    transition: background .25s ease;
+}
+.borne::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    background: radial-gradient(circle at 50% 50%, var(--or-18), transparent 68%);
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+.borne:hover, .borne:focus-visible { background: var(--or-10); }
+.borne:hover::before, .borne:focus-visible::before { opacity: 1; }
+
+.borne__reticule { width: 34px; height: 34px; overflow: visible; fill: none; stroke: currentColor; }
+.borne__anneau {
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+    opacity: .75;
+    transform-origin: center;
+    animation: tourner 26s linear infinite;
+    transition: opacity .3s ease;
+}
+.borne__croix { stroke-width: 1; opacity: .55; transition: opacity .3s ease, stroke-width .3s ease; }
+.borne__cercle { stroke-width: 1.5; transition: r .35s cubic-bezier(.2,.8,.2,1), stroke-width .3s ease; }
+.borne__coeur { fill: currentColor; stroke: none; transform-origin: center;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1); transform-box: fill-box; }
+
+@keyframes tourner { to { rotate: 360deg; } }
+
+.borne:hover .borne__anneau, .borne:focus-visible .borne__anneau { opacity: 1; animation-duration: 5s; }
+.borne:hover .borne__croix, .borne:focus-visible .borne__croix { opacity: 1; stroke-width: 1.2; }
+.borne:hover .borne__cercle, .borne:focus-visible .borne__cercle { stroke-width: 2; }
+.borne:hover .borne__coeur, .borne:focus-visible .borne__coeur { transform: scale(1.9); }
+.borne:hover .borne__reticule, .borne:focus-visible .borne__reticule {
+    filter: drop-shadow(0 0 8px var(--or)) drop-shadow(0 0 22px var(--or-32));
+}
+
+/* --- La visée : ligne et colonne ---------------------------------------- */
+.plan__ligne.est-visee > * { background-color: color-mix(in srgb, var(--or) 7%, var(--fond-2)); }
+.plan th.est-visee { background-color: color-mix(in srgb, var(--or) 9%, var(--fond-3)) !important; }
+.plan td.est-visee { background-color: color-mix(in srgb, var(--or) 6%, var(--fond-2)); }
+.plan td.est-visee.plan__case:not(.plan__case--borne) {
+    background-image: repeating-linear-gradient(45deg,
+        transparent 0 6px, var(--or-18) 6px 7px);
+}
+
+/* --- Le filtre ---------------------------------------------------------- */
+.plan__ligne a { transition: opacity .35s ease, filter .35s ease; }
+.plan-cadre[data-filtre="1.1"] .plan__ligne:not([data-comp~="1.1"]) a,
+.plan-cadre[data-filtre="1.2"] .plan__ligne:not([data-comp~="1.2"]) a,
+.plan-cadre[data-filtre="1.3"] .plan__ligne:not([data-comp~="1.3"]) a,
+.plan-cadre[data-filtre="1.4"] .plan__ligne:not([data-comp~="1.4"]) a,
+.plan-cadre[data-filtre="1.5"] .plan__ligne:not([data-comp~="1.5"]) a,
+.plan-cadre[data-filtre="1.6"] .plan__ligne:not([data-comp~="1.6"]) a { opacity: .17; filter: grayscale(1); }
+
+.plan-cadre[data-filtre="1.1"] .plan__ligne:not([data-comp~="1.1"]) > *,
+.plan-cadre[data-filtre="1.2"] .plan__ligne:not([data-comp~="1.2"]) > *,
+.plan-cadre[data-filtre="1.3"] .plan__ligne:not([data-comp~="1.3"]) > *,
+.plan-cadre[data-filtre="1.4"] .plan__ligne:not([data-comp~="1.4"]) > *,
+.plan-cadre[data-filtre="1.5"] .plan__ligne:not([data-comp~="1.5"]) > *,
+.plan-cadre[data-filtre="1.6"] .plan__ligne:not([data-comp~="1.6"]) > * {
+    background-color: var(--fond-1); background-image: none;
+}
+
+.plan__ligne[data-arpentee="oui"] .plan__num::after {
+    content: "▪"; color: var(--releve); margin-left: .3em; font-size: .8em;
+    text-shadow: 0 0 8px var(--releve);
+}
+
+.plan__ligne--vide .plan__ligne-titre { background: var(--fond-1); }
+.plan__ligne--vide .plan__case { opacity: .35; }
+.plan__ligne--vide span { display: block; padding: .85rem 1.1rem; }
+
+/* --- Le balayage de reconnaissance, au premier affichage --------------- */
+.plan-cadre > .plaque__i::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background: linear-gradient(105deg,
+        transparent 42%, var(--or-18) 50%, transparent 58%);
+    transform: translateX(-110%);
+    opacity: 0;
+}
+.plan-cadre.est-visible > .plaque__i::after { animation: balayer 1.5s cubic-bezier(.3,.7,.4,1) .25s; }
+@keyframes balayer {
+    0%   { transform: translateX(-110%); opacity: 0; }
+    12%  { opacity: 1; }
+    88%  { opacity: 1; }
+    100% { transform: translateX(110%); opacity: 0; }
+}
+
+@media (max-width: 54rem) {
+    .plan__long { display: none; }
+    .plan__court { display: inline; }
+    .plan__intitule { font-size: var(--t-micro); font-weight: 600; }
+    .plan__coin { min-width: 0; width: 11rem; padding: .7rem .65rem; }
+    .plan__ligne-titre { width: 11rem; }
+    .plan__ligne-titre a { padding: .7rem .65rem; }
+    .plan__ligne-titre a:hover { padding-left: .85rem; }
+    .plan__col a { padding: .7rem .45rem; }
+    .plan { min-width: 42rem; }
+    .plan-cadre { --coupe: 12px; }
+}
+.plan__court { display: none; }
+
+
+/* =====================================================================
+   2 bis. L'EN-TÊTE DE SECTION
+   Un grand numéro de planche en marge, tenu en contour. Il sert de
+   repère : à tout moment on sait sur quelle planche on se trouve.
+   ===================================================================== */
+.section-tete {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(.9rem, 3vw, 2.6rem);
+    align-items: start;
+    margin-bottom: clamp(1.8rem, 4vw, 3.2rem);
+    padding-bottom: clamp(1.1rem, 2.5vw, 1.7rem);
+    border-bottom: 1px solid var(--trait);
+    scroll-margin-top: calc(var(--entete-h) + 2rem);
+}
+.section-tete__planche {
+    font-family: var(--f-hud);
+    font-size: clamp(2.6rem, 7vw, 6rem);
+    font-weight: 700;
+    line-height: .78;
+    letter-spacing: -.055em;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--or-32);
+    user-select: none;
+}
+.section-tete__marque { margin-bottom: .55rem; }
+.section-tete h2 {
+    background: linear-gradient(172deg, var(--encre) 26%, var(--encre-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: .9rem;
+}
+.section-tete__note {
+    max-width: 48rem;
+    color: var(--encre-2);
+    font-size: var(--t-petit);
+    line-height: 1.7;
+}
+@media (max-width: 40rem) {
+    .section-tete { grid-template-columns: 1fr; gap: .4rem; }
+    .section-tete__planche { font-size: 2.4rem; }
+}
+
+/* =====================================================================
+   2 ter. LES PORTES D'ENTRÉE
+   Trois chemins annoncés d'emblée. C'est le remède au « je ne sais pas
+   par où prendre le dossier » : on ne fait pas deviner un plan, on le
+   donne.
+   ===================================================================== */
+.section--portes { padding-block: clamp(1.5rem, 4vw, 3rem) clamp(2.5rem, 6vw, 4.5rem); }
+.portes__titre { margin-bottom: 1rem; color: var(--or-sourd); }
+
+.portes {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+.porte {
+    --coupe: 15px;
+    text-decoration: none;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), background .35s ease, box-shadow .35s ease;
+}
+.porte > .plaque__i {
+    padding: 1.5rem 1.45rem 1.6rem;
+    display: grid;
+    gap: .5rem;
+    align-content: start;
+    min-height: 13.5rem;
+    overflow: hidden;
+}
+.porte:hover { transform: translateY(-5px); background: var(--or-sourd); box-shadow: var(--halo-or); }
+.porte:hover > .plaque__i { background: var(--fond-3); }
+.porte::before, .porte::after { opacity: .4; }
+.porte:hover::before, .porte:hover::after { opacity: 1; width: 46px; height: 46px; }
+
+.porte__num {
+    font-family: var(--f-hud);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    line-height: 1;
+    color: var(--or);
+    text-shadow: 0 0 22px var(--or-32);
+}
+.porte__titre {
+    font-family: var(--f-titre);
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    color: var(--encre);
+}
+.porte__texte { font-size: var(--t-petit); color: var(--encre-2); line-height: 1.6; }
+.porte__cible {
+    margin-top: auto;
+    padding-top: .8rem;
+    color: var(--or);
+    transition: letter-spacing .3s ease;
+}
+.porte:hover .porte__cible { letter-spacing: .3em; }
+
+/* =====================================================================
+   2 quater. LES DEUX VUES DU PLAN
+   Tableau officiel et plan de bornage cohabitent dans la même section.
+   Sans JavaScript, les deux s'affichent l'une sous l'autre : rien ne
+   disparaît jamais, on perd seulement le confort du basculement.
+   ===================================================================== */
+.vues__choix { display: flex; gap: 4px; }
+.vue { position: relative; }
+.vue + .vue { border-top: 1px solid var(--trait); }
+.js .vue[hidden] { display: none; }
+
+/* Le filtre agit aussi sur le plan de bornage */
+.plan-cadre[data-filtre="1.1"] .parcellaire__lien:not([data-comp~="1.1"]),
+.plan-cadre[data-filtre="1.2"] .parcellaire__lien:not([data-comp~="1.2"]),
+.plan-cadre[data-filtre="1.3"] .parcellaire__lien:not([data-comp~="1.3"]),
+.plan-cadre[data-filtre="1.4"] .parcellaire__lien:not([data-comp~="1.4"]),
+.plan-cadre[data-filtre="1.5"] .parcellaire__lien:not([data-comp~="1.5"]),
+.plan-cadre[data-filtre="1.6"] .parcellaire__lien:not([data-comp~="1.6"]) {
+    opacity: .2;
+}
+.parcellaire__lien { transition: opacity .35s ease; }
+
+/* =====================================================================
+   3. LE PARCELLAIRE, les neuf réalisations dessinées comme un plan
+   ===================================================================== */
+.parcellaire { position: relative; color: var(--or-sourd); padding: 1.3rem 1.3rem 1.1rem; }
+.parcellaire__svg { width: 100%; height: auto; overflow: visible; }
+.parcellaire__legende { margin-top: .9rem; color: var(--encre-3); letter-spacing: .12em; }
+
+/* Les contours de zone : le premier partage du terrain */
+.parcellaire__zone {
+    fill: none;
+    stroke: var(--or);
+    stroke-width: 1.6;
+    opacity: .55;
+}
+
+/* Le terrain réservé à la seconde année : hachuré, et dit comme tel */
+.parcellaire__reserve {
+    fill: var(--or-10);
+    stroke: var(--or-32);
+    stroke-width: 1;
+    stroke-dasharray: 5 5;
+}
+
+/* Une parcelle */
+.parcellaire__parcelle {
+    fill: var(--fond-3);
+    stroke: var(--trait-vif);
+    stroke-width: 1.1;
+    transition: fill .3s ease, stroke .3s ease, stroke-width .3s ease;
+}
+.parcellaire__lien { cursor: pointer; }
+.parcellaire__lien:hover .parcellaire__parcelle,
+.parcellaire__lien:focus-visible .parcellaire__parcelle {
+    fill: var(--or-18);
+    stroke: var(--or);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 12px var(--or-32));
+}
+.parcellaire__lien:focus-visible { outline: none; }
+
+.parcellaire__num {
+    font-family: var(--f-hud);
+    font-size: 21px;
+    font-weight: 700;
+    fill: var(--encre-2);
+    letter-spacing: .04em;
+    transition: fill .3s ease;
+    pointer-events: none;
+}
+.parcellaire__lien:hover .parcellaire__num,
+.parcellaire__lien:focus-visible .parcellaire__num { fill: var(--or-clair); }
+
+.parcellaire__lettre {
+    font-family: var(--f-hud);
+    font-size: 11px;
+    font-weight: 600;
+    fill: var(--or);
+    letter-spacing: .22em;
+    pointer-events: none;
+}
+.parcellaire__mention {
+    font-family: var(--f-hud);
+    font-size: 9px;
+    fill: var(--encre-3);
+    letter-spacing: .18em;
+    pointer-events: none;
+}
+
+.parcellaire__station { color: var(--releve); opacity: .8; }
+
+@media (max-width: 44rem) {
+    .parcellaire__num { font-size: 26px; }
+    .parcellaire__lettre { font-size: 13px; }
+    .parcellaire__mention { font-size: 11px; }
+}
+
+/* =====================================================================
+   4. LES PARCELLES
+   ===================================================================== */
+.parcelles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
+    gap: 12px;
+}
+
+.parcelle {
+    --coupe: 13px;
+    text-decoration: none;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), background .35s ease, box-shadow .35s ease;
+}
+.parcelle > .plaque__i {
+    padding: 1.25rem 1.3rem 1.4rem;
+    display: grid;
+    align-content: start;
+    gap: .6rem;
+    overflow: hidden;
+}
+.parcelle:hover { transform: translateY(-4px); background: var(--or-sourd); box-shadow: var(--halo-or); }
+.parcelle:hover > .plaque__i { background: var(--fond-3); }
+.parcelle::before, .parcelle::after { opacity: .35; }
+.parcelle:hover::before, .parcelle:hover::after { opacity: 1; width: 40px; height: 40px; }
+
+/* le lustre qui balaie la carte au survol */
+.parcelle__lustre {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 40%, var(--or-10) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform .8s cubic-bezier(.2,.8,.2,1);
+}
+.parcelle:hover .parcelle__lustre { transform: translateX(100%); }
+
+.parcelle__tete { display: flex; align-items: flex-start; justify-content: space-between; gap: .6rem; }
+.parcelle__num {
+    font-family: var(--f-hud);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--trait-vif);
+    line-height: .9;
+    letter-spacing: -.02em;
+    transition: -webkit-text-stroke-color .35s ease, color .35s ease;
+}
+.parcelle:hover .parcelle__num { -webkit-text-stroke-color: var(--or); color: var(--or-10); }
+
+.parcelle__comp {
+    font-family: var(--f-hud);
+    font-size: var(--t-nano);
+    font-weight: 600;
+    letter-spacing: .16em;
+    color: var(--or);
+    border: 1px solid var(--or-32);
+    background: var(--or-10);
+    padding: .25rem .45rem;
+    clip-path: var(--chanfrein-petit);
+    line-height: 1;
+    white-space: nowrap;
+}
+.parcelle__titre {
+    font-family: var(--f-titre);
+    font-size: 1.18rem;
+    font-weight: 600;
+    line-height: 1.22;
+    letter-spacing: -.015em;
+    color: var(--encre);
+}
+.parcelle__resume { font-size: var(--t-petit); color: var(--encre-2); line-height: 1.6; }
+.parcelle__pied { display: flex; flex-wrap: wrap; gap: .45rem .8rem; align-items: center; margin-top: .2rem; }
+
+.jetons { display: flex; flex-wrap: wrap; gap: .3rem; }
+.jeton {
+    font-family: var(--f-hud);
+    font-size: var(--t-nano);
+    letter-spacing: .08em;
+    color: var(--encre-3);
+    border: 1px solid var(--trait);
+    padding: .15rem .4rem;
+    white-space: nowrap;
+    transition: border-color .25s ease, color .25s ease;
+}
+.parcelle:hover .jeton { border-color: var(--trait-vif); color: var(--encre-2); }
+
+/* =====================================================================
+   4. LE TERRAIN, les six compétences
+   ===================================================================== */
+.terrain {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    gap: 12px;
+}
+
+.competence-carte {
+    --coupe: 13px;
+    text-decoration: none;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), background .35s ease, box-shadow .35s ease;
+}
+.competence-carte > .plaque__i {
+    padding: 1.3rem 1.3rem 1.5rem;
+    display: grid;
+    align-content: start;
+    gap: .55rem;
+    overflow: hidden;
+    min-height: 12.5rem;
+}
+.competence-carte:hover { transform: translateY(-4px); background: var(--or-sourd); box-shadow: var(--halo-or); }
+.competence-carte:hover > .plaque__i { background: var(--fond-3); }
+.competence-carte::before, .competence-carte::after { opacity: .35; }
+.competence-carte:hover::before, .competence-carte:hover::after { opacity: 1; width: 40px; height: 40px; }
+
+.competence-carte__fond {
+    position: absolute;
+    inset: auto -20% -25% -20%;
+    height: 75%;
+    background: var(--releve-topo) center 40% / 190% auto no-repeat;
+    opacity: .2;
+    pointer-events: none;
+    transition: opacity .45s ease, transform .7s cubic-bezier(.2,.8,.2,1);
+    transform: translateY(20%);
+}
+.competence-carte:hover .competence-carte__fond { opacity: .42; transform: translateY(2%); }
+
+.competence-carte__code {
+    font-family: var(--f-hud);
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1;
+    color: var(--or);
+    text-shadow: 0 0 24px var(--or-32);
+}
+.competence-carte__titre {
+    font-family: var(--f-titre);
+    font-size: 1.12rem;
+    font-weight: 600;
+    line-height: 1.22;
+    color: var(--encre);
+}
+.competence-carte__devise { font-style: italic; font-size: var(--t-petit);
+    color: var(--encre-2); line-height: 1.5; }
+.competence-carte__compte { position: relative; margin-top: auto; padding-top: .5rem; }
+
+/* =====================================================================
+   5. LA FICHE
+   ===================================================================== */
+.fil { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; padding-block: 1.6rem .5rem; }
+.fil a { text-decoration: none; color: var(--encre-3); transition: color .2s; }
+.fil a:hover { color: var(--or); }
+.fil .sep { color: var(--trait-vif); }
+
+.fiche { display: grid; gap: clamp(2rem, 4vw, 3.5rem); align-items: start; }
+@media (min-width: 64rem) { .fiche { grid-template-columns: minmax(0, 1fr) 21rem; } }
+@media (min-width: 64rem) { .fiche__marge { position: sticky; top: calc(var(--entete-h) + 1.6rem); } }
+
+.fiche__tete {
+    position: relative;
+    padding-block: clamp(1.2rem, 3vw, 2.4rem) clamp(1.8rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--trait);
+}
+.fiche__numero {
+    display: block;
+    font-family: var(--f-hud);
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    font-weight: 700;
+    line-height: .85;
+    letter-spacing: -.04em;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--or-32);
+    margin-bottom: .5rem;
+}
+.fiche__titre { margin-bottom: .8rem; }
+.fiche__soustitre {
+    font-family: var(--f-titre);
+    font-style: italic;
+    font-size: var(--t-lead);
+    color: var(--or);
+    margin-bottom: 1.2rem;
+    font-variation-settings: "SOFT" 30, "WONK" 1;
+}
+.fiche__resume { font-size: var(--t-lead); line-height: 1.6; color: var(--encre-2); max-width: 33em; }
+
+.bloc { padding-block: clamp(1.6rem, 3.5vw, 2.6rem); border-bottom: 1px solid var(--trait); }
+.bloc:last-child { border-bottom: 0; }
+.bloc__titre { display: flex; align-items: baseline; gap: .9rem; margin-bottom: 1rem; }
+.bloc__titre::before {
+    content: "";
+    width: 7px; height: 7px;
+    rotate: 45deg;
+    background: var(--or);
+    box-shadow: 0 0 10px var(--or);
+    flex-shrink: 0;
+    translate: 0 -.2em;
+}
+.bloc p, .bloc li { max-width: 36em; }
+.bloc > p { color: var(--encre-2); }
+
+.liste-plan { list-style: none; padding: 0; display: grid; gap: .8rem; margin-top: 1rem; }
+.liste-plan li { position: relative; padding-left: 1.7rem; line-height: 1.6; color: var(--encre-2); }
+.liste-plan li::before {
+    content: "";
+    position: absolute;
+    left: .1rem; top: .68em;
+    width: 8px; height: 8px;
+    border: 1px solid var(--or);
+    rotate: 45deg;
+}
+.liste-plan li::after {
+    content: "";
+    position: absolute;
+    left: .38rem; top: .93em;
+    width: 3px; height: 3px;
+    background: var(--or);
+    rotate: 45deg;
+    opacity: 0;
+    transition: opacity .25s ease;
+}
+.liste-plan li:hover::after { opacity: 1; }
+
+/* --- Les preuves ------------------------------------------------------- */
+.preuves { list-style: none; padding: 0; display: grid; gap: 8px; margin-top: 1.2rem; }
+.preuve { --coupe: 9px; }
+.preuve > .plaque__i {
+    padding: .85rem 1rem;
+    display: grid;
+    gap: .35rem .9rem;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+}
+.preuve::before, .preuve::after { opacity: 0; }
+.preuve:hover::before, .preuve:hover::after { opacity: .7; }
+.preuve__titre { font-size: var(--t-petit); line-height: 1.45; color: var(--encre); }
+.preuve__titre a { color: var(--releve); text-decoration: none; box-shadow: inset 0 -1px 0 currentColor; }
+.preuve__type { grid-column: 1; }
+.preuve__note { grid-column: 1 / -1; font-size: var(--t-petit); color: var(--encre-3);
+    line-height: 1.45; font-style: italic; }
+.preuve .etat { grid-row: span 2; }
+
+/* --- L'encart de référentiel -------------------------------------------- */
+.encart { --coupe: 12px; margin-top: 1.4rem; }
+.encart.plaque { background: var(--or-sourd); }
+.encart > .plaque__i {
+    padding: 1.2rem 1.3rem;
+    background: linear-gradient(150deg, color-mix(in srgb, var(--or) 9%, var(--fond-2)), var(--fond-2));
+}
+.encart__titre { margin-bottom: .8rem; }
+
+.enseignement {
+    position: relative;
+    margin-top: 1.6rem;
+    padding: 1.3rem 1.4rem 1.3rem 1.6rem;
+    background: linear-gradient(100deg, var(--fond-2), transparent);
+    border-left: 1px solid var(--or);
+}
+.enseignement::before {
+    content: "";
+    position: absolute;
+    left: -1px; top: 0; width: 1px; height: 2.4rem;
+    background: var(--or); box-shadow: 0 0 12px var(--or);
+}
+.enseignement p:last-child {
+    font-family: var(--f-titre);
+    font-style: italic;
+    font-size: var(--t-h3);
+    line-height: 1.35;
+    color: var(--encre);
+    font-variation-settings: "SOFT" 30, "WONK" 1;
+}
+
+/* --- Le cartouche latéral ------------------------------------------------ */
+.cartouche { --coupe: 13px; }
+.cartouche > .plaque__i { padding: 1.2rem 1.25rem 1.35rem; }
+.cartouche__grille { display: grid; gap: 1px; background: var(--trait); border: 1px solid var(--trait);
+    margin-top: .9rem; }
+.cartouche__champ { background: var(--fond-1); padding: .65rem .8rem; }
+.cartouche__cle { display: block; font-family: var(--f-hud); font-size: var(--t-nano);
+    letter-spacing: .2em; text-transform: uppercase; color: var(--or-sourd); margin-bottom: .25rem; }
+.cartouche__valeur { display: block; font-size: var(--t-petit); line-height: 1.45; color: var(--encre); }
+
+/* --- Les parcelles voisines ---------------------------------------------- */
+.voisines { display: grid; gap: 10px; margin-top: clamp(2.2rem, 5vw, 3.5rem); }
+@media (min-width: 44rem) { .voisines { grid-template-columns: 1fr 1fr; } }
+.voisine { --coupe: 12px; text-decoration: none; transition: background .3s ease, transform .3s cubic-bezier(.2,.8,.2,1); }
+.voisine > .plaque__i { padding: 1.1rem 1.25rem; display: grid; gap: .3rem; }
+.voisine:hover { background: var(--or-sourd); transform: translateY(-3px); }
+.voisine:hover > .plaque__i { background: var(--fond-3); }
+.voisine--suivante > .plaque__i { text-align: right; }
+.voisine__titre { font-family: var(--f-titre); font-weight: 600; font-size: 1.05rem;
+    color: var(--encre); line-height: 1.25; }
+
+/* =====================================================================
+   6. PAGES RÉDIGÉES, tableaux, certifications
+   ===================================================================== */
+.tableau-cadre { --coupe: 12px; margin-top: 1.2rem; }
+.tableau-cadre > .plaque__i { overflow-x: auto; }
+.tableau-simple { border-collapse: collapse; width: 100%; min-width: 34rem; font-size: var(--t-petit); }
+.tableau-simple th, .tableau-simple td {
+    border-bottom: 1px solid var(--trait);
+    border-right: 1px solid var(--trait);
+    padding: .7rem .85rem; text-align: left; vertical-align: top; line-height: 1.5;
+    color: var(--encre-2);
+}
+.tableau-simple tr > *:last-child { border-right: 0; }
+.tableau-simple tbody tr:last-child > * { border-bottom: 0; }
+.tableau-simple thead th {
+    background: var(--fond-3);
+    font-family: var(--f-hud); font-size: var(--t-nano); letter-spacing: .18em;
+    text-transform: uppercase; font-weight: 600; color: var(--or-sourd);
+}
+.tableau-simple tbody tr { transition: background .2s ease; }
+.tableau-simple tbody tr:hover > * { background: var(--or-10); }
+.tableau-simple td:first-child { font-weight: 600; color: var(--encre); }
+
+.certif { --coupe: 12px; margin-top: 1rem; }
+.certif.plaque { background: var(--or-sourd); }
+.certif > .plaque__i {
+    padding: 1.1rem 1.25rem 1.25rem;
+    display: grid; gap: .35rem;
+    background: linear-gradient(150deg, color-mix(in srgb, var(--or) 7%, var(--fond-2)), var(--fond-2));
+}
+.certif__tete { display: flex; justify-content: space-between; align-items: baseline; gap: .8rem; }
+.certif__organisme { font-family: var(--f-hud); font-size: var(--t-micro); font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--or); }
+.certif__intitule { font-family: var(--f-titre); font-size: 1.15rem; font-weight: 600; line-height: 1.25; }
+.certif__note { font-size: var(--t-petit); color: var(--encre-2); }
+.certif__preuve { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-top: .45rem; }
+
+/* =====================================================================
+   7. LE CARNET DE RELEVÉ
+   ===================================================================== */
+.carnet { position: relative; }
+.carnet__panneau {
+    --coupe: 12px;
+    position: absolute;
+    top: calc(100% + .6rem);
+    right: 0;
+    width: min(23rem, calc(100vw - 2rem));
+    z-index: 120;
+    box-shadow: var(--ombre-plaque), var(--halo-or);
+}
+.carnet__panneau > .plaque__i { padding: 1rem; background: var(--fond-1); }
+.carnet__panneau[hidden] { display: none; }
+.carnet__titre { display: flex; justify-content: space-between; gap: .5rem; margin-bottom: .8rem; }
+.carnet__liste { list-style: none; padding: 0; display: grid; gap: 1px; max-height: 16rem; overflow-y: auto; }
+.carnet__liste a {
+    display: grid; grid-template-columns: 1.4rem 1fr; gap: .5rem; align-items: center;
+    text-decoration: none; font-size: var(--t-petit); color: var(--encre-3);
+    padding: .35rem .4rem; transition: background .15s ease, color .15s ease;
+}
+.carnet__liste a:hover { background: var(--or-10); color: var(--encre); }
+.carnet__marque { font-family: var(--f-hud); font-size: var(--t-micro); color: var(--trait-vif); }
+.carnet__liste li[data-arpentee="oui"] .carnet__marque { color: var(--or); text-shadow: 0 0 8px var(--or-32); }
+.carnet__liste li[data-arpentee="oui"] a { color: var(--encre-2); }
+.carnet__pied { margin-top: .8rem; padding-top: .7rem; border-top: 1px solid var(--trait);
+    display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+.carnet__vider {
+    background: none; border: 0; padding: 0; cursor: pointer;
+    font-family: var(--f-hud); font-size: var(--t-nano); letter-spacing: .16em;
+    text-transform: uppercase; color: var(--encre-3); text-decoration: underline;
+}
+.carnet__vider:hover { color: var(--braise); }
+
+/* =====================================================================
+   8. RÉVÉLATION AU DÉFILEMENT
+   ===================================================================== */
+.js .revele { opacity: 0; transform: translateY(24px); }
+.revele.est-visible {
+    opacity: 1;
+    transform: none;
+    transition: opacity .75s cubic-bezier(.2,.8,.2,1), transform .75s cubic-bezier(.2,.8,.2,1);
+}
+.js .revele--decale > * { opacity: 0; transform: translateY(20px); }
+.revele--decale.est-visible > * {
+    opacity: 1; transform: none;
+    transition: opacity .6s cubic-bezier(.2,.8,.2,1), transform .6s cubic-bezier(.2,.8,.2,1);
+    transition-delay: calc(var(--i, 0) * 55ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .revele, .revele--decale > * { opacity: 1; transform: none; }
+    .couverture__releve, .couverture__nom, .couverture__qualite, .couverture__accroche,
+    .couverture__citation, .chiffres, .descendre { opacity: 1; animation: none; }
+    .rose, .borne__anneau, .descendre__cible::after { animation: none; }
+    .plan-cadre.est-visible > .plaque__i::after { animation: none; }
+}
+
+/* =====================================================================
+   9. LES PREUVES QUE L'ON VOIT
+   Une capture ou une attestation vaut mieux affichee que liee : la
+   commission juge sur piece, pas sur promesse de telechargement.
+   ===================================================================== */
+.illustration {
+    margin: 1.4rem 0 0;
+    padding: 1px;
+    background: var(--trait-vif);
+    clip-path: var(--chanfrein);
+    max-width: 44rem;
+}
+.illustration img {
+    display: block;
+    width: 100%;
+    height: auto;
+    clip-path: var(--chanfrein);
+    background: var(--fond-1);
+}
+.illustration figcaption {
+    padding: .7rem .9rem .5rem;
+    background: var(--fond-2);
+    color: var(--encre-3);
+    letter-spacing: .1em;
+    line-height: 1.5;
+    text-transform: none;
+}
+
+/* =====================================================================
+   10. LES PIECES DU DOSSIER
+   ===================================================================== */
+.dossier {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+}
+.dossier__piece {
+    --coupe: 12px;
+    text-decoration: none;
+    transition: transform .3s cubic-bezier(.2,.8,.2,1), background .3s ease, box-shadow .3s ease;
+}
+.dossier__piece > .plaque__i {
+    padding: 1.05rem 1.15rem 1.2rem;
+    display: grid;
+    gap: .35rem;
+    align-content: start;
+    min-height: 9.5rem;
+}
+.dossier__piece:hover { transform: translateY(-3px); background: var(--or-sourd); box-shadow: var(--halo-or); }
+.dossier__piece:hover > .plaque__i { background: var(--fond-3); }
+.dossier__piece::before, .dossier__piece::after { opacity: .3; }
+.dossier__piece:hover::before, .dossier__piece:hover::after { opacity: 1; width: 34px; height: 34px; }
+
+.dossier__tete { display: flex; align-items: baseline; justify-content: space-between; gap: .6rem; }
+.dossier__titre {
+    font-family: var(--f-titre);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--encre);
+}
+.dossier__poids { color: var(--or); white-space: nowrap; }
+.dossier__type { color: var(--or-sourd); }
+.dossier__note { font-size: var(--t-petit); color: var(--encre-2); line-height: 1.5; margin-top: auto; }

@@ -1,0 +1,833 @@
+{
+  "_lisezmoi": "Les 9 realisations professionnelles du tableau de synthese E5. Une parcelle = une ligne du tableau = une croix.",
+  "parcelles": [
+    {
+      "num": "01",
+      "slug": "prixy",
+      "titreCourt": "PRIXY",
+      "titre": "PRIXY - application intranet de réservation de salles",
+      "sousTitre": "Conduire un projet à quatre, du besoin au planning",
+      "section": "formation",
+      "competence": "1.4",
+      "periode": "Année scolaire 2025-2026",
+      "periodeCourte": "2025-2026",
+      "lieu": "SUP ALTA - Institution des Chartreux, Lyon",
+      "role": "Chef de projet - équipe de quatre",
+      "statut": "livre",
+      "statutLibelle": "Terminé",
+      "resume": "Une application intranet de réservation de salles, développée à quatre en PHP sur une architecture MVC. J'y ai tenu le rôle de chef de projet : c'est moi qui ai cadré le besoin, découpé les tâches et rendu compte des écarts.",
+      "corps": [
+        {
+          "titre": "Le besoin",
+          "paras": [
+            "Réserver une salle dans un établissement se fait encore souvent par un tableau affiché, un courriel ou un appel. PRIXY répond à ce besoin par une application intranet : un utilisateur consulte les disponibilités, réserve un créneau, et l'ensemble des réservations reste consultable au même endroit.",
+            "Le projet a été mené dans le cadre des ateliers de professionnalisation, en équipe de quatre. Il est écrit en PHP, structuré selon une architecture MVC (modèle, vue, contrôleur) qui sépare les données, l'affichage et la logique de traitement."
+          ]
+        },
+        {
+          "titre": "Mon rôle de chef de projet",
+          "paras": [
+            "Être chef de projet à quatre, ce n'est pas coder plus que les autres : c'est faire en sorte que les trois autres sachent quoi coder. Concrètement, la démarche s'est déroulée dans cet ordre :"
+          ],
+          "liste": [
+            "Analyse du besoin et rédaction du <strong>cahier des charges</strong> fonctionnel, qui fixe ce que l'application doit faire et pour qui.",
+            "Traduction en <strong>cahier des charges technique</strong> : architecture MVC, modèle de données, contraintes retenues.",
+            "Conception des <strong>maquettes</strong> (treize écrans) pour valider l'enchaînement des parcours avant d'écrire la moindre ligne de code.",
+            "<strong>Planification</strong> des activités et découpage en tâches réparties dans l'équipe.",
+            "<strong>Comptes rendus de suivi</strong> réguliers, où l'on compare l'avancement réel au planning et où l'on justifie les écarts."
+          ]
+        },
+        {
+          "titre": "Le résultat",
+          "paras": [
+            "Le projet est arrivé à son terme. L'application est fonctionnelle, et l'ensemble des documents de conduite de projet a été produit : le cahier des charges fonctionnel, le cahier des charges technique, la documentation technique, les treize écrans de maquette, le planning et les comptes rendus de suivi.",
+            "C'est cette dernière liste qui compte le plus pour la compétence visée. Une application qui tourne prouve qu'on sait développer ; un projet documenté de bout en bout prouve qu'on sait le <strong>conduire</strong>."
+          ]
+        },
+        {
+          "titre": "Pourquoi maquetter avant de développer",
+          "paras": [
+            "Les treize écrans de maquette ne sont pas une coquetterie. Ils remplissent la même fonction qu'un plan avant un chantier : ils rendent le désaccord visible et gratuit. Corriger un écran sur une maquette coûte dix minutes ; le corriger une fois développé coûte une semaine.",
+            "Cette conviction n'est pas théorique : mon stage à la Mairie de Douvres m'a fait vivre l'inverse, trois semaines de développement perdues faute de modèle validé au départ. PRIXY et la refonte du site communal se répondent, l'un ayant appris à l'autre."
+          ]
+        }
+      ],
+      "technique": [
+        "PHP",
+        "Architecture MVC",
+        "Travail en équipe",
+        "Maquettage",
+        "Planification"
+      ],
+      "preuves": [
+        {
+          "titre": "Cahier des charges fonctionnel",
+          "type": "Document",
+          "etat": "a-deposer"
+        },
+        {
+          "titre": "Cahier des charges technique",
+          "type": "Document",
+          "etat": "a-deposer"
+        },
+        {
+          "titre": "Documentation technique",
+          "type": "Document",
+          "etat": "a-deposer"
+        },
+        {
+          "titre": "Document de maquettes - 13 écrans",
+          "type": "Maquettes",
+          "etat": "a-deposer"
+        },
+        {
+          "titre": "Planning et comptes rendus de suivi",
+          "type": "Suivi de projet",
+          "etat": "a-deposer"
+        }
+      ],
+      "prouve": [
+        "Analyser les objectifs et les modalités d'organisation d'un projet : le double cahier des charges explicite les objectifs et l'organisation retenue.",
+        "Planifier les activités : le planning découpe le projet en tâches réparties et datées.",
+        "Évaluer les indicateurs de suivi d'un projet et analyser les écarts : les comptes rendus de suivi confrontent le réalisé au prévu."
+      ],
+      "enseignement": "Le rôle de chef de projet se joue avant le code : dans la clarté du besoin écrit et dans la validation des maquettes."
+    },
+    {
+      "num": "02",
+      "slug": "virealys",
+      "titreCourt": "VIREALYS",
+      "titre": "VIREALYS - site WordPress déployé sur le serveur du laboratoire",
+      "sousTitre": "Du poste de développement au serveur de production",
+      "section": "formation",
+      "competence": "1.5",
+      "periode": "Année scolaire 2025-2026",
+      "periodeCourte": "2025-2026",
+      "lieu": "Laboratoire informatique - Institution des Chartreux",
+      "role": "Conception et déploiement",
+      "statut": "livre",
+      "statutLibelle": "Terminé",
+      "resume": "Concevoir un site WordPress est une chose ; le mettre en ligne sur un serveur qui n'est pas le sien en est une autre. VIREALYS est déployé sur le serveur du laboratoire de l'école, à l'adresse virealys.labo.infochartreux.fr.",
+      "corps": [
+        {
+          "titre": "Concevoir, puis déployer",
+          "paras": [
+            "Le projet consistait à concevoir un site sous WordPress, puis à le déployer sur l'infrastructure du laboratoire de l'établissement, un serveur réel, partagé, avec ses contraintes propres, et non un environnement local de confort.",
+            "C'est précisément l'écart entre les deux qui fait la compétence : un site qui fonctionne sur son poste ne prouve rien. Un site joignable à une adresse publique, sur une machine que l'on n'administre pas seul, prouve que la mise en production a été menée jusqu'au bout."
+          ]
+        },
+        {
+          "titre": "L'adresse comme preuve",
+          "paras": [
+            "Le site est accessible à l'adresse <code>virealys.labo.infochartreux.fr</code>. Le sous-domaine <code>labo</code> indique l'hébergement sur le serveur pédagogique de l'établissement.",
+            "Cette réalisation et la mise en service du site de la Mairie de Douvres relèvent du même métier (installer, configurer, vérifier page par page, rendre joignable), à deux échelles différentes.",
+            "Le site est aujourd'hui en ligne et le projet est clos : il ne s'agit plus d'une maquette de démonstration, mais d'un service joignable, hébergé ailleurs que sur mon poste."
+          ]
+        }
+      ],
+      "technique": [
+        "WordPress",
+        "Déploiement",
+        "Serveur mutualisé",
+        "Nom de domaine",
+        "Recette"
+      ],
+      "preuves": [
+        {
+          "titre": "Site déployé - virealys.labo.infochartreux.fr",
+          "type": "Service en ligne",
+          "etat": "en-ligne",
+          "href": "https://virealys.labo.infochartreux.fr"
+        },
+        {
+          "titre": "Captures d'écran du site",
+          "type": "Captures",
+          "etat": "a-deposer"
+        },
+        {
+          "titre": "Procédure de déploiement",
+          "type": "Document",
+          "etat": "a-deposer"
+        }
+      ],
+      "prouve": [
+        "Déployer un service : le site est installé et joignable sur le serveur du laboratoire.",
+        "Réaliser les tests d'intégration et d'acceptation d'un service : vérification du site en ligne après déploiement.",
+        "Accompagner les utilisateurs dans la mise en place d'un service : ."
+      ],
+      "enseignement": "Un service n'existe qu'à partir du moment où quelqu'un d'autre peut l'atteindre par une adresse."
+    },
+    {
+      "num": "03",
+      "slug": "environnement-identite",
+      "titreCourt": "Environnement & identité",
+      "titre": "Construction de mon environnement d'apprentissage et de mon identité professionnelle",
+      "sousTitre": "De la Casio 90+E aux certifications Python",
+      "section": "formation",
+      "competence": "1.6",
+      "periode": "Année scolaire 2025-2026",
+      "periodeCourte": "2025-2026",
+      "lieu": "Travail personnel",
+      "role": "Démarche personnelle continue",
+      "statut": "continu",
+      "statutLibelle": "Continu",
+      "resume": "J'ai commencé par écrire des jeux en Python sur une calculatrice Casio 90+E. Cette réalisation raconte comment ce point de départ est devenu un environnement d'apprentissage organisé : deux certifications, des plateformes d'entraînement, une identité professionnelle assumée.",
+      "corps": [
+        {
+          "titre": "Le point de départ",
+          "paras": [
+            "Mon appétence pour le développement est née d'un support minuscule : une calculatrice Casio 90+E, sur laquelle j'écrivais des jeux en Python. C'est ce qui m'a conduit à choisir l'option SLAM (Solutions Logicielles et Applications Métiers) plutôt que SISR.",
+            "Une contrainte matérielle aussi serrée apprend une chose durable : ce qui compte n'est pas la puissance de l'outil, mais la clarté de ce que l'on demande à la machine."
+          ]
+        },
+        {
+          "titre": "Mon environnement d'apprentissage",
+          "paras": [
+            "Ma méthode de travail est constante, et je l'ai appliquée telle quelle en stage : <strong>la documentation officielle d'abord, l'expérimentation en local ensuite, la mise en pratique sur le vrai projet enfin</strong>. Elle a servi pour Docker comme pour le format WXR de WordPress, deux sujets que je ne connaissais pas avant le stage."
+          ],
+          "liste": [
+            "<strong>Certifications</strong> - deux parcours achevés et évalués, en Python (voir ci-dessous).",
+            "<strong>Plateformes d'entraînement</strong>, TryHackMe et Root-Me, pour la pratique de la sécurité offensive et défensive.",
+            "<strong>Environnement de développement</strong>, PhpStorm, Docker et Portainer pour isoler chaque projet, Git pour l'historique.",
+            "<strong>Identité professionnelle</strong>, CV et profil sur réseau professionnel, tenus à jour et cohérents avec ce portfolio."
+          ]
+        },
+        {
+          "titre": "Mes certifications",
+          "paras": [
+            "Deux certifications obtenues durant l'année scolaire 2025-2026, l'une académique et longue, l'autre technique et ciblée :"
+          ],
+          "liste": [
+            "<strong>IBM - Python for Data Science, AI &amp; Development</strong> (Coursera, 30 janvier 2026).",
+            "<strong>W3Schools - Certified Python Developer</strong>, niveau Professional (28 février 2026)."
+          ]
+        }
+      ],
+      "technique": [
+        "Python",
+        "Docker",
+        "PhpStorm",
+        "Git",
+        "TryHackMe",
+        "Root-Me"
+      ],
+      "preuves": [
+        {
+          "titre": "Certification IBM - Python for Data Science, AI & Development",
+          "type": "Certification",
+          "etat": "en-ligne",
+          "note": "Coursera - 30 janvier 2026. Vérifiable en ligne.",
+          "href": "https://coursera.org/verify/KHAPP43XRTXK"
+        },
+        {
+          "titre": "Certification W3Schools - Certified Python Developer (Professional)",
+          "type": "Certification",
+          "etat": "en-ligne",
+          "note": "Niveau Professional - 28 février 2026. Vérifiable en ligne.",
+          "href": "https://verify.w3schools.com/1QT8SVQI86"
+        },
+        {
+          "titre": "Profils TryHackMe et Root-Me",
+          "type": "Profils",
+          "etat": "a-deposer"
+        },
+        {
+          "titre": "CV et profil professionnel",
+          "type": "Identité",
+          "etat": "a-deposer"
+        },
+        {
+          "titre": "Compte rendu de veille technologique",
+          "type": "Document",
+          "etat": "en-ligne",
+          "href": "veille.html"
+        }
+      ],
+      "prouve": [
+        "Mettre en place son environnement d'apprentissage personnel : outils, méthode et plateformes explicités.",
+        "Mettre en œuvre des outils et stratégies de veille informationnelle : voir la page Veille.",
+        "Gérer son identité professionnelle : portfolio, CV, profil professionnel et dépôt public cohérents.",
+        "Développer son projet professionnel : trajectoire SLAM assumée et documentée."
+      ],
+      "enseignement": "Se former n'est pas un supplément au métier : c'est le métier, exercé sur soi-même.",
+      "illustrations": [
+        {
+          "fichier": "assets/preuves/certification-ibm-python.png",
+          "legende": "IBM, Python for Data Science, AI & Development (Coursera, 30 janvier 2026)."
+        },
+        {
+          "fichier": "assets/preuves/certification-w3schools-python.png",
+          "legende": "W3Schools, Certified Python Developer, niveau Professional (28 février 2026)."
+        }
+      ]
+    },
+    {
+      "num": "04",
+      "slug": "audit-douvres",
+      "titreCourt": "Audit du patrimoine",
+      "titre": "Audit informatique et financier de la Mairie de Douvres",
+      "sousTitre": "Recenser 23 000 € de dépenses pour en libérer 13 500",
+      "section": "pro1",
+      "competence": "1.1",
+      "periode": "01/06/26 au 03/07/26",
+      "periodeCourte": "juin - juillet 2026",
+      "lieu": "Mairie de Douvres (Ain)",
+      "role": "Auditeur - rattaché directement au maire",
+      "statut": "livre",
+      "statutLibelle": "Livré et validé",
+      "resume": "Recensement exhaustif des contrats, équipements et services numériques d'une commune de 1 100 habitants. Résultat : environ 23 000 € de dépenses informatiques annuelles, dont environ 13 500 € d'économies possibles, soit plus de la moitié du budget.",
+      "corps": [
+        {
+          "titre": "Le constat de départ",
+          "paras": [
+            "La Mairie de Douvres n'a ni service informatique, ni informaticien. Elle a pourtant un système d'information complet : état civil dématérialisé, dépôt en ligne des autorisations d'urbanisme, comptabilité publique sur logiciel spécialisé, système de vidéosurveillance, site internet vieux de plus de vingt ans.",
+            "Faute de vue d'ensemble, la commune avait perdu la maîtrise de son outil informatique. Le premier travail n'était donc pas technique : il était de savoir ce qu'elle possédait."
+          ]
+        },
+        {
+          "titre": "Ma démarche",
+          "paras": [
+            "Les contrats informatiques sont écrits dans un langage commercial. Des lignes se recoupent, des services sont parfois facturés deux fois sous deux noms différents. Il n'existe aucun moyen de s'y retrouver par la lecture seule."
+          ],
+          "liste": [
+            "<strong>Extraction ligne par ligne</strong> de l'intégralité des contrats dans un tableur unique, poste par poste, avec le service rendu, le prestataire, le coût annuel et l'échéance.",
+            "<strong>Recoupement</strong> des lignes entre elles pour faire apparaître les recouvrements : locations et abonnements qui se superposent.",
+            "<strong>Analyse des coûts</strong> et chiffrage des économies possibles poste par poste.",
+            "<strong>Rapport de synthèse</strong> assorti de préconisations, remis et <strong>validé par le maire</strong>."
+          ]
+        },
+        {
+          "titre": "Le résultat",
+          "paras": [
+            "Environ <strong>23 000 € par an</strong> de dépenses informatiques recensées, et environ <strong>13 500 € par an</strong> d'économies identifiées : soit plus de la moitié du budget informatique de la commune. La part la plus frappante venait des locations et des abonnements qui se chevauchaient.",
+            "L'audit a également mis en évidence des <strong>dépendances tierces à risque</strong> héritées d'anciens prestataires sur le site existant. Les constats détaillés relèvent du secret professionnel et ne figurent ni dans mon rapport de stage, ni dans ce portfolio. Ils sont consultables sur demande auprès de la Mairie de Douvres."
+          ]
+        },
+        {
+          "titre": "Ce que l'audit a changé",
+          "paras": [
+            "Ce constat a fondé toute la suite du stage. Il justifie la refonte du site (sortir de la dépendance à un prestataire) et il justifie la manière dont je l'ai construite : aucune fonction clé confiée à une extension tierce non maîtrisée."
+          ]
+        }
+      ],
+      "technique": [
+        "Recensement de patrimoine",
+        "Analyse contractuelle",
+        "Analyse de coûts",
+        "Tableur",
+        "Rapport de préconisations"
+      ],
+      "preuves": [
+        {
+          "titre": "Tableur d'analyse poste par poste",
+          "type": "Analyse",
+          "etat": "confidentiel",
+          "note": "Confidentiel. Consultable sur demande auprès de la Mairie de Douvres."
+        },
+        {
+          "titre": "Rapport de synthèse validé par le maire",
+          "type": "Rapport",
+          "etat": "confidentiel",
+          "note": "Confidentiel. Consultable sur demande auprès de la Mairie de Douvres."
+        },
+        {
+          "titre": "Rapport de stage - partie « Contexte » et « Déroulé »",
+          "type": "Rapport",
+          "etat": "en-ligne",
+          "note": "Parties « Contexte » et « Déroulé » : le diagnostic, la démarche et les préconisations.",
+          "href": "assets/preuves/rapport-de-stage.pdf"
+        },
+        {
+          "titre": "Rapport de mi-stage",
+          "type": "Rapport",
+          "etat": "en-ligne",
+          "href": "assets/preuves/rapport-mi-stage.pdf",
+          "note": "Rendu du 18 juin 2026 : l'état du diagnostic à la moitié du stage."
+        }
+      ],
+      "prouve": [
+        "Recenser et identifier les ressources numériques : recensement exhaustif des contrats, équipements et services.",
+        "Vérifier le respect des règles d'utilisation des ressources numériques : écarts détectés et signalés au maire.",
+        "Vérifier les conditions de la continuité d'un service informatique : dépendances tierces à risque identifiées et signalées.",
+        "Exploiter des référentiels, normes et standards : préconisations formalisées dans un rapport validé."
+      ],
+      "enseignement": "Un problème informatique est souvent d'abord un problème d'organisation."
+    },
+    {
+      "num": "05",
+      "slug": "assistance-mairie",
+      "titreCourt": "Assistance aux services",
+      "titre": "Assistance informatique aux services de la mairie",
+      "sousTitre": "Vidéosurveillance, signatures électroniques, support quotidien",
+      "section": "pro1",
+      "competence": "1.2",
+      "periode": "01/06/26 au 03/07/26",
+      "periodeCourte": "juin - juillet 2026",
+      "lieu": "Mairie de Douvres (Ain)",
+      "role": "Support informatique de proximité",
+      "statut": "livre",
+      "statutLibelle": "Livré",
+      "resume": "À côté du grand projet, le travail qui rend service tout de suite : diagnostiquer un système de vidéosurveillance, harmoniser les signatures électroniques de tous les services, dépanner au quotidien, et tenir un journal de tout cela.",
+      "corps": [
+        {
+          "titre": "Collecter et orienter les demandes",
+          "paras": [
+            "Une commune de vingt agents n'a pas d'outil de ticketing. Les demandes arrivent au fil de l'eau, oralement, dans les couloirs. J'ai donc tenu un <strong>journal quotidien de mes activités</strong> dans le bloc-notes de classe : chaque demande, son auteur, le diagnostic posé et la suite donnée.",
+            "Ce journal joue le rôle qu'un GLPI tiendrait ailleurs : il rend l'activité traçable, et il permet de constater ce qui revient, donc ce qu'il faut corriger à la racine plutôt que de le redépanner."
+          ]
+        },
+        {
+          "titre": "Les interventions",
+          "liste": [
+            "<strong>Système de vidéosurveillance</strong>, dépannage et analyse du dispositif communal, avec diagnostic de l'existant.",
+            "<strong>Signatures électroniques</strong>, création d'un modèle harmonisé aux couleurs de la commune, décliné et <strong>déployé pour l'ensemble des services</strong>. Une demande d'apparence anodine, mais qui touche à l'image de la mairie dans chaque courriel envoyé.",
+            "<strong>Support bureautique quotidien</strong>, des formules de tableur aux petits blocages techniques, l'assistance de proximité aux agents."
+          ]
+        },
+        {
+          "titre": "Traduire l'informatique",
+          "paras": [
+            "C'est sur ces missions que j'ai le plus progressé sur un point qui ne s'apprend pas dans la documentation : adapter sa communication à son interlocuteur. Les agents de la mairie ne sont pas informaticiens ; une réponse juste mais incompréhensible est une réponse inutile.",
+            "Ces missions peuvent sembler modestes à côté de la refonte du site. Ce sont pourtant elles qui rendent service immédiatement, et c'est par elles que la confiance s'est installée."
+          ]
+        }
+      ],
+      "technique": [
+        "Diagnostic d'incident",
+        "Vidéosurveillance",
+        "Signatures électroniques",
+        "Support bureautique",
+        "Journal d'intervention"
+      ],
+      "preuves": [
+        {
+          "titre": "Modèles de signature électronique",
+          "type": "Livrable",
+          "etat": "en-ligne",
+          "note": "Annexe 4 du rapport de stage.",
+          "href": "assets/preuves/rapport-de-stage.pdf"
+        },
+        {
+          "titre": "Extraits du journal de suivi quotidien",
+          "type": "Journal",
+          "etat": "en-ligne",
+          "note": "Le journal complet : une page par jour, du 1er juin au 2 juillet 2026.",
+          "href": "assets/preuves/journal-de-suivi-quotidien.pdf"
+        },
+        {
+          "titre": "Compte rendu d'intervention - vidéosurveillance",
+          "type": "Compte rendu",
+          "etat": "a-deposer"
+        },
+        {
+          "titre": "Organigramme de la mairie et position du stagiaire",
+          "type": "Schéma",
+          "etat": "en-ligne",
+          "href": "assets/preuves/organigramme-mairie-de-douvres.png",
+          "note": "Les services auprès desquels l'assistance a été rendue."
+        }
+      ],
+      "prouve": [
+        "Collecter, suivre et orienter des demandes : journal quotidien tenu tout au long du stage.",
+        "Traiter des demandes concernant les services réseau et système : diagnostic du système de vidéosurveillance.",
+        "Traiter des demandes concernant les applications : support bureautique et applicatif aux agents.",
+        "La communication écrite et orale est adaptée à l'interlocuteur."
+      ],
+      "enseignement": "Une réponse juste mais incompréhensible est une réponse inutile."
+    },
+    {
+      "num": "06",
+      "slug": "refonte-site",
+      "titreCourt": "Refonte du site communal",
+      "titre": "Refonte complète du site internet de la commune",
+      "sousTitre": "Un thème enfant WordPress pour rendre un village autonome",
+      "section": "pro1",
+      "competence": "1.3",
+      "periode": "01/06/26 au 03/07/26",
+      "periodeCourte": "juin - juillet 2026",
+      "lieu": "Mairie de Douvres (Ain)",
+      "role": "Conception, développement et cadrage - seul développeur",
+      "statut": "livre",
+      "statutLibelle": "V1 fonctionnelle",
+      "resume": "Le cœur du stage. Remplacer un site de plus de vingt ans, maintenu par un prestataire, par un site que la mairie peut conduire seule. Un thème enfant WordPress développé de bout en bout, et un projet qu'il a fallu avoir le courage de recommencer à zéro.",
+      "corps": [
+        {
+          "titre": "Le besoin, et le fardeau",
+          "paras": [
+            "La commune possède un site internet depuis plus de vingt ans. Il a rendu de grands services, mais il a vieilli : difficile à modifier, daté visuellement, et surtout <strong>dépendant d'un prestataire extérieur</strong> pour le faire vivre. La nouvelle équipe municipale voulait un site moderne, à l'image du village, que la mairie pourrait gérer seule.",
+            "L'existant est à la fois une richesse et un fardeau : près de <strong>4 000 articles, plus de 8 500 photos et un millier de documents</strong>. Plus de vingt ans de la mémoire du village. Rien ne doit être perdu."
+          ]
+        },
+        {
+          "titre": "Le choix de la solution",
+          "paras": [
+            "Aucun outil ne m'a été imposé, et c'est justement le problème : personne à la mairie ne pouvait m'imposer un langage ou une base de données. On m'a fixé une destination, pas un chemin. J'ai donc étudié les alternatives avant de trancher."
+          ],
+          "liste": [
+            "<strong>Développement sur mesure</strong>, la solution la plus séduisante pour un développeur, liberté totale. Défaut rédhibitoire : personne ne pourrait maintenir mon code après mon départ.",
+            "<strong>Drupal</strong> - puissant, mais complexe et pensé pour de grandes organisations.",
+            "<strong>Joomla</strong> - plus accessible, mais une communauté qui diminue d'année en année.",
+            "<strong>Services clés en main (type Wix)</strong>, très simples, mais par abonnement, avec les données du village stockées chez un tiers.",
+            "<strong>Agence</strong> - exactement la dépendance dont la commune cherchait à sortir.",
+            "<strong>WordPress</strong> - retenu : gratuit, communauté immense, il fait fonctionner plus de 40 % des sites du monde, l'ancien site tourne déjà dessus (ce qui facilite la récupération du contenu), et la secrétaire de mairie peut publier un article sans écrire une ligne de code."
+          ]
+        },
+        {
+          "titre": "Le défaut assumé de WordPress",
+          "paras": [
+            "Sa popularité en fait une cible privilégiée. Ce choix impose donc des mises à jour régulières et une vigilance réelle sur la sécurité, ce que la documentation technique livrée à la mairie formalise noir sur blanc."
+          ]
+        },
+        {
+          "titre": "L'architecture retenue",
+          "paras": [
+            "Le site repose sur un <strong>thème enfant</strong> nommé <code>douvres-enfant</code>, basé sur Twenty Twenty-Five, le thème par défaut de WordPress. Un thème enfant hérite entièrement du parent et se contente d'ajouter ou de surcharger : les mises à jour du parent n'écrasent jamais mon travail.",
+            "Twenty Twenty-Five est un <strong>thème en blocs</strong> (Full Site Editing) : l'intégralité du site (en-tête, pied de page, pages, articles) se compose visuellement dans l'éditeur de site, sans code. C'est la condition technique de l'autonomie de la mairie."
+          ],
+          "liste": [
+            "<code>style.css</code> - carte d'identité du thème et lien au parent (<code>Template: twentytwentyfive</code>).",
+            "<code>theme.json</code> - réglages globaux : palette, polices, largeurs de mise en page.",
+            "<code>functions.php</code> - la logique PHP sur mesure.",
+            "<code>templates/</code>, <code>parts/</code>, <code>patterns/</code>, gabarits, parties de modèle et compositions en blocs.",
+            "<em>Le <code>theme.json</code> règle l'apparence, le <code>functions.php</code> règle le comportement, les gabarits règlent la structure.</em>"
+          ]
+        },
+        {
+          "titre": "Les fonctionnalités développées",
+          "liste": [
+            "<strong>Système de brèves à quatre emplacements</strong>, une meta <code>douvres_place</code> range chaque actualité dans Actualités, Ça vient de se passer, Archives ou En attente. La mairie publie et choisit l'emplacement, sans toucher à la mise en page.",
+            "<strong>Archivage automatique sans cron</strong>, au-delà d'un délai paramétré, une brève bascule seule en Archives. Je n'utilise pas WP-Cron, qui ne se déclenche qu'à la visite d'un internaute et devient peu fiable sur une commune à faible trafic : j'emploie un <strong>transient</strong> comme garde-fou, ce qui évite de relancer une requête lourde à chaque chargement.",
+            "<strong>Galerie pleine largeur</strong> alimentée par les brèves « Actualités », via le mécanisme natif <code>alignfull</code> plutôt qu'un bricolage CSS fragile en <code>100vw</code>.",
+            "<strong>Navigation fixe</strong> - en-tête accrochée en haut, plate puis ombrée au défilement. Elle s'appuie sur une cale injectée en JavaScript et une classe <code>dvr-fixnav</code> sur le <code>body</code>, pour gérer proprement le décalage de la barre d'administration WordPress.",
+            "<strong>Lecteur en surimpression</strong>, cliquer une brève ouvre un lecteur sur fond sombre par-dessus la page, plutôt que de quitter l'accueil.",
+            "<strong>Moteur zigzag</strong> - la présence d'un bloc galerie dans un article déclenche seule une mise en page alternée texte / images.",
+            "<strong>Agenda automatique</strong> - alimenté par une meta <code>date_evenement</code> posée sur les articles concernés."
+          ]
+        },
+        {
+          "titre": "La charte graphique de la commune",
+          "paras": [
+            "Réglée entièrement dans <code>theme.json</code> : bleu <code>#1c5191</code>, or <code>#dca828</code>, Marcellus pour les titres, Spectral pour le corps, Hanken Grotesk pour l'interface. Largeur de contenu portée à <strong>1080 px</strong> (contre ~645 px par défaut) et blocs larges à <strong>1320 px</strong>. Le défaut de Twenty Twenty-Five est pensé pour du texte de blog, trop étroit pour un site municipal riche en photographies."
+          ]
+        },
+        {
+          "titre": "Le moment qui a tout changé",
+          "paras": [
+            "Dès le départ, j'avais recommandé un design résolument moderne. Le choix s'est porté sur un compromis : du moderne tout en conservant l'esprit de l'ancien site. J'avais prévenu que ce mélange risquait de ne satisfaire personne. C'est exactement ce qui s'est passé. Réunion après réunion, je modifiais le design, et réunion après réunion il ne convainquait toujours pas.",
+            "<strong>Le jeudi 18 juin au soir</strong>, en réunion du comité de communication, j'ai posé le problème clairement : il fallait arrêter de retoucher un compromis qui ne satisfaisait personne, et prendre une décision. La décision a été prise ce soir-là, <strong>tout reprendre à zéro</strong>.",
+            "Le lendemain je présentais mon bilan de mi-stage à l'école. Le lundi 22 juin, je recommençais, avec une méthode inverse : plus question de développer avant validation. J'ai proposé des modèles, je les ai peaufinés trois jours, et <strong>le maire les a validés le 26 juin</strong>. La semaine suivante j'ai développé sur cette base, avec une deuxième validation du comité de communication le 30 juin. <strong>Le 2 juillet, dernier jour de stage, la première version était fonctionnelle.</strong>"
+          ]
+        },
+        {
+          "titre": "L'écart au planning, et sa justification",
+          "paras": [
+            "Le planning prévisionnel prévoyait une semaine de découverte et d'audit, trois semaines de construction, une semaine de finalisation. La réalité a concentré la refonte sur les deux dernières semaines : une pour les modèles et leurs validations, une pour le développement.",
+            "Cet écart ne vient pas d'une mauvaise planification. Il vient d'un compromis de départ qui ne fonctionnait pas, et qu'il a fallu avoir le courage d'abandonner. J'en tire une règle que je garderai : <strong>désigner dès le départ qui décide</strong>, et faire valider les modèles avant de développer."
+          ]
+        }
+      ],
+      "technique": [
+        "WordPress",
+        "Thème enfant",
+        "Full Site Editing",
+        "PHP",
+        "theme.json",
+        "MariaDB",
+        "Docker",
+        "PhpStorm",
+        "Portainer",
+        "Query Loop",
+        "Transients",
+        "WXR"
+      ],
+      "preuves": [
+        {
+          "titre": "Documentation technique du thème",
+          "type": "Document",
+          "etat": "en-ligne",
+          "note": "Annexe 1 du rapport de stage, également intégrée en page privée de l'administration du site.",
+          "href": "assets/preuves/rapport-de-stage.pdf"
+        },
+        {
+          "titre": "Captures d'écran du nouveau site",
+          "type": "Captures",
+          "etat": "en-ligne",
+          "href": "assets/preuves/administration-guide-et-assistant.png",
+          "note": "L'administration du site : le guide en six missions et l'assistant d'installation."
+        },
+        {
+          "titre": "Cahier des charges validé avec le comité de communication",
+          "type": "Document",
+          "etat": "a-deposer"
+        },
+        {
+          "titre": "Modèles validés par le maire - 26 juin 2026",
+          "type": "Maquettes",
+          "etat": "a-deposer"
+        },
+        {
+          "titre": "Historique des commits du thème douvres-enfant",
+          "type": "Dépôt",
+          "etat": "en-ligne",
+          "note": "Dépôt public. Le code du thème communal reste chez la mairie ; celui de ce portfolio est ici.",
+          "href": "https://github.com/Picsou01/portefolio"
+        },
+        {
+          "titre": "Support de soutenance finale",
+          "type": "Présentation",
+          "etat": "en-ligne",
+          "href": "assets/preuves/soutenance-finale.pptx",
+          "note": "Présentation de la production devant le jury, le 3 juillet 2026."
+        }
+      ],
+      "prouve": [
+        "Participer à l'évolution d'un site Web exploitant les données de l'organisation : refonte complète, reprise de vingt ans de contenus.",
+        "Participer à la valorisation de l'image de l'organisation sur les médias numériques : charte graphique communale, validation par les élus.",
+        "Tenir compte du cadre juridique et des enjeux économiques : sortie de la dépendance au prestataire, mentions légales, site de service public.",
+        "Référencer les services en ligne de l'organisation et mesurer leur visibilité."
+      ],
+      "enseignement": "Alerter ne suffit pas. Il faut aussi savoir demander une décision, au bon moment, à la bonne personne.",
+      "illustrations": [
+        {
+          "fichier": "assets/preuves/administration-guide-et-assistant.png",
+          "legende": "Le guide en six missions et l'assistant d'installation, intégrés à l'administration du site."
+        }
+      ]
+    },
+    {
+      "num": "07",
+      "slug": "supports-communication",
+      "titreCourt": "Supports de communication",
+      "titre": "Supports de communication numérique de la commune",
+      "sousTitre": "Lettre d'information trimestrielle et newsletter numérique",
+      "section": "pro1",
+      "competence": "1.3",
+      "periode": "01/06/26 au 03/07/26",
+      "periodeCourte": "juin - juillet 2026",
+      "lieu": "Mairie de Douvres (Ain)",
+      "role": "Conception des supports - comité de communication",
+      "statut": "livre",
+      "statutLibelle": "Livré",
+      "resume": "Un site ne suffit pas à porter la parole d'une commune. J'ai conçu le modèle de la lettre d'information municipale trimestrielle et proposé une newsletter numérique venant la prolonger.",
+      "corps": [
+        {
+          "titre": "Deux canaux, deux publics",
+          "paras": [
+            "Dans un village de 1 100 habitants, tout le monde ne consulte pas un site internet. La lettre d'information trimestrielle reste le support qui atteint chaque foyer ; la newsletter numérique touche ceux qui veulent être informés plus vite et plus souvent.",
+            "J'ai donc travaillé les deux comme un ensemble cohérent, aux mêmes couleurs que le site et que les signatures électroniques déployées dans les services."
+          ]
+        },
+        {
+          "titre": "Le modèle de lettre d'information",
+          "paras": [
+            "Un modèle réutilisable trimestre après trimestre par le comité de communication, sans intervention technique : la structure est fixée, seul le contenu change. Même principe que le site : l'autonomie de la mairie prime sur l'effet."
+          ]
+        },
+        {
+          "titre": "La proposition de newsletter numérique",
+          "paras": [
+            "La newsletter prolonge naturellement le système de brèves du nouveau site : les actualités publiées alimentent l'envoi, sans double saisie. La proposition a été remise au comité de communication."
+          ]
+        }
+      ],
+      "technique": [
+        "Communication institutionnelle",
+        "Charte graphique",
+        "Modèle réutilisable",
+        "Newsletter"
+      ],
+      "preuves": [
+        {
+          "titre": "Modèle de lettre d'information municipale",
+          "type": "Livrable",
+          "etat": "a-deposer"
+        },
+        {
+          "titre": "Proposition de newsletter numérique",
+          "type": "Document",
+          "etat": "a-deposer"
+        }
+      ],
+      "prouve": [
+        "Participer à la valorisation de l'image de l'organisation sur les médias numériques : .",
+        "Tenir compte du cadre juridique et des enjeux économiques : de la communication d'une collectivité.",
+        "Cohérence des supports avec l'identité visuelle portée par le site."
+      ],
+      "enseignement": "Un support de communication réussi est celui que l'organisation peut reproduire sans son auteur."
+    },
+    {
+      "num": "08",
+      "slug": "mise-en-service",
+      "titreCourt": "Mise en service",
+      "titre": "Préparation de la mise en service du nouveau site",
+      "sousTitre": "Tests, transition, sauvegarde et formation du personnel",
+      "section": "pro1",
+      "competence": "1.5",
+      "periode": "01/06/26 au 03/07/26",
+      "periodeCourte": "juin - juillet 2026",
+      "lieu": "Mairie de Douvres (Ain)",
+      "role": "Préparation et conduite de la bascule",
+      "statut": "prolonge",
+      "statutLibelle": "Stage prolongé",
+      "resume": "Un site fonctionnel n'est pas un site en service. J'ai préparé la bascule complète : procédure de transition en huit étapes, plan de sauvegarde, migration de vingt ans de contenus au format WXR, et un tutoriel guidé pour que le personnel puisse publier seul.",
+      "corps": [
+        {
+          "titre": "La procédure de transition",
+          "paras": [
+            "La mise en service d'un site de service public ne s'improvise pas : elle se déroule dans un ordre écrit à l'avance, de façon que chaque étape soit vérifiable et réversible."
+          ],
+          "liste": [
+            "Sauvegarde complète de l'ancien site (base et fichiers) avec UpdraftPlus, conservée <strong>hors du serveur</strong>.",
+            "Export du contenu trié au format <strong>WXR</strong>, l'export XML natif de WordPress : environ 4 000 articles, 8 500 photos et un millier de documents, après élimination des doublons et des fichiers redimensionnés.",
+            "Préparation de la production : WordPress à jour, base dédiée, certificat HTTPS.",
+            "Installation du thème parent puis du thème enfant, contrôle du <code>theme.json</code>.",
+            "Import du contenu WXR et des médias, contrôle du rattachement des images.",
+            "Vérification page par page : navigation, actualités, agenda, galeries, affichage mobile.",
+            "Bascule du nom de domaine vers le nouveau site.",
+            "Contrôles après bascule, archivage hors ligne de l'ancien site, remise des identifiants à la mairie."
+          ]
+        },
+        {
+          "titre": "Sauvegarde, reprise et habilitations",
+          "paras": [
+            "Sauvegarde automatique hebdomadaire du site complet, copie conservée hors du serveur, et sauvegarde manuelle avant chaque mise à jour. En cas d'incident, la reprise consiste à restaurer la dernière sauvegarde saine puis à dérouler les vérifications de mise en service. <strong>La restauration a été testée en local durant le stage</strong>, une sauvegarde jamais restaurée n'est pas une sauvegarde.",
+            "Côté accès, le principe retenu est celui du moindre privilège : comptes nominatifs, rôle Administrateur réservé à la maintenance technique, rôle Éditeur pour la publication par le personnel. Politique de mots de passe : au moins douze caractères, unique par compte et par service, conservé dans un gestionnaire de mots de passe, jamais transmis par courriel."
+          ]
+        },
+        {
+          "titre": "Le tutoriel destiné au personnel",
+          "paras": [
+            "La documentation utilisateur s'adresse à des agents sans aucune connaissance en informatique. Elle commence volontairement par une phrase de mise en confiance : <em>vous ne pouvez rien casser</em>, tout contenu est corrigible après coup, et le site est sauvegardé chaque semaine.",
+            "Elle détaille pas à pas la connexion à l'administration, la publication d'une actualité, l'ajout de photos, l'annonce d'un événement et la modification d'une page. C'est le livrable qui conditionne tous les autres : sans lui, la mairie redevient dépendante."
+          ]
+        },
+        {
+          "titre": "La suite",
+          "paras": [
+            "À l'issue des cinq semaines prévues, la V1 était fonctionnelle mais la mise en service restait à conduire. À la demande du maire, mon tuteur, <strong>mon stage a été prolongé de deux semaines</strong> pour mener cette étape à son terme : bascule, migration de vingt ans de mémoire du village, et formation du personnel avec le tutoriel."
+          ]
+        }
+      ],
+      "technique": [
+        "UpdraftPlus",
+        "WXR",
+        "HTTPS",
+        "Plan de sauvegarde",
+        "Test de restauration",
+        "Moindre privilège",
+        "Documentation utilisateur"
+      ],
+      "preuves": [
+        {
+          "titre": "Tutoriel guidé destiné au personnel - documentation utilisateur",
+          "type": "Support de formation",
+          "etat": "en-ligne",
+          "note": "Annexe 2 du rapport de stage.",
+          "href": "assets/preuves/rapport-de-stage.pdf"
+        },
+        {
+          "titre": "Procédure de transition en huit étapes",
+          "type": "Procédure",
+          "etat": "en-ligne",
+          "href": "assets/preuves/rapport-de-stage.pdf",
+          "note": "Annexe 1 du rapport de stage : les huit étapes de la bascule."
+        },
+        {
+          "titre": "Plan de sauvegarde et compte rendu du test de restauration",
+          "type": "Document",
+          "etat": "en-ligne",
+          "href": "assets/preuves/rapport-de-stage.pdf",
+          "note": "Annexe 1 du rapport de stage, avec le compte rendu du test de restauration."
+        },
+        {
+          "titre": "Compte rendu de formation du personnel",
+          "type": "Compte rendu",
+          "etat": "a-deposer",
+          "note": "À produire à l'issue de la prolongation de stage."
+        }
+      ],
+      "prouve": [
+        "Réaliser les tests d'intégration et d'acceptation d'un service : vérification page par page, test de restauration.",
+        "Déployer un service : procédure de mise en production formalisée et conduite.",
+        "Accompagner les utilisateurs dans la mise en place d'un service : tutoriel guidé et formation du personnel.",
+        "En complément (1.1) : plan de sauvegarde, conditions de continuité et niveaux d'habilitation."
+      ],
+      "enseignement": "Une sauvegarde qui n'a jamais été restaurée n'est pas une sauvegarde."
+    },
+    {
+      "num": "09",
+      "slug": "etude-ia",
+      "titreCourt": "Étude d'opportunité IA",
+      "titre": "Étude d'opportunité sur l'intelligence artificielle en mairie",
+      "sousTitre": "Gagner en productivité sans céder la confidentialité",
+      "section": "pro1",
+      "competence": "1.6",
+      "periode": "01/06/26 au 03/07/26",
+      "periodeCourte": "juin - juillet 2026",
+      "lieu": "Mairie de Douvres (Ain)",
+      "role": "Étude d'opportunité - mission confiée par lettre de mission",
+      "statut": "livre",
+      "statutLibelle": "Note remise",
+      "resume": "Ma lettre de mission comportait une question ouverte : l'intelligence artificielle a-t-elle sa place dans le fonctionnement d'une commune ? La réponse ne pouvait pas être technique seule : une mairie détient les données de ses concitoyens.",
+      "corps": [
+        {
+          "titre": "La contrainte avant le besoin",
+          "paras": [
+            "Une mairie doit préserver la confidentialité des données de ses administrés. Elle ne peut donc pas utiliser n'importe quel service sans risquer de contrevenir à cette obligation. La contrainte a été posée en premier, avant même l'analyse du besoin : toute solution qui exposerait des données nominatives à un tiers non maîtrisé était écartée d'emblée."
+          ]
+        },
+        {
+          "titre": "L'analyse du besoin",
+          "paras": [
+            "Deux usages ressortent clairement des échanges avec les services :"
+          ],
+          "liste": [
+            "<strong>La communication</strong> - création d'affiches et, plus largement, production d'images pour les supports municipaux.",
+            "<strong>L'appui rédactionnel quotidien</strong>, aide à la rédaction de courriels et de documents pour le secrétariat, afin d'améliorer efficacité et productivité."
+          ]
+        },
+        {
+          "titre": "La solution retenue",
+          "paras": [
+            "Je me suis tourné vers l'offre d'<strong>Orange</strong>, opérateur dont la mairie est déjà cliente : ce qui limite l'ajout d'un nouveau prestataire, cohérent avec les conclusions de l'audit.",
+            "Son intérêt tient à son rôle de <strong>passerelle</strong> : elle donne accès à différents types d'IA tout en protégeant la circulation et la diffusion des données. Les documents restent stockés chez l'opérateur, sans stockage direct côté fournisseurs d'IA, et <strong>les données ne sont pas utilisées à des fins d'entraînement</strong>."
+          ]
+        },
+        {
+          "titre": "Pourquoi cette mission relève du développement professionnel",
+          "paras": [
+            "Une note d'opportunité sur l'intégration d'une technologie dans une solution est, dans le référentiel E5, une preuve directe de veille appliquée : identifier une technologie émergente, évaluer sa pertinence pour un besoin réel, et arbitrer en fonction de contraintes qui ne sont pas techniques."
+          ]
+        }
+      ],
+      "technique": [
+        "Étude d'opportunité",
+        "Confidentialité des données",
+        "RGPD",
+        "Veille appliquée",
+        "Analyse de besoin"
+      ],
+      "preuves": [
+        {
+          "titre": "Note d'étude - intégrée au rapport de stage",
+          "type": "Note d'opportunité",
+          "etat": "en-ligne",
+          "href": "assets/preuves/rapport-de-stage.pdf",
+          "note": "Section « L'étude d'opportunité sur l'intelligence artificielle » du rapport."
+        },
+        {
+          "titre": "Compte rendu de veille technologique",
+          "type": "Document",
+          "etat": "en-ligne",
+          "href": "veille.html"
+        }
+      ],
+      "prouve": [
+        "Mettre en œuvre des outils et stratégies de veille informationnelle : note d'opportunité sur l'intégration d'une technologie.",
+        "Développer son projet professionnel : arbitrage entre gain de productivité et obligation de confidentialité.",
+        "Les besoins de formation sont identifiés pour mettre à disposition un service."
+      ],
+      "enseignement": "La bonne question n'était pas « quelle IA ? » mais « quelles données ai-je le droit de lui confier ? »."
+    }
+  ]
+}

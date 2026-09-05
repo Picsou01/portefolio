@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr" data-racine="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veille technologique - Maël Davidenko</title>
+<meta name="description" content="Stratégie de veille informationnelle : thèmes suivis, sources, méthode de sélection et exemples de décisions techniques issues de la veille.">
+<meta name="author" content="Maël Davidenko">
+<meta name="theme-color" content="#0a0705">
+<meta name="color-scheme" content="dark light">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Veille technologique - Maël Davidenko">
+<meta property="og:description" content="Stratégie de veille informationnelle : thèmes suivis, sources, méthode de sélection et exemples de décisions techniques issues de la veille.">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="assets/marque.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&amp;family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&amp;family=Spectral:ital,wght@0,300;0,400;0,600;1,400&amp;display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/cadastre.css">
+<link rel="stylesheet" href="css/impression.css">
+<script>
+/* Deux choses AVANT le premier rendu, pour eviter tout clignotement :
+   1. la classe `js`, qui autorise les effets masquant du contenu ; sans
+      elle, une page ouverte sans JavaScript s'affiche entierement ;
+   2. le theme.
+
+   Le theme se resout ici, et une fois pour toutes : un choix memorise
+   s'il existe, sinon la preference du systeme. L'attribut data-theme est
+   donc TOUJOURS pose, ce qui evite d'avoir a dupliquer la palette claire
+   dans une media query. */
+(function () {
+  var r = document.documentElement;
+  r.classList.add('js');
+  var t = null;
+  try { t = localStorage.getItem('cadastre.theme'); } catch (e) {}
+  if (t !== 'papier' && t !== 'nuit') {
+    t = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches)
+      ? 'papier' : 'nuit';
+  }
+  r.dataset.theme = t;
+})();
+</script>
+</head>
+<body>
+<a class="evitement" href="#contenu">Aller au contenu</a>
+
+<div class="scene" aria-hidden="true">
+  <canvas id="relief"></canvas>
+  <div class="scene__trame"></div>
+  <div class="scene__lampe"></div>
+  <div class="scene__grain"></div>
+  <div class="scene__vignette"></div>
+</div>
+
+<div class="rail" aria-hidden="true">
+  <div class="rail__ligne"></div>
+  <div class="rail__graduation"></div>
+  <span class="rail__borne rail__borne--haut">000</span>
+  <span class="rail__valeur" data-role="rail-cote">000</span>
+  <svg class="rail__curseur" data-role="rail-curseur" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4">
+    <path d="M7.5 1.5 13.5 7.5 7.5 13.5 1.5 7.5Z"/><circle cx="7.5" cy="7.5" r="1.6" fill="currentColor"/>
+  </svg>
+  <span class="rail__borne rail__borne--bas">100</span>
+</div>
+<header class="entete">
+  <div class="enveloppe entete__interieur">
+    <a class="marque" href="index.html">
+      <svg class="marque__viseur" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <circle class="anneau" cx="16" cy="16" r="8.5" stroke-dasharray="3.4 3"/>
+        <path d="M16 3v26M3 16h26"/><circle cx="16" cy="16" r="1.8" fill="currentColor" stroke="none"/>
+      </svg>
+      <span class="marque__nom">Maël Davidenko<small>Cadastre · E5</small></span>
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="nav__lien" href="index.html#plan" data-section="plan">Le plan</a>
+      <a class="nav__lien" href="index.html#realisations" data-section="realisations">Réalisations</a>
+      <a class="nav__lien" href="index.html#competences" data-section="competences">Compétences</a>
+      <a class="nav__lien" href="veille.html">Veille</a>
+      <a class="nav__lien" href="parcours.html">Parcours</a>
+      <a class="nav__lien" href="tableau-de-synthese.html">Tableau E5</a>
+    </nav>
+
+    <div class="outils">
+      <div class="carnet">
+        <button type="button" class="bouton" data-role="carnet" aria-expanded="false" aria-label="Carnet de relevé : parcelles déjà consultées">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 3h12l4 4v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+          <span data-role="carnet-compte">0/9</span>
+        </button>
+        <div class="carnet__panneau plaque" data-role="carnet-panneau" hidden>
+          <div class="plaque__i">
+            <p class="carnet__titre"><span class="hud hud--or">Carnet de relevé</span><span class="hud">local</span></p>
+            <ul class="carnet__liste" data-role="carnet-liste"></ul>
+            <div class="carnet__pied">
+              <span class="hud">rien n'est envoyé</span>
+              <button type="button" class="carnet__vider" data-role="carnet-vider">Effacer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="bouton" data-role="theme" aria-label="Changer de thème">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19"/></svg>
+        <span data-role="theme-libelle">Papier</span>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="contenu">
+  <div class="enveloppe">
+    <nav class="fil" aria-label="Fil d'Ariane"><a class="hud" href="index.html">Cadastre</a><span class="hud sep" aria-hidden="true">/</span><span class="hud hud--or">Veille technologique</span></nav>
+
+    <header class="fiche__tete">
+      <span class="fiche__numero">1.6</span>
+      <h1 class="fiche__titre">Veille technologique</h1>
+      <p class="fiche__soustitre">Ce que je surveille, comment, et ce que ça a changé</p>
+      <p class="fiche__resume">Une veille ne se prouve pas par une liste de flux RSS. Elle se prouve par des décisions. Cette page expose mes thèmes, mes sources et ma méthode, puis deux cas où une recherche a directement changé un choix technique.</p>
+    </header>
+
+    <div class="fiche">
+      <div><section class="bloc revele"><h2 class="bloc__titre"><span>Ma méthode, en trois temps</span></h2><p>Je m'en tiens à une méthode que j'applique depuis le début de ma formation, et que j'ai appliquée telle quelle en stage sur deux technologies que je ne connaissais pas, Docker et le format WXR de WordPress :</p><ul class="liste-plan"><li><strong>La documentation officielle d'abord.</strong> Avant tout tutoriel, la source primaire : la documentation de l'éditeur ou du projet. C'est la seule qui soit à jour et qui engage son auteur.</li><li><strong>L'expérimentation en local ensuite.</strong> Un conteneur Docker jetable, ou un environnement de test isolé. On casse, on recommence, sans conséquence.</li><li><strong>La mise en pratique sur le vrai projet enfin.</strong> Et seulement à ce moment-là.</li></ul><p>Cette progression n'est pas une lenteur, c'est une assurance : je n'introduis jamais dans un projet réel une technologie que je n'ai pas d'abord cassée ailleurs.</p></section><section class="bloc revele"><h2 class="bloc__titre"><span>Comment je choisis une source</span></h2><p>Le volume d'information disponible sur un sujet technique est infini ; la qualité, non. J'applique quatre critères de tri, dans cet ordre :</p><ul class="liste-plan"><li><strong>L'auteur engage-t-il sa responsabilité ?</strong> La documentation d'un éditeur, l'avis d'une agence nationale ou le billet d'un mainteneur de projet valent mieux qu'un article anonyme optimisé pour le référencement.</li><li><strong>La source est-elle datée, et récente ?</strong> Un article WordPress de 2018 décrit un moteur qui n'existe plus : le Full Site Editing a tout changé.</li><li><strong>L'information est-elle vérifiable ailleurs ?</strong> Un mécanisme cité par une seule source se teste avant d'être cru.</li><li><strong>Puis-je la reproduire ?</strong> Une source qui ne permet pas de refaire l'expérience n'est pas une source, c'est une opinion.</li></ul></section><section class="bloc revele"><h2 class="bloc__titre"><span>Mes quatre thèmes de veille</span></h2><p>Ils ne sont pas choisis par curiosité générale : chacun correspond à un besoin né d'un projet réel.</p><div class="plaque tableau-cadre"><div class="plaque__i"><table class="tableau-simple"><thead><tr><th scope="col">Thème</th><th scope="col">Pourquoi je le suis</th><th scope="col">Ce que j'y cherche</th></tr></thead><tbody><tr><td>Écosystème WordPress et Full Site Editing</td><td>Le site d'une commune de 1 100 habitants en dépend, et la mairie doit pouvoir le maintenir seule après moi.</td><td>Évolutions du moteur de blocs, cycle de vie des thèmes par défaut, bonnes pratiques theme.json.</td></tr><tr><td>Sécurité des applications web et des CMS</td><td>WordPress fait tourner plus de 40 % des sites du monde : sa popularité en fait une cible. Mon audit a mis en évidence des dépendances tierces à risque.</td><td>Vulnérabilités des extensions, hygiène des mises à jour, gestion des habilitations et des mots de passe.</td></tr><tr><td>Développement PHP et architectures applicatives</td><td>C'est le cœur de l'option SLAM, et le langage de mes deux projets, PRIXY en MVC, le thème douvres-enfant en PHP.</td><td>Évolutions du langage, séparation des responsabilités, patrons d'architecture.</td></tr><tr><td>Intelligence artificielle et confidentialité des données</td><td>Mission explicite de ma lettre de mission en mairie : une collectivité détient les données de ses administrés.</td><td>Modes d'hébergement, engagements sur la non-réutilisation des données, cadre réglementaire.</td></tr></tbody></table></div></div></section><section class="bloc revele"><h2 class="bloc__titre"><span>Cas n° 1 - la veille a écarté une solution évidente</span></h2><p><strong>Le besoin.</strong> Sur le nouveau site de la commune, les actualités anciennes doivent basculer seules en archives après un certain délai. Aucune intervention humaine ne doit être nécessaire.</p><p><strong>La solution évidente.</strong> WordPress propose WP-Cron, son planificateur de tâches intégré. C'est la première réponse de tous les tutoriels.</p><p><strong>Ce que la documentation officielle m'a appris.</strong> WP-Cron n'est pas un vrai cron système : il ne se déclenche <em>qu'à la visite d'un internaute</em>. Sur le site d'un village à faible trafic, une tâche planifiée peut donc ne jamais partir, ou partir avec plusieurs jours de retard.</p><p><strong>La décision.</strong> J'ai écarté WP-Cron au profit d'un <strong>transient</strong> (une valeur mise en cache avec une durée de vie) qui sert de garde-fou : il évite de relancer une requête lourde à chaque chargement de page tout en repassant régulièrement les vieilles actualités en archives, sans dépendre du trafic.</p><p><strong>Ce que ça prouve.</strong> Sans cette lecture, j'aurais livré à la mairie une fonctionnalité qui aurait semblé marcher en test et échoué en production, au moment exact où plus personne n'aurait été là pour la corriger.</p></section><section class="bloc revele"><h2 class="bloc__titre"><span>Cas n° 2 - la veille a produit une note d'opportunité</span></h2><p><strong>Le besoin.</strong> Ma lettre de mission demandait d'étudier l'usage de l'intelligence artificielle dans le fonctionnement communal. Deux usages sont ressortis : la production d'images pour la communication, et l'appui à la rédaction pour le secrétariat.</p><p><strong>La contrainte, posée avant la recherche.</strong> Une mairie détient les données de ses administrés. Toute solution exposant des données nominatives à un tiers non maîtrisé était écartée d'emblée. La veille ne portait donc pas sur « quelle IA est la meilleure », mais sur <em>où vont les données</em>.</p><p><strong>La solution retenue.</strong> L'offre d'Orange, opérateur dont la mairie est déjà cliente, ce qui évite d'ajouter un prestataire, conformément aux conclusions de mon audit. Son intérêt est son rôle de passerelle : accès à différents types d'IA, documents stockés chez l'opérateur, et données non utilisées à des fins d'entraînement.</p><p><strong>Ce que ça prouve.</strong> Le référentiel E5 cite explicitement la « note d'opportunité sur l'intégration d'une technologie » comme preuve de veille. Celle-ci a été remise et figure dans mon rapport de stage.</p><p><a class="lien" href="parcelles/p09-etude-ia.html">Voir la fiche complète de cette réalisation →</a></p></section><section class="bloc revele"><h2 class="bloc__titre"><span>Mes outils</span></h2><ul class="liste-plan"><li><strong>Agrégateur de flux</strong> - un lecteur RSS regroupant les journaux officiels des projets suivis, pour ne pas dépendre d'un algorithme de recommandation. <em>À nommer.</em></li><li><strong>Sources primaires suivies</strong>, le blog de développement de WordPress, les notes de version PHP, les publications de l'ANSSI sur l'hygiène informatique. <em>À confirmer et compléter.</em></li><li><strong>Plateformes de pratique</strong>, TryHackMe et Root-Me, cités comme preuves dans mon tableau de synthèse : la veille en sécurité s'y transforme en exercice.</li><li><strong>Journal de bord</strong> - le bloc-notes de classe, où j'ai tenu mon journal quotidien d'activités pendant tout le stage.</li><li><strong>Diffusion</strong> - ce portfolio lui-même, et le dépôt public du code. <em>Le référentiel valorise un lieu de diffusion : c'est ici.</em></li></ul></section></div>
+      <aside class="fiche__marge">
+        <div class="plaque cartouche"><div class="plaque__i"><p class="hud hud--or">Cartouche</p><div class="cartouche__grille"><div class="cartouche__champ"><span class="cartouche__cle">Compétence</span><span class="cartouche__valeur">1.6 - Organiser son développement professionnel</span></div><div class="cartouche__champ"><span class="cartouche__cle">Sous-compétence</span><span class="cartouche__valeur">Mettre en œuvre des outils et stratégies de veille informationnelle</span></div><div class="cartouche__champ"><span class="cartouche__cle">Thèmes suivis</span><span class="cartouche__valeur">4</span></div><div class="cartouche__champ"><span class="cartouche__cle">Cas documentés</span><span class="cartouche__valeur">2 décisions issues de la veille</span></div></div></div></div>
+      </aside>
+    </div>
+  </div>
+</main>
+<footer class="pied">
+  <div class="enveloppe">
+    <div class="pied__grille">
+      <div>
+        <p class="hud hud--or pied__titre">Le cadastre</p>
+        <ul class="pied__liste">
+          <li><a href="index.html#plan">Plan de compétences</a></li>
+          <li><a href="index.html#realisations">Les neuf réalisations</a></li>
+          <li><a href="index.html#competences">Les six compétences</a></li>
+          <li><a href="tableau-de-synthese.html">Tableau de synthèse E5</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="hud hud--or pied__titre">Le géomètre</p>
+        <ul class="pied__liste">
+          <li><a href="parcours.html">Parcours et certifications</a></li>
+          <li><a href="veille.html">Veille technologique</a></li>
+          <li><a href="https://github.com/Picsou01/portefolio">Dépôt public</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="hud hud--or pied__titre">Cadre</p>
+        <ul class="pied__liste">
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+        </ul>
+        <p class="hud" style="margin-top:1rem;line-height:1.8">BTS SIO · option SLAM<br>Épreuve E5 · session 2027<br>Institution des Chartreux (SUP ALTA)</p>
+      </div>
+    </div>
+    <div class="pied__bas">
+      <p class="hud hud--or">⌖ 45°57′ N · 5°21′ E · Douvres, Ain</p>
+      <p class="hud">Maël Davidenko · tous droits réservés</p>
+    </div>
+  </div>
+</footer>
+<script src="js/parcelles.js"></script>
+<script src="js/relief.js"></script>
+<script src="js/script.js"></script>
+<script src="js/cadastre.js"></script>
+<script src="js/carnet.js"></script>
+</body>
+</html>

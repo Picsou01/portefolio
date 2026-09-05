@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr" data-racine="../">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parcelle 05 - Assistance aux services · Portfolio E5</title>
+<meta name="description" content="À côté du grand projet, le travail qui rend service tout de suite : diagnostiquer un système de vidéosurveillance, harmoniser les signatures électroniques de tous les services, dép">
+<meta name="author" content="Maël Davidenko">
+<meta name="theme-color" content="#0a0705">
+<meta name="color-scheme" content="dark light">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Parcelle 05 - Assistance aux services · Portfolio E5">
+<meta property="og:description" content="À côté du grand projet, le travail qui rend service tout de suite : diagnostiquer un système de vidéosurveillance, harmoniser les signatures électroniques de tous les services, dép">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="../assets/marque.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&amp;family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&amp;family=Spectral:ital,wght@0,300;0,400;0,600;1,400&amp;display=swap">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/cadastre.css">
+<link rel="stylesheet" href="../css/impression.css">
+<script>
+/* Deux choses AVANT le premier rendu, pour eviter tout clignotement :
+   1. la classe `js`, qui autorise les effets masquant du contenu ; sans
+      elle, une page ouverte sans JavaScript s'affiche entierement ;
+   2. le theme.
+
+   Le theme se resout ici, et une fois pour toutes : un choix memorise
+   s'il existe, sinon la preference du systeme. L'attribut data-theme est
+   donc TOUJOURS pose, ce qui evite d'avoir a dupliquer la palette claire
+   dans une media query. */
+(function () {
+  var r = document.documentElement;
+  r.classList.add('js');
+  var t = null;
+  try { t = localStorage.getItem('cadastre.theme'); } catch (e) {}
+  if (t !== 'papier' && t !== 'nuit') {
+    t = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches)
+      ? 'papier' : 'nuit';
+  }
+  r.dataset.theme = t;
+})();
+</script>
+</head>
+<body data-parcelle="assistance-mairie">
+<a class="evitement" href="#contenu">Aller au contenu</a>
+
+<div class="scene" aria-hidden="true">
+  <canvas id="relief"></canvas>
+  <div class="scene__trame"></div>
+  <div class="scene__lampe"></div>
+  <div class="scene__grain"></div>
+  <div class="scene__vignette"></div>
+</div>
+
+<div class="rail" aria-hidden="true">
+  <div class="rail__ligne"></div>
+  <div class="rail__graduation"></div>
+  <span class="rail__borne rail__borne--haut">000</span>
+  <span class="rail__valeur" data-role="rail-cote">000</span>
+  <svg class="rail__curseur" data-role="rail-curseur" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4">
+    <path d="M7.5 1.5 13.5 7.5 7.5 13.5 1.5 7.5Z"/><circle cx="7.5" cy="7.5" r="1.6" fill="currentColor"/>
+  </svg>
+  <span class="rail__borne rail__borne--bas">100</span>
+</div>
+<header class="entete">
+  <div class="enveloppe entete__interieur">
+    <a class="marque" href="../index.html">
+      <svg class="marque__viseur" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <circle class="anneau" cx="16" cy="16" r="8.5" stroke-dasharray="3.4 3"/>
+        <path d="M16 3v26M3 16h26"/><circle cx="16" cy="16" r="1.8" fill="currentColor" stroke="none"/>
+      </svg>
+      <span class="marque__nom">Maël Davidenko<small>Cadastre · E5</small></span>
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="nav__lien" href="../index.html#plan" data-section="plan">Le plan</a>
+      <a class="nav__lien" href="../index.html#realisations" data-section="realisations">Réalisations</a>
+      <a class="nav__lien" href="../index.html#competences" data-section="competences">Compétences</a>
+      <a class="nav__lien" href="../veille.html">Veille</a>
+      <a class="nav__lien" href="../parcours.html">Parcours</a>
+      <a class="nav__lien" href="../tableau-de-synthese.html">Tableau E5</a>
+    </nav>
+
+    <div class="outils">
+      <div class="carnet">
+        <button type="button" class="bouton" data-role="carnet" aria-expanded="false" aria-label="Carnet de relevé : parcelles déjà consultées">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 3h12l4 4v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+          <span data-role="carnet-compte">0/9</span>
+        </button>
+        <div class="carnet__panneau plaque" data-role="carnet-panneau" hidden>
+          <div class="plaque__i">
+            <p class="carnet__titre"><span class="hud hud--or">Carnet de relevé</span><span class="hud">local</span></p>
+            <ul class="carnet__liste" data-role="carnet-liste"></ul>
+            <div class="carnet__pied">
+              <span class="hud">rien n'est envoyé</span>
+              <button type="button" class="carnet__vider" data-role="carnet-vider">Effacer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="bouton" data-role="theme" aria-label="Changer de thème">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19"/></svg>
+        <span data-role="theme-libelle">Papier</span>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="contenu">
+  <div class="enveloppe">
+    <nav class="fil" aria-label="Fil d'Ariane"><a class="hud" href="../index.html">Cadastre</a><span class="hud sep" aria-hidden="true">/</span><a class="hud" href="../index.html#realisations">Réalisations</a><span class="hud sep" aria-hidden="true">/</span><span class="hud hud--or">Parcelle 05</span></nav>
+
+    <header class="fiche__tete">
+      <span class="fiche__numero">05</span>
+      <h1 class="fiche__titre">Assistance informatique aux services de la mairie</h1>
+      <p class="fiche__soustitre">Vidéosurveillance, signatures électroniques, support quotidien</p>
+      <p class="fiche__resume">À côté du grand projet, le travail qui rend service tout de suite : diagnostiquer un système de vidéosurveillance, harmoniser les signatures électroniques de tous les services, dépanner au quotidien, et tenir un journal de tout cela.</p>
+      <div class="rang" style="margin-top:1.4rem">
+        <span class="etat etat--livre">Livré</span>
+        <a class="etat etat--livre" href="../competences/c1-2-incidents.html" style="text-decoration:none">Compétence 1.2</a>
+        <span class="hud">01/06/26 au 03/07/26</span>
+      </div>
+    </header>
+
+    <div class="fiche">
+      <div>
+        <section class="bloc revele"><h2 class="bloc__titre"><span>Collecter et orienter les demandes</span></h2><p>Une commune de vingt agents n'a pas d'outil de ticketing. Les demandes arrivent au fil de l'eau, oralement, dans les couloirs. J'ai donc tenu un <strong>journal quotidien de mes activités</strong> dans le bloc-notes de classe : chaque demande, son auteur, le diagnostic posé et la suite donnée.</p><p>Ce journal joue le rôle qu'un GLPI tiendrait ailleurs : il rend l'activité traçable, et il permet de constater ce qui revient, donc ce qu'il faut corriger à la racine plutôt que de le redépanner.</p></section><section class="bloc revele"><h2 class="bloc__titre"><span>Les interventions</span></h2><ul class="liste-plan"><li><strong>Système de vidéosurveillance</strong>, dépannage et analyse du dispositif communal, avec diagnostic de l'existant.</li><li><strong>Signatures électroniques</strong>, création d'un modèle harmonisé aux couleurs de la commune, décliné et <strong>déployé pour l'ensemble des services</strong>. Une demande d'apparence anodine, mais qui touche à l'image de la mairie dans chaque courriel envoyé.</li><li><strong>Support bureautique quotidien</strong>, des formules de tableur aux petits blocages techniques, l'assistance de proximité aux agents.</li></ul></section><section class="bloc revele"><h2 class="bloc__titre"><span>Traduire l'informatique</span></h2><p>C'est sur ces missions que j'ai le plus progressé sur un point qui ne s'apprend pas dans la documentation : adapter sa communication à son interlocuteur. Les agents de la mairie ne sont pas informaticiens ; une réponse juste mais incompréhensible est une réponse inutile.</p><p>Ces missions peuvent sembler modestes à côté de la refonte du site. Ce sont pourtant elles qui rendent service immédiatement, et c'est par elles que la confiance s'est installée.</p></section>
+
+        
+
+        <section class="bloc revele">
+          <h2 class="bloc__titre"><span>Les preuves</span></h2>
+          <p>Les documents ci-dessous constituent les traces de cette réalisation. Leur état indique s'ils sont consultables ici, confidentiels, ou encore non publiés.</p>
+          <ul class="preuves"><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="../assets/preuves/rapport-de-stage.pdf">Modèles de signature électronique</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Livrable</span>
+        <span class="preuve__note">Annexe 4 du rapport de stage.</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="../assets/preuves/journal-de-suivi-quotidien.pdf">Extraits du journal de suivi quotidien</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Journal</span>
+        <span class="preuve__note">Le journal complet : une page par jour, du 1er juin au 2 juillet 2026.</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre">Compte rendu d'intervention - vidéosurveillance</span>
+        <span class="etat etat--a-deposer">Non publié</span>
+        <span class="hud preuve__type">Compte rendu</span>
+        </div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="../assets/preuves/organigramme-mairie-de-douvres.png">Organigramme de la mairie et position du stagiaire</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Schéma</span>
+        <span class="preuve__note">Les services auprès desquels l'assistance a été rendue.</span></div></div></li></ul>
+        </section>
+
+        <section class="bloc revele">
+          <h2 class="bloc__titre"><span>Ce que cette réalisation démontre</span></h2>
+          <div class="plaque encart"><div class="plaque__i"><p class="hud hud--or encart__titre">Compétence 1.2 : Répondre aux incidents et aux demandes d'assistance et d'évolution</p><ul class="liste-plan"><li>Collecter, suivre et orienter des demandes : journal quotidien tenu tout au long du stage.</li><li>Traiter des demandes concernant les services réseau et système : diagnostic du système de vidéosurveillance.</li><li>Traiter des demandes concernant les applications : support bureautique et applicatif aux agents.</li><li>La communication écrite et orale est adaptée à l'interlocuteur.</li></ul></div></div>
+          <div class="enseignement">
+            <p class="hud">Ce que j'en retiens</p>
+            <p>« Une réponse juste mais incompréhensible est une réponse inutile. »</p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="fiche__marge">
+        <div class="plaque cartouche"><div class="plaque__i"><p class="hud hud--or">Cartouche de la parcelle</p><div class="cartouche__grille"><div class="cartouche__champ"><span class="cartouche__cle">Parcelle</span><span class="cartouche__valeur">n° 05</span></div><div class="cartouche__champ"><span class="cartouche__cle">Période</span><span class="cartouche__valeur">01/06/26 au 03/07/26</span></div><div class="cartouche__champ"><span class="cartouche__cle">Lieu</span><span class="cartouche__valeur">Mairie de Douvres (Ain)</span></div><div class="cartouche__champ"><span class="cartouche__cle">Rôle</span><span class="cartouche__valeur">Support informatique de proximité</span></div><div class="cartouche__champ"><span class="cartouche__cle">Compétence</span><span class="cartouche__valeur">1.2 · Incidents</span></div><div class="cartouche__champ"><span class="cartouche__cle">Preuves</span><span class="cartouche__valeur">4 documents</span></div></div><p class="hud" style="margin:1.2rem 0 .6rem">Environnement technologique</p><div class="jetons"><span class="jeton">Diagnostic d'incident</span><span class="jeton">Vidéosurveillance</span><span class="jeton">Signatures électroniques</span><span class="jeton">Support bureautique</span><span class="jeton">Journal d'intervention</span></div></div></div>
+      </aside>
+    </div>
+
+    <nav class="voisines" aria-label="Parcelles voisines"><a class="plaque voisine" href="../parcelles/p04-audit-douvres.html"><span class="plaque__i"><span class="hud">← Parcelle 04</span><span class="voisine__titre">Audit du patrimoine</span></span></a><a class="plaque voisine voisine--suivante" href="../parcelles/p06-refonte-site.html"><span class="plaque__i"><span class="hud">Parcelle 06 →</span><span class="voisine__titre">Refonte du site communal</span></span></a></nav>
+  </div>
+</main>
+<footer class="pied">
+  <div class="enveloppe">
+    <div class="pied__grille">
+      <div>
+        <p class="hud hud--or pied__titre">Le cadastre</p>
+        <ul class="pied__liste">
+          <li><a href="../index.html#plan">Plan de compétences</a></li>
+          <li><a href="../index.html#realisations">Les neuf réalisations</a></li>
+          <li><a href="../index.html#competences">Les six compétences</a></li>
+          <li><a href="../tableau-de-synthese.html">Tableau de synthèse E5</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="hud hud--or pied__titre">Le géomètre</p>
+        <ul class="pied__liste">
+          <li><a href="../parcours.html">Parcours et certifications</a></li>
+          <li><a href="../veille.html">Veille technologique</a></li>
+          <li><a href="https://github.com/Picsou01/portefolio">Dépôt public</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="hud hud--or pied__titre">Cadre</p>
+        <ul class="pied__liste">
+          <li><a href="../mentions-legales.html">Mentions légales</a></li>
+        </ul>
+        <p class="hud" style="margin-top:1rem;line-height:1.8">BTS SIO · option SLAM<br>Épreuve E5 · session 2027<br>Institution des Chartreux (SUP ALTA)</p>
+      </div>
+    </div>
+    <div class="pied__bas">
+      <p class="hud hud--or">⌖ 45°57′ N · 5°21′ E · Douvres, Ain</p>
+      <p class="hud">Maël Davidenko · tous droits réservés</p>
+    </div>
+  </div>
+</footer>
+<script src="../js/parcelles.js"></script>
+<script src="../js/relief.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/cadastre.js"></script>
+<script src="../js/carnet.js"></script>
+</body>
+</html>

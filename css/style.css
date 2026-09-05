@@ -1,74 +1,691 @@
-/* Variables — change tes couleurs et tailles ici */
+/* =====================================================================
+   LE CADASTRE - socle
+   Portfolio E5 · Maël Davidenko · BTS SIO SLAM · session 2027
+
+   Jetons, remise à zéro, typographie, primitives graphiques.
+   Les composants sont dans cadastre.css
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1. JETONS
+   Le site est pensé de nuit : un plan posé sur une table lumineuse,
+   éclairé par une lampe chaude. Le mode papier existe, mais c'est le
+   mode nuit qui porte l'identité.
+   --------------------------------------------------------------------- */
 :root {
-    --couleur-fond: #0a0a0a;
-    --couleur-texte: #f5f5f5;
-    --couleur-accent: #00d9ff;
-    --espacement: 2rem;
-    --largeur-max: 1200px;
-    --police: system-ui, -apple-system, sans-serif;
+    color-scheme: dark light;
+
+    /* --- Fonds : bruns profonds, jamais gris, jamais bleus ------------ */
+    --fond-0:  #0a0705;   /* le noir du fond de page */
+    --fond-1:  #120d08;   /* sections */
+    --fond-2:  #1b140d;   /* plaques */
+    --fond-3:  #251b11;   /* plaques en relief, survol */
+
+    /* --- Encres -------------------------------------------------------- */
+    --encre:   #f7ecd8;
+    --encre-2: #c2ab8c;
+    --encre-3: #9c886c;
+
+    /* --- Traits -------------------------------------------------------- */
+    --trait:     #362819;
+    --trait-vif: #56412a;
+
+    /* --- Lumière : l'or est la source ---------------------------------- */
+    --or:        #ffb03a;
+    --or-clair:  #ffd68a;
+    --or-sourd:  #b57c23;
+    --or-10:     rgba(255, 176, 58, .10);
+    --or-18:     rgba(255, 176, 58, .18);
+    --or-32:     rgba(255, 176, 58, .32);
+
+    /* --- Contrepoints -------------------------------------------------- */
+    --braise:  #ff6b35;   /* chaleur vive : accents, alertes douces */
+    --releve:  #56d9e8;   /* bleu de calque : liens, visées, données */
+    --releve-14: rgba(86, 217, 232, .14);
+    --alerte:  #e8543f;
+
+    /* --- Lueurs -------------------------------------------------------- */
+    --halo-or:     0 0 22px -6px rgba(255, 176, 58, .55), 0 0 60px -20px rgba(255, 176, 58, .45);
+    --halo-or-fort:0 0 14px -2px rgba(255, 176, 58, .75), 0 0 48px -10px rgba(255, 176, 58, .55);
+    --halo-releve: 0 0 20px -6px rgba(86, 217, 232, .55);
+    --ombre-plaque: 0 2px 0 rgba(0,0,0,.5), 0 18px 40px -24px rgba(0,0,0,.9);
+
+    /* --- Typographie --------------------------------------------------- */
+    --f-titre: "Fraunces", "Playfair Display", Georgia, serif;
+    --f-hud:   "Chakra Petch", "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    --f-corps: "Spectral", Georgia, "Times New Roman", serif;
+
+    --t-nano:  .625rem;
+    --t-micro: .7rem;
+    --t-petit: .8125rem;
+    --t-base:  clamp(1rem, .95rem + .22vw, 1.09rem);
+    --t-lead:  clamp(1.15rem, 1.02rem + .55vw, 1.42rem);
+    --t-h3:    clamp(1.2rem, 1.05rem + .62vw, 1.55rem);
+    --t-h2:    clamp(1.9rem, 1.25rem + 2.8vw, 3.6rem);
+    --t-h1:    clamp(2.4rem, 1.5rem + 3.6vw, 5rem);
+    --t-geant: clamp(3.2rem, 1.2rem + 9.4vw, 10.5rem);
+
+    /* --- Mesures ------------------------------------------------------- */
+    --gouttiere: clamp(1.1rem, 4vw, 3.5rem);
+    --large:     84rem;
+    --lisible:   38rem;
+    --entete-h:  4rem;
+    --rail:      2.75rem;   /* largeur du rail altimètre, à gauche */
+
+    /* --- Le chanfrein : la signature de forme -------------------------- */
+    --coupe:  14px;
+    --chanfrein: polygon(
+        var(--coupe) 0, 100% 0,
+        100% calc(100% - var(--coupe)), calc(100% - var(--coupe)) 100%,
+        0 100%, 0 var(--coupe));
+    --chanfrein-petit: polygon(
+        7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
+
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+    --grain-opacite: .055;
+
+    /* Le relevé topographique utilisé en fond de plaque : deux tirages du
+       même relief, l'un à l'encre claire pour la nuit, l'autre à l'encre
+       sombre pour le papier. */
+    --releve-topo: url("../assets/lignes-de-niveau-nuit.svg");
 }
 
-/* Reset minimal — vire les marges par défaut */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* --- Mode PAPIER : le même relevé, vu de jour --------------------------- */
+:root[data-theme="papier"] {
+    color-scheme: light;
+    --fond-0:  #e9dcc4;
+    --fond-1:  #f2e8d5;
+    --fond-2:  #fbf4e5;
+    --fond-3:  #fffaf0;
+    --encre:   #1b1206;
+    --encre-2: #5a4630;
+    --encre-3: #6a563d;
+    --trait:     #d6c7a8;
+    --trait-vif: #a8916d;
+    --or:        #7a4a00;   /* bronze : traits ET texte, >= 4.5:1 */
+    --or-clair:  #5c3600;   /* accent appuyé */
+    --or-sourd:  #7d5c1c;   /* libellés secondaires */
+    --or-10:     rgba(168, 108, 7, .09);
+    --or-18:     rgba(168, 108, 7, .16);
+    --or-32:     rgba(168, 108, 7, .3);
+    --braise:  #b8400f;
+    --releve:  #0a6b7d;
+    --releve-14: rgba(10, 107, 125, .12);
+    --alerte:  #a8331c;
+    --halo-or:      0 0 18px -8px rgba(168, 108, 7, .4);
+    --halo-or-fort: 0 0 12px -3px rgba(168, 108, 7, .5);
+    --halo-releve:  0 0 16px -8px rgba(10, 107, 125, .4);
+    --ombre-plaque: 0 1px 0 rgba(120, 98, 73, .12), 0 16px 34px -26px rgba(60, 44, 20, .5);
+    --grain-opacite: .04;
+    --releve-topo: url("../assets/lignes-de-niveau.svg");
 }
 
-/* Base du body */
+/* ---------------------------------------------------------------------
+   2. REMISE À ZÉRO
+   --------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* La classe `js` est posee par un script en tete de page. Tout effet qui
+   masque du contenu en attendant JavaScript est conditionne par elle :
+   sans script, la page s'affiche entierement, tout de suite. */
+* { margin: 0; }
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--entete-h) + 2rem);
+}
+
 body {
-    font-family: var(--police);
-    background: var(--couleur-fond);
-    color: var(--couleur-texte);
-    line-height: 1.6;
+    font-family: var(--f-corps);
+    font-size: var(--t-base);
+    line-height: 1.7;
+    color: var(--encre);
+    background: var(--fond-0);
     min-height: 100vh;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Header et navigation */
-header {
-    padding: var(--espacement);
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+
+:where(button, a, [tabindex]):focus-visible {
+    outline: 2px solid var(--releve);
+    outline-offset: 3px;
 }
 
-nav {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
+::selection { background: var(--or-32); color: var(--encre); }
+
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: var(--fond-1); }
+::-webkit-scrollbar-thumb { background: var(--trait-vif); }
+::-webkit-scrollbar-thumb:hover { background: var(--or-sourd); }
+
+.sr {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap;
 }
 
-nav a {
-    color: var(--couleur-texte);
+.evitement {
+    position: fixed; left: 50%; top: 0; transform: translate(-50%, -130%);
+    z-index: 300; background: var(--or); color: #180f04;
+    padding: .7rem 1.4rem; font-family: var(--f-hud); font-weight: 600;
+    font-size: var(--t-petit); letter-spacing: .1em; text-transform: uppercase;
+    text-decoration: none; transition: transform .2s ease;
+    clip-path: var(--chanfrein-petit);
+}
+.evitement:focus { transform: translate(-50%, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+/* ---------------------------------------------------------------------
+   3. LES COUCHES DE FOND
+   Quatre plans superposés, du plus lointain au plus proche :
+   le relief animé, la trame, le grain, la vignette.
+   --------------------------------------------------------------------- */
+.scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Le relief : dessiné image par image par js/relief.js */
+#relief {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* La trame du géomètre : un quadrillage millimétré, très discret */
+.scene__trame {
+    position: absolute;
+    inset: -10%;
+    background-image:
+        linear-gradient(var(--trait) 1px, transparent 1px),
+        linear-gradient(90deg, var(--trait) 1px, transparent 1px);
+    background-size: 88px 88px;
+    opacity: .3;
+    -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 38%, #000 5%, transparent 78%);
+    mask-image: radial-gradient(ellipse 78% 62% at 50% 38%, #000 5%, transparent 78%);
+}
+
+.scene__grain {
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    opacity: var(--grain-opacite);
+}
+
+/* La lampe : une lueur chaude en haut, qui donne sa direction à la lumière */
+.scene__lampe {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 42% at 50% -8%, var(--or-10), transparent 70%),
+        radial-gradient(ellipse 90% 60% at 50% 120%, rgba(255,107,53,.05), transparent 60%);
+}
+
+/* La vignette : referme le champ, comme un oculaire */
+.scene__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 100% 85% at 50% 45%,
+                transparent 42%, rgba(0,0,0,.42) 100%);
+}
+:root[data-theme="papier"] .scene__vignette {
+    background: radial-gradient(ellipse 100% 85% at 50% 45%,
+                transparent 48%, rgba(90, 70, 48, .16) 100%);
+}
+
+/* ---------------------------------------------------------------------
+   4. TYPOGRAPHIE
+   --------------------------------------------------------------------- */
+h1, h2, h3, h4 {
+    font-family: var(--f-titre);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -.022em;
+    font-variation-settings: "SOFT" 12, "WONK" 1;
+    text-wrap: balance;
+}
+h1 { font-size: var(--t-h1); }
+h2 { font-size: var(--t-h2); }
+h3 { font-size: var(--t-h3); font-weight: 600; letter-spacing: -.008em; }
+
+p { text-wrap: pretty; }
+p + p { margin-top: 1em; }
+strong { font-weight: 600; color: var(--or-clair); }
+:root[data-theme="papier"] strong { color: var(--encre); }
+em { font-style: italic; }
+
+code {
+    font-family: var(--f-hud);
+    font-weight: 500;
+    font-size: .88em;
+    background: var(--fond-3);
+    border-left: 2px solid var(--or-sourd);
+    padding: .1em .42em;
+    color: var(--or-clair);
+    white-space: nowrap;
+}
+
+/* Le libellé d'instrument : petit, capitales, très espacé */
+.hud {
+    font-family: var(--f-hud);
+    font-weight: 500;
+    font-size: var(--t-micro);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--encre-3);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.4;
+}
+.hud--or     { color: var(--or); }
+.hud--releve { color: var(--releve); }
+.hud--vif    { color: var(--encre); }
+
+.lien {
+    color: var(--releve);
     text-decoration: none;
-    transition: color 0.3s;
+    box-shadow: inset 0 -1px 0 currentColor;
+    transition: box-shadow .2s ease, color .2s ease, text-shadow .2s ease;
+}
+.lien:hover { box-shadow: inset 0 -2px 0 currentColor; text-shadow: var(--halo-releve); }
+
+/* ---------------------------------------------------------------------
+   5. PRIMITIVES GRAPHIQUES
+   --------------------------------------------------------------------- */
+
+/* --- LA PLAQUE : panneau chanfreiné à filet lumineux -------------------
+   Deux couches : l'extérieure porte le filet, l'intérieure le fond.
+   C'est la seule façon d'obtenir un contour net de 1 px sur une forme
+   découpée en clip-path, une bordure CSS serait rognée avec le reste. */
+.plaque {
+    display: block;
+    position: relative;
+    background: var(--trait-vif);
+    padding: 1px;
+    clip-path: var(--chanfrein);
+    transition: background .3s ease, filter .3s ease;
+}
+.plaque > .plaque__i {
+    display: block;
+    position: relative;
+    background: var(--fond-2);
+    clip-path: var(--chanfrein);
+    height: 100%;
+}
+.plaque--vive { background: var(--or-sourd); }
+.plaque--creuse > .plaque__i { background: var(--fond-1); }
+.plaque--haute > .plaque__i { background: var(--fond-3); }
+
+/* Le liseré d'angle : deux traits d'or qui suivent les coupes */
+.plaque::before,
+.plaque::after {
+    content: "";
+    position: absolute;
+    width: 22px; height: 22px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: .8;
+    transition: opacity .3s ease, width .3s ease, height .3s ease;
+}
+.plaque::before {
+    top: 0; right: 0;
+    border-top: 2px solid var(--or);
+    border-right: 2px solid var(--or);
+}
+.plaque::after {
+    bottom: 0; left: 0;
+    border-bottom: 2px solid var(--or);
+    border-left: 2px solid var(--or);
 }
 
-nav a:hover {
-    color: var(--couleur-accent);
+/* --- Les équerres d'angle, posées librement --------------------------- */
+.equerre {
+    position: absolute;
+    width: 13px; height: 13px;
+    border: 1px solid var(--or);
+    opacity: .55;
+    pointer-events: none;
+    transition: opacity .3s ease, transform .3s ease;
+}
+.equerre--hg { top: 6px;  left: 6px;  border-right: 0; border-bottom: 0; }
+.equerre--hd { top: 6px;  right: 6px; border-left: 0;  border-bottom: 0; }
+.equerre--bg { bottom: 6px; left: 6px; border-right: 0; border-top: 0; }
+.equerre--bd { bottom: 6px; right: 6px; border-left: 0; border-top: 0; }
+
+/* --- Le bouton d'instrument ------------------------------------------- */
+.bouton {
+    --coupe: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 2.05rem;
+    padding: 0 .7rem;
+    background: transparent;
+    border: 1px solid var(--trait-vif);
+    color: var(--encre-2);
+    font-family: var(--f-hud);
+    font-weight: 500;
+    font-size: var(--t-micro);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    clip-path: var(--chanfrein-petit);
+    transition: color .2s ease, border-color .2s ease, background .2s ease, box-shadow .25s ease;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+.bouton:hover {
+    color: var(--or-clair);
+    border-color: var(--or);
+    background: var(--or-10);
+    box-shadow: var(--halo-or);
+}
+.bouton[aria-pressed="true"] {
+    color: #1a1004;
+    background: var(--or);
+    border-color: var(--or);
+    box-shadow: var(--halo-or-fort);
+    font-weight: 700;
+}
+:root[data-theme="papier"] .bouton[aria-pressed="true"] { color: #fff8e8; }
+.bouton svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* --- Le filet de section ---------------------------------------------- */
+.filet {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--or-32), var(--trait) 24%, transparent);
+    margin-block: 2.5rem;
 }
 
-/* Contenu principal */
-main {
-    max-width: var(--largeur-max);
-    margin: 0 auto;
-    padding: var(--espacement);
+/* --- Réglure : une graduation d'instrument ---------------------------- */
+.reglure {
+    height: 10px;
+    background-image: repeating-linear-gradient(90deg,
+        var(--trait-vif) 0 1px, transparent 1px 12px);
+    -webkit-mask-image: linear-gradient(90deg, #000, #000 60%, transparent);
+    mask-image: linear-gradient(90deg, #000, #000 60%, transparent);
+    opacity: .8;
 }
 
-section {
-    min-height: 80vh;
-    padding: var(--espacement) 0;
+/* ---------------------------------------------------------------------
+   6. OSSATURE
+   --------------------------------------------------------------------- */
+.enveloppe {
+    position: relative;
+    z-index: 1;
+    width: min(100% - 2 * var(--gouttiere), var(--large));
+    margin-inline: auto;
+}
+.enveloppe--lisible { width: min(100% - 2 * var(--gouttiere), var(--lisible)); }
+
+main { position: relative; z-index: 1; }
+
+.section { padding-block: clamp(3.5rem, 9vw, 8rem); position: relative; }
+
+/* Une section serrée : pour les blocs de rappel, en fin de page */
+.section--serre { padding-block: clamp(2rem, 5vw, 3.5rem); }
+
+/* ---------------------------------------------------------------------
+   7. EN-TÊTE
+   --------------------------------------------------------------------- */
+.entete {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--entete-h);
+    transition: background .3s ease, box-shadow .3s ease, border-color .3s ease;
+    border-bottom: 1px solid transparent;
+}
+.entete[data-defile="oui"] {
+    background: color-mix(in srgb, var(--fond-0) 82%, transparent);
+    backdrop-filter: blur(18px) saturate(1.5);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+    border-bottom-color: var(--trait);
+    box-shadow: 0 12px 30px -22px #000;
 }
 
-h1 {
-    font-size: clamp(2rem, 5vw, 4rem);
-    margin-bottom: 1rem;
+.entete__interieur {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: clamp(.6rem, 2.5vw, 2rem);
 }
 
-h2 {
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    margin-bottom: 1rem;
+.marque { display: inline-flex; align-items: center; gap: .65rem; text-decoration: none; flex-shrink: 0; }
+.marque__viseur { width: 26px; height: 26px; color: var(--or); flex-shrink: 0; overflow: visible; }
+.marque__viseur .anneau { transform-origin: center; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.marque:hover .marque__viseur { filter: drop-shadow(0 0 6px var(--or-32)); }
+.marque:hover .anneau { transform: rotate(135deg); }
+
+.marque__nom {
+    font-family: var(--f-titre);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -.015em;
+    white-space: nowrap;
+    line-height: 1;
+}
+.marque__nom small {
+    display: block;
+    font-family: var(--f-hud);
+    font-size: var(--t-nano);
+    font-weight: 500;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--or-sourd);
+    margin-top: .18rem;
 }
 
-footer {
-    text-align: center;
-    padding: var(--espacement);
-    opacity: 0.6;
+.nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(.35rem, 1.6vw, 1.35rem);
+    margin-left: auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
+.nav::-webkit-scrollbar { display: none; }
+
+.nav__lien {
+    position: relative;
+    font-family: var(--f-hud);
+    font-weight: 500;
+    font-size: var(--t-micro);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--encre-3);
+    text-decoration: none;
+    padding: .5rem .1rem;
+    white-space: nowrap;
+    transition: color .22s ease, text-shadow .22s ease;
+}
+.nav__lien::before {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: .22rem;
+    width: 0; height: 1px;
+    background: var(--or);
+    box-shadow: 0 0 8px var(--or);
+    transform: translateX(-50%);
+    transition: width .28s cubic-bezier(.2,.8,.2,1);
+}
+.nav__lien:hover, .nav__lien[aria-current="page"] { color: var(--encre); }
+.nav__lien:hover::before, .nav__lien[aria-current="page"]::before { width: 100%; }
+
+/* Le sommaire vivant : la section que l'on traverse s'allume en or */
+.nav__lien.est-courant { color: var(--or); }
+.nav__lien.est-courant::before { width: 100%; }
+
+.outils { display: flex; align-items: center; gap: .45rem; flex-shrink: 0; }
+
+/* ---------------------------------------------------------------------
+   8. LE RAIL, altimètre de défilement, sur le bord gauche
+   --------------------------------------------------------------------- */
+.rail {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: var(--rail);
+    z-index: 90;
+    display: none;
+    pointer-events: none;
+}
+@media (min-width: 78rem) { .rail { display: block; } }
+
+.rail__ligne {
+    position: absolute;
+    left: 50%; top: 12vh; bottom: 12vh;
+    width: 1px;
+    background: linear-gradient(var(--trait), var(--trait-vif), var(--trait));
+    transform: translateX(-50%);
+}
+.rail__graduation {
+    position: absolute;
+    left: 50%; top: 12vh; bottom: 12vh;
+    width: 9px;
+    transform: translateX(-50%);
+    background-image: repeating-linear-gradient(180deg, var(--trait-vif) 0 1px, transparent 1px 14px);
+    opacity: .55;
+}
+.rail__curseur {
+    position: absolute;
+    left: 50%;
+    width: 15px; height: 15px;
+    margin-left: -7.5px;
+    top: 12vh;
+    color: var(--or);
+    transition: top .12s linear;
+    filter: drop-shadow(0 0 6px var(--or-32));
+}
+.rail__borne {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--f-hud);
+    font-size: var(--t-nano);
+    letter-spacing: .1em;
+    color: var(--trait-vif);
+    font-variant-numeric: tabular-nums;
+}
+.rail__borne--haut { top: calc(12vh - 1.4rem); }
+.rail__borne--bas  { top: calc(88vh + .5rem); }
+
+/* La cote courante, qui voyage avec le curseur */
+.rail__valeur {
+    position: absolute;
+    left: 50%;
+    top: 12vh;
+    transform: translate(-50%, -1.55rem);
+    font-family: var(--f-hud);
+    font-weight: 600;
+    font-size: var(--t-nano);
+    letter-spacing: .12em;
+    color: var(--or);
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 10px var(--or-32);
+    transition: top .12s linear;
+}
+
+@media (min-width: 78rem) {
+    .entete__interieur, main > .enveloppe, .section > .enveloppe,
+    .couverture > .enveloppe, .pied > .enveloppe {
+        padding-left: calc(var(--rail) - var(--gouttiere) + .5rem);
+    }
+}
+
+/* ---------------------------------------------------------------------
+   9. ÉTIQUETTES D'ÉTAT
+   --------------------------------------------------------------------- */
+.etat {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-family: var(--f-hud);
+    font-weight: 500;
+    font-size: var(--t-nano);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    padding: .22rem .5rem;
+    border: 1px solid currentColor;
+    color: var(--encre-3);
+    white-space: nowrap;
+    clip-path: var(--chanfrein-petit);
+    line-height: 1;
+}
+.etat::before {
+    content: "";
+    width: 4px; height: 4px;
+    background: currentColor;
+    box-shadow: 0 0 6px currentColor;
+    flex-shrink: 0;
+    rotate: 45deg;
+}
+.etat--livre, .etat--prolonge { color: var(--or); }
+.etat--en-ligne, .etat--continu { color: var(--releve); }
+.etat--en-cours { color: var(--encre-2); }
+.etat--confidentiel { color: var(--braise); }
+.etat--a-deposer { color: var(--encre-3); opacity: .75; }
+.etat--a-deposer::before { background: none; box-shadow: none; border: 1px solid currentColor; }
+
+/* ---------------------------------------------------------------------
+   10. PIED
+   --------------------------------------------------------------------- */
+.pied {
+    position: relative;
+    z-index: 1;
+    margin-top: clamp(3rem, 8vw, 7rem);
+    border-top: 1px solid var(--trait);
+    background: linear-gradient(var(--fond-1), var(--fond-0));
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) 2rem;
+}
+.pied__grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 2.5rem;
+    align-items: start;
+}
+.pied__titre { margin-bottom: .9rem; }
+.pied__liste { list-style: none; padding: 0; display: grid; gap: .5rem; }
+.pied__liste a {
+    text-decoration: none;
+    font-size: var(--t-petit);
+    color: var(--encre-2);
+    transition: color .2s, padding-left .2s;
+    display: inline-block;
+}
+.pied__liste a:hover { color: var(--or-clair); padding-left: .3rem; }
+.pied__bas {
+    margin-top: 2.6rem;
+    padding-top: 1.3rem;
+    border-top: 1px solid var(--trait);
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem 2rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ---------------------------------------------------------------------
+   11. UTILITAIRES
+   --------------------------------------------------------------------- */
+.rang { display: flex; flex-wrap: wrap; gap: var(--gap, .6rem); align-items: center; }
+.discret { color: var(--encre-2); }

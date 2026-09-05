@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr" data-racine="../">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compétence 1.5 - Mettre à disposition des utilisateurs un service informatique · Portfolio E5</title>
+<meta name="description" content="Compétence 1.5 du bloc 1 du BTS SIO : Mettre à disposition des utilisateurs un service informatique. Réalisations, preuves et indicateurs de performance.">
+<meta name="author" content="Maël Davidenko">
+<meta name="theme-color" content="#0a0705">
+<meta name="color-scheme" content="dark light">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compétence 1.5 - Mettre à disposition des utilisateurs un service informatique · Portfolio E5">
+<meta property="og:description" content="Compétence 1.5 du bloc 1 du BTS SIO : Mettre à disposition des utilisateurs un service informatique. Réalisations, preuves et indicateurs de performance.">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="../assets/marque.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&amp;family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&amp;family=Spectral:ital,wght@0,300;0,400;0,600;1,400&amp;display=swap">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/cadastre.css">
+<link rel="stylesheet" href="../css/impression.css">
+<script>
+/* Deux choses AVANT le premier rendu, pour eviter tout clignotement :
+   1. la classe `js`, qui autorise les effets masquant du contenu ; sans
+      elle, une page ouverte sans JavaScript s'affiche entierement ;
+   2. le theme.
+
+   Le theme se resout ici, et une fois pour toutes : un choix memorise
+   s'il existe, sinon la preference du systeme. L'attribut data-theme est
+   donc TOUJOURS pose, ce qui evite d'avoir a dupliquer la palette claire
+   dans une media query. */
+(function () {
+  var r = document.documentElement;
+  r.classList.add('js');
+  var t = null;
+  try { t = localStorage.getItem('cadastre.theme'); } catch (e) {}
+  if (t !== 'papier' && t !== 'nuit') {
+    t = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches)
+      ? 'papier' : 'nuit';
+  }
+  r.dataset.theme = t;
+})();
+</script>
+</head>
+<body>
+<a class="evitement" href="#contenu">Aller au contenu</a>
+
+<div class="scene" aria-hidden="true">
+  <canvas id="relief"></canvas>
+  <div class="scene__trame"></div>
+  <div class="scene__lampe"></div>
+  <div class="scene__grain"></div>
+  <div class="scene__vignette"></div>
+</div>
+
+<div class="rail" aria-hidden="true">
+  <div class="rail__ligne"></div>
+  <div class="rail__graduation"></div>
+  <span class="rail__borne rail__borne--haut">000</span>
+  <span class="rail__valeur" data-role="rail-cote">000</span>
+  <svg class="rail__curseur" data-role="rail-curseur" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4">
+    <path d="M7.5 1.5 13.5 7.5 7.5 13.5 1.5 7.5Z"/><circle cx="7.5" cy="7.5" r="1.6" fill="currentColor"/>
+  </svg>
+  <span class="rail__borne rail__borne--bas">100</span>
+</div>
+<header class="entete">
+  <div class="enveloppe entete__interieur">
+    <a class="marque" href="../index.html">
+      <svg class="marque__viseur" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <circle class="anneau" cx="16" cy="16" r="8.5" stroke-dasharray="3.4 3"/>
+        <path d="M16 3v26M3 16h26"/><circle cx="16" cy="16" r="1.8" fill="currentColor" stroke="none"/>
+      </svg>
+      <span class="marque__nom">Maël Davidenko<small>Cadastre · E5</small></span>
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="nav__lien" href="../index.html#plan" data-section="plan">Le plan</a>
+      <a class="nav__lien" href="../index.html#realisations" data-section="realisations">Réalisations</a>
+      <a class="nav__lien" href="../index.html#competences" data-section="competences">Compétences</a>
+      <a class="nav__lien" href="../veille.html">Veille</a>
+      <a class="nav__lien" href="../parcours.html">Parcours</a>
+      <a class="nav__lien" href="../tableau-de-synthese.html">Tableau E5</a>
+    </nav>
+
+    <div class="outils">
+      <div class="carnet">
+        <button type="button" class="bouton" data-role="carnet" aria-expanded="false" aria-label="Carnet de relevé : parcelles déjà consultées">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 3h12l4 4v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+          <span data-role="carnet-compte">0/9</span>
+        </button>
+        <div class="carnet__panneau plaque" data-role="carnet-panneau" hidden>
+          <div class="plaque__i">
+            <p class="carnet__titre"><span class="hud hud--or">Carnet de relevé</span><span class="hud">local</span></p>
+            <ul class="carnet__liste" data-role="carnet-liste"></ul>
+            <div class="carnet__pied">
+              <span class="hud">rien n'est envoyé</span>
+              <button type="button" class="carnet__vider" data-role="carnet-vider">Effacer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="bouton" data-role="theme" aria-label="Changer de thème">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19"/></svg>
+        <span data-role="theme-libelle">Papier</span>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="contenu">
+  <div class="enveloppe">
+    <nav class="fil" aria-label="Fil d'Ariane"><a class="hud" href="../index.html">Cadastre</a><span class="hud sep" aria-hidden="true">/</span><a class="hud" href="../index.html#competences">Compétences</a><span class="hud sep" aria-hidden="true">/</span><span class="hud hud--or">Compétence 1.5</span></nav>
+
+    <header class="fiche__tete">
+      <span class="fiche__numero">1.5</span>
+      <h1 class="fiche__titre">Mettre à disposition des utilisateurs un service informatique</h1>
+      <p class="fiche__soustitre">« Un service n'est déployé que le jour où quelqu'un d'autre sait s'en servir. »</p>
+      <p class="fiche__resume">Compétence du bloc 1 : Support et mise à disposition de services informatiques. Couverte par 2 réalisations de mon tableau de synthèse.</p>
+    </header>
+
+    <div class="fiche">
+      <div>
+        <section class="bloc revele">
+          <h2 class="bloc__titre"><span>Ce que le référentiel demande</span></h2>
+          <p>Les sous-compétences telles qu'elles figurent au référentiel du BTS SIO.</p>
+          <ul class="liste-plan"><li>Réaliser les tests d'intégration et d'acceptation d'un service</li><li>Déployer un service</li><li>Accompagner les utilisateurs dans la mise en place d'un service</li></ul>
+        </section>
+
+        <section class="bloc revele">
+          <h2 class="bloc__titre"><span>Mes réalisations pour cette compétence</span></h2>
+          <div class="parcelles" style="margin-top:1.2rem"><a class="plaque parcelle" href="../parcelles/p02-virealys.html"><span class="plaque__i"><span class="parcelle__lustre"></span>
+        <span class="parcelle__tete">
+          <span class="parcelle__num">02</span>
+          <span class="parcelle__comp">C1.5</span>
+        </span>
+        <span class="parcelle__titre">VIREALYS - site WordPress déployé sur le serveur du laboratoire</span>
+        <span class="parcelle__resume">Concevoir un site WordPress est une chose ; le mettre en ligne sur un serveur qui n'est pas le sien en est une autre. VIREALYS est déployé sur le serveur du laboratoire de l'école, à l'adresse virealys.labo.infochartreux.fr.</span>
+        <span class="parcelle__pied">
+          <span class="etat etat--livre">Terminé</span>
+          <span class="hud">2025-2026</span>
+        </span></span></a><a class="plaque parcelle" href="../parcelles/p08-mise-en-service.html"><span class="plaque__i"><span class="parcelle__lustre"></span>
+        <span class="parcelle__tete">
+          <span class="parcelle__num">08</span>
+          <span class="parcelle__comp">C1.5</span>
+        </span>
+        <span class="parcelle__titre">Préparation de la mise en service du nouveau site</span>
+        <span class="parcelle__resume">Un site fonctionnel n'est pas un site en service. J'ai préparé la bascule complète : procédure de transition en huit étapes, plan de sauvegarde, migration de vingt ans de contenus au format WXR, et un tutoriel guidé pour que le personnel puisse publier seul.</span>
+        <span class="parcelle__pied">
+          <span class="etat etat--prolonge">Stage prolongé</span>
+          <span class="hud">juin - juillet 2026</span>
+        </span></span></a></div>
+        </section>
+
+        <section class="bloc revele">
+          <h2 class="bloc__titre"><span>Les preuves rattachées</span></h2>
+          <ul class="preuves"><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="https://virealys.labo.infochartreux.fr">Site déployé - virealys.labo.infochartreux.fr</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Parcelle 02 · Service en ligne</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre">Captures d'écran du site</span>
+        <span class="etat etat--a-deposer">Non publié</span>
+        <span class="hud preuve__type">Parcelle 02 · Captures</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre">Procédure de déploiement</span>
+        <span class="etat etat--a-deposer">Non publié</span>
+        <span class="hud preuve__type">Parcelle 02 · Document</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="../assets/preuves/rapport-de-stage.pdf">Tutoriel guidé destiné au personnel - documentation utilisateur</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Parcelle 08 · Support de formation</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="../assets/preuves/rapport-de-stage.pdf">Procédure de transition en huit étapes</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Parcelle 08 · Procédure</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="../assets/preuves/rapport-de-stage.pdf">Plan de sauvegarde et compte rendu du test de restauration</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Parcelle 08 · Document</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre">Compte rendu de formation du personnel</span>
+        <span class="etat etat--a-deposer">Non publié</span>
+        <span class="hud preuve__type">Parcelle 08 · Compte rendu</span></div></div></li></ul>
+        </section>
+
+        <section class="bloc revele">
+          <h2 class="bloc__titre"><span>Indicateurs de performance</span></h2>
+          <p>Les critères sur lesquels la commission d'interrogation apprécie le niveau de maîtrise.</p>
+          <div class="plaque encart"><div class="plaque__i"><p class="hud hud--or encart__titre">Référentiel E5 · compétence 1.5</p><ul class="liste-plan"><li>Des tests pertinents d'intégration et d'acceptation sont rédigés et effectués.</li><li>Les outils de test sont utilisés de manière appropriée.</li><li>Un rapport de test du service est produit.</li><li>Un support d'information est disponible.</li><li>Les modalités d'accompagnement sont définies.</li><li>Le service déployé est opérationnel et donne satisfaction à l'utilisateur.</li></ul></div></div>
+        </section>
+      </div>
+
+      <aside class="fiche__marge">
+        <div class="plaque cartouche"><div class="plaque__i"><p class="hud hud--or">Cartouche de la compétence</p><div class="cartouche__grille"><div class="cartouche__champ"><span class="cartouche__cle">Code</span><span class="cartouche__valeur">1.5</span></div><div class="cartouche__champ"><span class="cartouche__cle">Bloc</span><span class="cartouche__valeur">1 : Support et mise à disposition de services informatiques</span></div><div class="cartouche__champ"><span class="cartouche__cle">Sous-compétences</span><span class="cartouche__valeur">3</span></div><div class="cartouche__champ"><span class="cartouche__cle">Couverture</span><span class="cartouche__valeur">2 réalisations</span></div></div><p class="hud" style="margin:1.2rem 0 .6rem">Relief de couverture</p><span class="relief" aria-hidden="true"><i></i><i></i></span></div></div>
+      </aside>
+    </div>
+  </div>
+</main>
+<footer class="pied">
+  <div class="enveloppe">
+    <div class="pied__grille">
+      <div>
+        <p class="hud hud--or pied__titre">Le cadastre</p>
+        <ul class="pied__liste">
+          <li><a href="../index.html#plan">Plan de compétences</a></li>
+          <li><a href="../index.html#realisations">Les neuf réalisations</a></li>
+          <li><a href="../index.html#competences">Les six compétences</a></li>
+          <li><a href="../tableau-de-synthese.html">Tableau de synthèse E5</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="hud hud--or pied__titre">Le géomètre</p>
+        <ul class="pied__liste">
+          <li><a href="../parcours.html">Parcours et certifications</a></li>
+          <li><a href="../veille.html">Veille technologique</a></li>
+          <li><a href="https://github.com/Picsou01/portefolio">Dépôt public</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="hud hud--or pied__titre">Cadre</p>
+        <ul class="pied__liste">
+          <li><a href="../mentions-legales.html">Mentions légales</a></li>
+        </ul>
+        <p class="hud" style="margin-top:1rem;line-height:1.8">BTS SIO · option SLAM<br>Épreuve E5 · session 2027<br>Institution des Chartreux (SUP ALTA)</p>
+      </div>
+    </div>
+    <div class="pied__bas">
+      <p class="hud hud--or">⌖ 45°57′ N · 5°21′ E · Douvres, Ain</p>
+      <p class="hud">Maël Davidenko · tous droits réservés</p>
+    </div>
+  </div>
+</footer>
+<script src="../js/parcelles.js"></script>
+<script src="../js/relief.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/cadastre.js"></script>
+<script src="../js/carnet.js"></script>
+</body>
+</html>

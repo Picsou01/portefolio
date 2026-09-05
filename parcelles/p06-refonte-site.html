@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr" data-racine="../">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parcelle 06 - Refonte du site communal · Portfolio E5</title>
+<meta name="description" content="Le cœur du stage. Remplacer un site de plus de vingt ans, maintenu par un prestataire, par un site que la mairie peut conduire seule. Un thème enfant WordPress développé de bout en">
+<meta name="author" content="Maël Davidenko">
+<meta name="theme-color" content="#0a0705">
+<meta name="color-scheme" content="dark light">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Parcelle 06 - Refonte du site communal · Portfolio E5">
+<meta property="og:description" content="Le cœur du stage. Remplacer un site de plus de vingt ans, maintenu par un prestataire, par un site que la mairie peut conduire seule. Un thème enfant WordPress développé de bout en">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="../assets/marque.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&amp;family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&amp;family=Spectral:ital,wght@0,300;0,400;0,600;1,400&amp;display=swap">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/cadastre.css">
+<link rel="stylesheet" href="../css/impression.css">
+<script>
+/* Deux choses AVANT le premier rendu, pour eviter tout clignotement :
+   1. la classe `js`, qui autorise les effets masquant du contenu ; sans
+      elle, une page ouverte sans JavaScript s'affiche entierement ;
+   2. le theme.
+
+   Le theme se resout ici, et une fois pour toutes : un choix memorise
+   s'il existe, sinon la preference du systeme. L'attribut data-theme est
+   donc TOUJOURS pose, ce qui evite d'avoir a dupliquer la palette claire
+   dans une media query. */
+(function () {
+  var r = document.documentElement;
+  r.classList.add('js');
+  var t = null;
+  try { t = localStorage.getItem('cadastre.theme'); } catch (e) {}
+  if (t !== 'papier' && t !== 'nuit') {
+    t = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches)
+      ? 'papier' : 'nuit';
+  }
+  r.dataset.theme = t;
+})();
+</script>
+</head>
+<body data-parcelle="refonte-site">
+<a class="evitement" href="#contenu">Aller au contenu</a>
+
+<div class="scene" aria-hidden="true">
+  <canvas id="relief"></canvas>
+  <div class="scene__trame"></div>
+  <div class="scene__lampe"></div>
+  <div class="scene__grain"></div>
+  <div class="scene__vignette"></div>
+</div>
+
+<div class="rail" aria-hidden="true">
+  <div class="rail__ligne"></div>
+  <div class="rail__graduation"></div>
+  <span class="rail__borne rail__borne--haut">000</span>
+  <span class="rail__valeur" data-role="rail-cote">000</span>
+  <svg class="rail__curseur" data-role="rail-curseur" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4">
+    <path d="M7.5 1.5 13.5 7.5 7.5 13.5 1.5 7.5Z"/><circle cx="7.5" cy="7.5" r="1.6" fill="currentColor"/>
+  </svg>
+  <span class="rail__borne rail__borne--bas">100</span>
+</div>
+<header class="entete">
+  <div class="enveloppe entete__interieur">
+    <a class="marque" href="../index.html">
+      <svg class="marque__viseur" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <circle class="anneau" cx="16" cy="16" r="8.5" stroke-dasharray="3.4 3"/>
+        <path d="M16 3v26M3 16h26"/><circle cx="16" cy="16" r="1.8" fill="currentColor" stroke="none"/>
+      </svg>
+      <span class="marque__nom">Maël Davidenko<small>Cadastre · E5</small></span>
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="nav__lien" href="../index.html#plan" data-section="plan">Le plan</a>
+      <a class="nav__lien" href="../index.html#realisations" data-section="realisations">Réalisations</a>
+      <a class="nav__lien" href="../index.html#competences" data-section="competences">Compétences</a>
+      <a class="nav__lien" href="../veille.html">Veille</a>
+      <a class="nav__lien" href="../parcours.html">Parcours</a>
+      <a class="nav__lien" href="../tableau-de-synthese.html">Tableau E5</a>
+    </nav>
+
+    <div class="outils">
+      <div class="carnet">
+        <button type="button" class="bouton" data-role="carnet" aria-expanded="false" aria-label="Carnet de relevé : parcelles déjà consultées">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 3h12l4 4v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+          <span data-role="carnet-compte">0/9</span>
+        </button>
+        <div class="carnet__panneau plaque" data-role="carnet-panneau" hidden>
+          <div class="plaque__i">
+            <p class="carnet__titre"><span class="hud hud--or">Carnet de relevé</span><span class="hud">local</span></p>
+            <ul class="carnet__liste" data-role="carnet-liste"></ul>
+            <div class="carnet__pied">
+              <span class="hud">rien n'est envoyé</span>
+              <button type="button" class="carnet__vider" data-role="carnet-vider">Effacer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="bouton" data-role="theme" aria-label="Changer de thème">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19"/></svg>
+        <span data-role="theme-libelle">Papier</span>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="contenu">
+  <div class="enveloppe">
+    <nav class="fil" aria-label="Fil d'Ariane"><a class="hud" href="../index.html">Cadastre</a><span class="hud sep" aria-hidden="true">/</span><a class="hud" href="../index.html#realisations">Réalisations</a><span class="hud sep" aria-hidden="true">/</span><span class="hud hud--or">Parcelle 06</span></nav>
+
+    <header class="fiche__tete">
+      <span class="fiche__numero">06</span>
+      <h1 class="fiche__titre">Refonte complète du site internet de la commune</h1>
+      <p class="fiche__soustitre">Un thème enfant WordPress pour rendre un village autonome</p>
+      <p class="fiche__resume">Le cœur du stage. Remplacer un site de plus de vingt ans, maintenu par un prestataire, par un site que la mairie peut conduire seule. Un thème enfant WordPress développé de bout en bout, et un projet qu'il a fallu avoir le courage de recommencer à zéro.</p>
+      <div class="rang" style="margin-top:1.4rem">
+        <span class="etat etat--livre">V1 fonctionnelle</span>
+        <a class="etat etat--livre" href="../competences/c1-3-presence-en-ligne.html" style="text-decoration:none">Compétence 1.3</a>
+        <span class="hud">01/06/26 au 03/07/26</span>
+      </div>
+    </header>
+
+    <div class="fiche">
+      <div>
+        <section class="bloc revele"><h2 class="bloc__titre"><span>Le besoin, et le fardeau</span></h2><p>La commune possède un site internet depuis plus de vingt ans. Il a rendu de grands services, mais il a vieilli : difficile à modifier, daté visuellement, et surtout <strong>dépendant d'un prestataire extérieur</strong> pour le faire vivre. La nouvelle équipe municipale voulait un site moderne, à l'image du village, que la mairie pourrait gérer seule.</p><p>L'existant est à la fois une richesse et un fardeau : près de <strong>4 000 articles, plus de 8 500 photos et un millier de documents</strong>. Plus de vingt ans de la mémoire du village. Rien ne doit être perdu.</p></section><section class="bloc revele"><h2 class="bloc__titre"><span>Le choix de la solution</span></h2><p>Aucun outil ne m'a été imposé, et c'est justement le problème : personne à la mairie ne pouvait m'imposer un langage ou une base de données. On m'a fixé une destination, pas un chemin. J'ai donc étudié les alternatives avant de trancher.</p><ul class="liste-plan"><li><strong>Développement sur mesure</strong>, la solution la plus séduisante pour un développeur, liberté totale. Défaut rédhibitoire : personne ne pourrait maintenir mon code après mon départ.</li><li><strong>Drupal</strong> - puissant, mais complexe et pensé pour de grandes organisations.</li><li><strong>Joomla</strong> - plus accessible, mais une communauté qui diminue d'année en année.</li><li><strong>Services clés en main (type Wix)</strong>, très simples, mais par abonnement, avec les données du village stockées chez un tiers.</li><li><strong>Agence</strong> - exactement la dépendance dont la commune cherchait à sortir.</li><li><strong>WordPress</strong> - retenu : gratuit, communauté immense, il fait fonctionner plus de 40 % des sites du monde, l'ancien site tourne déjà dessus (ce qui facilite la récupération du contenu), et la secrétaire de mairie peut publier un article sans écrire une ligne de code.</li></ul></section><section class="bloc revele"><h2 class="bloc__titre"><span>Le défaut assumé de WordPress</span></h2><p>Sa popularité en fait une cible privilégiée. Ce choix impose donc des mises à jour régulières et une vigilance réelle sur la sécurité, ce que la documentation technique livrée à la mairie formalise noir sur blanc.</p></section><section class="bloc revele"><h2 class="bloc__titre"><span>L'architecture retenue</span></h2><p>Le site repose sur un <strong>thème enfant</strong> nommé <code>douvres-enfant</code>, basé sur Twenty Twenty-Five, le thème par défaut de WordPress. Un thème enfant hérite entièrement du parent et se contente d'ajouter ou de surcharger : les mises à jour du parent n'écrasent jamais mon travail.</p><p>Twenty Twenty-Five est un <strong>thème en blocs</strong> (Full Site Editing) : l'intégralité du site (en-tête, pied de page, pages, articles) se compose visuellement dans l'éditeur de site, sans code. C'est la condition technique de l'autonomie de la mairie.</p><ul class="liste-plan"><li><code>style.css</code> - carte d'identité du thème et lien au parent (<code>Template: twentytwentyfive</code>).</li><li><code>theme.json</code> - réglages globaux : palette, polices, largeurs de mise en page.</li><li><code>functions.php</code> - la logique PHP sur mesure.</li><li><code>templates/</code>, <code>parts/</code>, <code>patterns/</code>, gabarits, parties de modèle et compositions en blocs.</li><li><em>Le <code>theme.json</code> règle l'apparence, le <code>functions.php</code> règle le comportement, les gabarits règlent la structure.</em></li></ul></section><section class="bloc revele"><h2 class="bloc__titre"><span>Les fonctionnalités développées</span></h2><ul class="liste-plan"><li><strong>Système de brèves à quatre emplacements</strong>, une meta <code>douvres_place</code> range chaque actualité dans Actualités, Ça vient de se passer, Archives ou En attente. La mairie publie et choisit l'emplacement, sans toucher à la mise en page.</li><li><strong>Archivage automatique sans cron</strong>, au-delà d'un délai paramétré, une brève bascule seule en Archives. Je n'utilise pas WP-Cron, qui ne se déclenche qu'à la visite d'un internaute et devient peu fiable sur une commune à faible trafic : j'emploie un <strong>transient</strong> comme garde-fou, ce qui évite de relancer une requête lourde à chaque chargement.</li><li><strong>Galerie pleine largeur</strong> alimentée par les brèves « Actualités », via le mécanisme natif <code>alignfull</code> plutôt qu'un bricolage CSS fragile en <code>100vw</code>.</li><li><strong>Navigation fixe</strong> - en-tête accrochée en haut, plate puis ombrée au défilement. Elle s'appuie sur une cale injectée en JavaScript et une classe <code>dvr-fixnav</code> sur le <code>body</code>, pour gérer proprement le décalage de la barre d'administration WordPress.</li><li><strong>Lecteur en surimpression</strong>, cliquer une brève ouvre un lecteur sur fond sombre par-dessus la page, plutôt que de quitter l'accueil.</li><li><strong>Moteur zigzag</strong> - la présence d'un bloc galerie dans un article déclenche seule une mise en page alternée texte / images.</li><li><strong>Agenda automatique</strong> - alimenté par une meta <code>date_evenement</code> posée sur les articles concernés.</li></ul></section><section class="bloc revele"><h2 class="bloc__titre"><span>La charte graphique de la commune</span></h2><p>Réglée entièrement dans <code>theme.json</code> : bleu <code>#1c5191</code>, or <code>#dca828</code>, Marcellus pour les titres, Spectral pour le corps, Hanken Grotesk pour l'interface. Largeur de contenu portée à <strong>1080 px</strong> (contre ~645 px par défaut) et blocs larges à <strong>1320 px</strong>. Le défaut de Twenty Twenty-Five est pensé pour du texte de blog, trop étroit pour un site municipal riche en photographies.</p></section><section class="bloc revele"><h2 class="bloc__titre"><span>Le moment qui a tout changé</span></h2><p>Dès le départ, j'avais recommandé un design résolument moderne. Le choix s'est porté sur un compromis : du moderne tout en conservant l'esprit de l'ancien site. J'avais prévenu que ce mélange risquait de ne satisfaire personne. C'est exactement ce qui s'est passé. Réunion après réunion, je modifiais le design, et réunion après réunion il ne convainquait toujours pas.</p><p><strong>Le jeudi 18 juin au soir</strong>, en réunion du comité de communication, j'ai posé le problème clairement : il fallait arrêter de retoucher un compromis qui ne satisfaisait personne, et prendre une décision. La décision a été prise ce soir-là, <strong>tout reprendre à zéro</strong>.</p><p>Le lendemain je présentais mon bilan de mi-stage à l'école. Le lundi 22 juin, je recommençais, avec une méthode inverse : plus question de développer avant validation. J'ai proposé des modèles, je les ai peaufinés trois jours, et <strong>le maire les a validés le 26 juin</strong>. La semaine suivante j'ai développé sur cette base, avec une deuxième validation du comité de communication le 30 juin. <strong>Le 2 juillet, dernier jour de stage, la première version était fonctionnelle.</strong></p></section><section class="bloc revele"><h2 class="bloc__titre"><span>L'écart au planning, et sa justification</span></h2><p>Le planning prévisionnel prévoyait une semaine de découverte et d'audit, trois semaines de construction, une semaine de finalisation. La réalité a concentré la refonte sur les deux dernières semaines : une pour les modèles et leurs validations, une pour le développement.</p><p>Cet écart ne vient pas d'une mauvaise planification. Il vient d'un compromis de départ qui ne fonctionnait pas, et qu'il a fallu avoir le courage d'abandonner. J'en tire une règle que je garderai : <strong>désigner dès le départ qui décide</strong>, et faire valider les modèles avant de développer.</p></section>
+
+        <section class="bloc revele"><h2 class="bloc__titre"><span>En images</span></h2><figure class="illustration">
+              <img src="../assets/preuves/administration-guide-et-assistant.png" alt="Le guide en six missions et l'assistant d'installation, intégrés à l'administration du site." loading="lazy">
+              <figcaption class="hud">Le guide en six missions et l'assistant d'installation, intégrés à l'administration du site.</figcaption>
+            </figure></section>
+
+        <section class="bloc revele">
+          <h2 class="bloc__titre"><span>Les preuves</span></h2>
+          <p>Les documents ci-dessous constituent les traces de cette réalisation. Leur état indique s'ils sont consultables ici, confidentiels, ou encore non publiés.</p>
+          <ul class="preuves"><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="../assets/preuves/rapport-de-stage.pdf">Documentation technique du thème</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Document</span>
+        <span class="preuve__note">Annexe 1 du rapport de stage, également intégrée en page privée de l'administration du site.</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="../assets/preuves/administration-guide-et-assistant.png">Captures d'écran du nouveau site</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Captures</span>
+        <span class="preuve__note">L'administration du site : le guide en six missions et l'assistant d'installation.</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre">Cahier des charges validé avec le comité de communication</span>
+        <span class="etat etat--a-deposer">Non publié</span>
+        <span class="hud preuve__type">Document</span>
+        </div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre">Modèles validés par le maire - 26 juin 2026</span>
+        <span class="etat etat--a-deposer">Non publié</span>
+        <span class="hud preuve__type">Maquettes</span>
+        </div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="https://github.com/Picsou01/portefolio">Historique des commits du thème douvres-enfant</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Dépôt</span>
+        <span class="preuve__note">Dépôt public. Le code du thème communal reste chez la mairie ; celui de ce portfolio est ici.</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="../assets/preuves/soutenance-finale.pptx">Support de soutenance finale</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Présentation</span>
+        <span class="preuve__note">Présentation de la production devant le jury, le 3 juillet 2026.</span></div></div></li></ul>
+        </section>
+
+        <section class="bloc revele">
+          <h2 class="bloc__titre"><span>Ce que cette réalisation démontre</span></h2>
+          <div class="plaque encart"><div class="plaque__i"><p class="hud hud--or encart__titre">Compétence 1.3 : Développer la présence en ligne de l'organisation</p><ul class="liste-plan"><li>Participer à l'évolution d'un site Web exploitant les données de l'organisation : refonte complète, reprise de vingt ans de contenus.</li><li>Participer à la valorisation de l'image de l'organisation sur les médias numériques : charte graphique communale, validation par les élus.</li><li>Tenir compte du cadre juridique et des enjeux économiques : sortie de la dépendance au prestataire, mentions légales, site de service public.</li><li>Référencer les services en ligne de l'organisation et mesurer leur visibilité.</li></ul></div></div>
+          <div class="enseignement">
+            <p class="hud">Ce que j'en retiens</p>
+            <p>« Alerter ne suffit pas. Il faut aussi savoir demander une décision, au bon moment, à la bonne personne. »</p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="fiche__marge">
+        <div class="plaque cartouche"><div class="plaque__i"><p class="hud hud--or">Cartouche de la parcelle</p><div class="cartouche__grille"><div class="cartouche__champ"><span class="cartouche__cle">Parcelle</span><span class="cartouche__valeur">n° 06</span></div><div class="cartouche__champ"><span class="cartouche__cle">Période</span><span class="cartouche__valeur">01/06/26 au 03/07/26</span></div><div class="cartouche__champ"><span class="cartouche__cle">Lieu</span><span class="cartouche__valeur">Mairie de Douvres (Ain)</span></div><div class="cartouche__champ"><span class="cartouche__cle">Rôle</span><span class="cartouche__valeur">Conception, développement et cadrage - seul développeur</span></div><div class="cartouche__champ"><span class="cartouche__cle">Compétence</span><span class="cartouche__valeur">1.3 · Présence en ligne</span></div><div class="cartouche__champ"><span class="cartouche__cle">Preuves</span><span class="cartouche__valeur">6 documents</span></div></div><p class="hud" style="margin:1.2rem 0 .6rem">Environnement technologique</p><div class="jetons"><span class="jeton">WordPress</span><span class="jeton">Thème enfant</span><span class="jeton">Full Site Editing</span><span class="jeton">PHP</span><span class="jeton">theme.json</span><span class="jeton">MariaDB</span><span class="jeton">Docker</span><span class="jeton">PhpStorm</span><span class="jeton">Portainer</span><span class="jeton">Query Loop</span><span class="jeton">Transients</span><span class="jeton">WXR</span></div></div></div>
+      </aside>
+    </div>
+
+    <nav class="voisines" aria-label="Parcelles voisines"><a class="plaque voisine" href="../parcelles/p05-assistance-mairie.html"><span class="plaque__i"><span class="hud">← Parcelle 05</span><span class="voisine__titre">Assistance aux services</span></span></a><a class="plaque voisine voisine--suivante" href="../parcelles/p07-supports-communication.html"><span class="plaque__i"><span class="hud">Parcelle 07 →</span><span class="voisine__titre">Supports de communication</span></span></a></nav>
+  </div>
+</main>
+<footer class="pied">
+  <div class="enveloppe">
+    <div class="pied__grille">
+      <div>
+        <p class="hud hud--or pied__titre">Le cadastre</p>
+        <ul class="pied__liste">
+          <li><a href="../index.html#plan">Plan de compétences</a></li>
+          <li><a href="../index.html#realisations">Les neuf réalisations</a></li>
+          <li><a href="../index.html#competences">Les six compétences</a></li>
+          <li><a href="../tableau-de-synthese.html">Tableau de synthèse E5</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="hud hud--or pied__titre">Le géomètre</p>
+        <ul class="pied__liste">
+          <li><a href="../parcours.html">Parcours et certifications</a></li>
+          <li><a href="../veille.html">Veille technologique</a></li>
+          <li><a href="https://github.com/Picsou01/portefolio">Dépôt public</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="hud hud--or pied__titre">Cadre</p>
+        <ul class="pied__liste">
+          <li><a href="../mentions-legales.html">Mentions légales</a></li>
+        </ul>
+        <p class="hud" style="margin-top:1rem;line-height:1.8">BTS SIO · option SLAM<br>Épreuve E5 · session 2027<br>Institution des Chartreux (SUP ALTA)</p>
+      </div>
+    </div>
+    <div class="pied__bas">
+      <p class="hud hud--or">⌖ 45°57′ N · 5°21′ E · Douvres, Ain</p>
+      <p class="hud">Maël Davidenko · tous droits réservés</p>
+    </div>
+  </div>
+</footer>
+<script src="../js/parcelles.js"></script>
+<script src="../js/relief.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/cadastre.js"></script>
+<script src="../js/carnet.js"></script>
+</body>
+</html>

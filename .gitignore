@@ -1,0 +1,29 @@
+# Editeurs
+.idea/
+.vscode/
+*.swp
+
+# Systeme
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Python (le generateur)
+__pycache__/
+*.pyc
+.venv/
+
+# Preuves confidentielles : ne doivent JAMAIS etre publiees.
+# L'audit de la Mairie de Douvres releve du secret professionnel.
+assets/preuves/confidentiel/
+*-confidentiel.*
+
+# Rendus de travail hors depot
+*.tmp
+*.bak
+
+# Rien de ce qui touche a l'audit de la Mairie de Douvres ne doit
+# remonter ici : tableur d'analyse des couts et rapport de synthese
+# relevent du secret professionnel.
+*audit*.xlsx
+*audit*confidentiel*

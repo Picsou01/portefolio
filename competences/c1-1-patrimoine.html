@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr" data-racine="../">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compétence 1.1 - Gérer le patrimoine informatique · Portfolio E5</title>
+<meta name="description" content="Compétence 1.1 du bloc 1 du BTS SIO : Gérer le patrimoine informatique. Réalisations, preuves et indicateurs de performance.">
+<meta name="author" content="Maël Davidenko">
+<meta name="theme-color" content="#0a0705">
+<meta name="color-scheme" content="dark light">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compétence 1.1 - Gérer le patrimoine informatique · Portfolio E5">
+<meta property="og:description" content="Compétence 1.1 du bloc 1 du BTS SIO : Gérer le patrimoine informatique. Réalisations, preuves et indicateurs de performance.">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" href="../assets/marque.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&amp;family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&amp;family=Spectral:ital,wght@0,300;0,400;0,600;1,400&amp;display=swap">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/cadastre.css">
+<link rel="stylesheet" href="../css/impression.css">
+<script>
+/* Deux choses AVANT le premier rendu, pour eviter tout clignotement :
+   1. la classe `js`, qui autorise les effets masquant du contenu ; sans
+      elle, une page ouverte sans JavaScript s'affiche entierement ;
+   2. le theme.
+
+   Le theme se resout ici, et une fois pour toutes : un choix memorise
+   s'il existe, sinon la preference du systeme. L'attribut data-theme est
+   donc TOUJOURS pose, ce qui evite d'avoir a dupliquer la palette claire
+   dans une media query. */
+(function () {
+  var r = document.documentElement;
+  r.classList.add('js');
+  var t = null;
+  try { t = localStorage.getItem('cadastre.theme'); } catch (e) {}
+  if (t !== 'papier' && t !== 'nuit') {
+    t = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches)
+      ? 'papier' : 'nuit';
+  }
+  r.dataset.theme = t;
+})();
+</script>
+</head>
+<body>
+<a class="evitement" href="#contenu">Aller au contenu</a>
+
+<div class="scene" aria-hidden="true">
+  <canvas id="relief"></canvas>
+  <div class="scene__trame"></div>
+  <div class="scene__lampe"></div>
+  <div class="scene__grain"></div>
+  <div class="scene__vignette"></div>
+</div>
+
+<div class="rail" aria-hidden="true">
+  <div class="rail__ligne"></div>
+  <div class="rail__graduation"></div>
+  <span class="rail__borne rail__borne--haut">000</span>
+  <span class="rail__valeur" data-role="rail-cote">000</span>
+  <svg class="rail__curseur" data-role="rail-curseur" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4">
+    <path d="M7.5 1.5 13.5 7.5 7.5 13.5 1.5 7.5Z"/><circle cx="7.5" cy="7.5" r="1.6" fill="currentColor"/>
+  </svg>
+  <span class="rail__borne rail__borne--bas">100</span>
+</div>
+<header class="entete">
+  <div class="enveloppe entete__interieur">
+    <a class="marque" href="../index.html">
+      <svg class="marque__viseur" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <circle class="anneau" cx="16" cy="16" r="8.5" stroke-dasharray="3.4 3"/>
+        <path d="M16 3v26M3 16h26"/><circle cx="16" cy="16" r="1.8" fill="currentColor" stroke="none"/>
+      </svg>
+      <span class="marque__nom">Maël Davidenko<small>Cadastre · E5</small></span>
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="nav__lien" href="../index.html#plan" data-section="plan">Le plan</a>
+      <a class="nav__lien" href="../index.html#realisations" data-section="realisations">Réalisations</a>
+      <a class="nav__lien" href="../index.html#competences" data-section="competences">Compétences</a>
+      <a class="nav__lien" href="../veille.html">Veille</a>
+      <a class="nav__lien" href="../parcours.html">Parcours</a>
+      <a class="nav__lien" href="../tableau-de-synthese.html">Tableau E5</a>
+    </nav>
+
+    <div class="outils">
+      <div class="carnet">
+        <button type="button" class="bouton" data-role="carnet" aria-expanded="false" aria-label="Carnet de relevé : parcelles déjà consultées">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 3h12l4 4v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+          <span data-role="carnet-compte">0/9</span>
+        </button>
+        <div class="carnet__panneau plaque" data-role="carnet-panneau" hidden>
+          <div class="plaque__i">
+            <p class="carnet__titre"><span class="hud hud--or">Carnet de relevé</span><span class="hud">local</span></p>
+            <ul class="carnet__liste" data-role="carnet-liste"></ul>
+            <div class="carnet__pied">
+              <span class="hud">rien n'est envoyé</span>
+              <button type="button" class="carnet__vider" data-role="carnet-vider">Effacer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="bouton" data-role="theme" aria-label="Changer de thème">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19"/></svg>
+        <span data-role="theme-libelle">Papier</span>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="contenu">
+  <div class="enveloppe">
+    <nav class="fil" aria-label="Fil d'Ariane"><a class="hud" href="../index.html">Cadastre</a><span class="hud sep" aria-hidden="true">/</span><a class="hud" href="../index.html#competences">Compétences</a><span class="hud sep" aria-hidden="true">/</span><span class="hud hud--or">Compétence 1.1</span></nav>
+
+    <header class="fiche__tete">
+      <span class="fiche__numero">1.1</span>
+      <h1 class="fiche__titre">Gérer le patrimoine informatique</h1>
+      <p class="fiche__soustitre">« Savoir ce que l'on possède avant de décider ce que l'on garde. »</p>
+      <p class="fiche__resume">Compétence du bloc 1 : Support et mise à disposition de services informatiques. Couverte par 1 réalisation de mon tableau de synthèse.</p>
+    </header>
+
+    <div class="fiche">
+      <div>
+        <section class="bloc revele">
+          <h2 class="bloc__titre"><span>Ce que le référentiel demande</span></h2>
+          <p>Les sous-compétences telles qu'elles figurent au référentiel du BTS SIO.</p>
+          <ul class="liste-plan"><li>Recenser et identifier les ressources numériques</li><li>Exploiter des référentiels, normes et standards adoptés par le prestataire informatique</li><li>Mettre en place et vérifier les niveaux d'habilitation associés à un service</li><li>Vérifier les conditions de la continuité d'un service informatique</li><li>Gérer des sauvegardes</li><li>Vérifier le respect des règles d'utilisation des ressources numériques</li></ul>
+        </section>
+
+        <section class="bloc revele">
+          <h2 class="bloc__titre"><span>Mes réalisations pour cette compétence</span></h2>
+          <div class="parcelles" style="margin-top:1.2rem"><a class="plaque parcelle" href="../parcelles/p04-audit-douvres.html"><span class="plaque__i"><span class="parcelle__lustre"></span>
+        <span class="parcelle__tete">
+          <span class="parcelle__num">04</span>
+          <span class="parcelle__comp">C1.1</span>
+        </span>
+        <span class="parcelle__titre">Audit informatique et financier de la Mairie de Douvres</span>
+        <span class="parcelle__resume">Recensement exhaustif des contrats, équipements et services numériques d'une commune de 1 100 habitants. Résultat : environ 23 000 € de dépenses informatiques annuelles, dont environ 13 500 € d'économies possibles, soit plus de la moitié du budget.</span>
+        <span class="parcelle__pied">
+          <span class="etat etat--livre">Livré et validé</span>
+          <span class="hud">juin - juillet 2026</span>
+        </span></span></a></div>
+        </section>
+
+        <section class="bloc revele">
+          <h2 class="bloc__titre"><span>Les preuves rattachées</span></h2>
+          <ul class="preuves"><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre">Tableur d'analyse poste par poste</span>
+        <span class="etat etat--confidentiel">Sur demande</span>
+        <span class="hud preuve__type">Parcelle 04 · Analyse</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre">Rapport de synthèse validé par le maire</span>
+        <span class="etat etat--confidentiel">Sur demande</span>
+        <span class="hud preuve__type">Parcelle 04 · Rapport</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="../assets/preuves/rapport-de-stage.pdf">Rapport de stage - partie « Contexte » et « Déroulé »</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Parcelle 04 · Rapport</span></div></div></li><li><div class="plaque preuve"><div class="plaque__i"><span class="preuve__titre"><a href="../assets/preuves/rapport-mi-stage.pdf">Rapport de mi-stage</a></span>
+        <span class="etat etat--en-ligne">Consultable</span>
+        <span class="hud preuve__type">Parcelle 04 · Rapport</span></div></div></li></ul>
+        </section>
+
+        <section class="bloc revele">
+          <h2 class="bloc__titre"><span>Indicateurs de performance</span></h2>
+          <p>Les critères sur lesquels la commission d'interrogation apprécie le niveau de maîtrise.</p>
+          <div class="plaque encart"><div class="plaque__i"><p class="hud hud--or encart__titre">Référentiel E5 · compétence 1.1</p><ul class="liste-plan"><li>Le recensement du patrimoine informatique est exhaustif.</li><li>Les référentiels, normes et standards sont mobilisés de façon pertinente.</li><li>Les droits mis en place correspondent aux habilitations des acteurs.</li><li>Les conditions de continuité et de reprise d'un service sont vérifiées et les manquements sont signalés.</li><li>Les sauvegardes sont réalisées dans les conditions prévues conformément au plan de sauvegarde.</li><li>Les restaurations sont testées et opérationnelles.</li><li>Les écarts par rapport aux règles d'utilisation des ressources numériques sont détectés et signalés.</li></ul></div></div>
+        </section>
+      </div>
+
+      <aside class="fiche__marge">
+        <div class="plaque cartouche"><div class="plaque__i"><p class="hud hud--or">Cartouche de la compétence</p><div class="cartouche__grille"><div class="cartouche__champ"><span class="cartouche__cle">Code</span><span class="cartouche__valeur">1.1</span></div><div class="cartouche__champ"><span class="cartouche__cle">Bloc</span><span class="cartouche__valeur">1 : Support et mise à disposition de services informatiques</span></div><div class="cartouche__champ"><span class="cartouche__cle">Sous-compétences</span><span class="cartouche__valeur">6</span></div><div class="cartouche__champ"><span class="cartouche__cle">Couverture</span><span class="cartouche__valeur">1 réalisation</span></div></div><p class="hud" style="margin:1.2rem 0 .6rem">Relief de couverture</p><span class="relief" aria-hidden="true"><i></i></span></div></div>
+      </aside>
+    </div>
+  </div>
+</main>
+<footer class="pied">
+  <div class="enveloppe">
+    <div class="pied__grille">
+      <div>
+        <p class="hud hud--or pied__titre">Le cadastre</p>
+        <ul class="pied__liste">
+          <li><a href="../index.html#plan">Plan de compétences</a></li>
+          <li><a href="../index.html#realisations">Les neuf réalisations</a></li>
+          <li><a href="../index.html#competences">Les six compétences</a></li>
+          <li><a href="../tableau-de-synthese.html">Tableau de synthèse E5</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="hud hud--or pied__titre">Le géomètre</p>
+        <ul class="pied__liste">
+          <li><a href="../parcours.html">Parcours et certifications</a></li>
+          <li><a href="../veille.html">Veille technologique</a></li>
+          <li><a href="https://github.com/Picsou01/portefolio">Dépôt public</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="hud hud--or pied__titre">Cadre</p>
+        <ul class="pied__liste">
+          <li><a href="../mentions-legales.html">Mentions légales</a></li>
+        </ul>
+        <p class="hud" style="margin-top:1rem;line-height:1.8">BTS SIO · option SLAM<br>Épreuve E5 · session 2027<br>Institution des Chartreux (SUP ALTA)</p>
+      </div>
+    </div>
+    <div class="pied__bas">
+      <p class="hud hud--or">⌖ 45°57′ N · 5°21′ E · Douvres, Ain</p>
+      <p class="hud">Maël Davidenko · tous droits réservés</p>
+    </div>
+  </div>
+</footer>
+<script src="../js/parcelles.js"></script>
+<script src="../js/relief.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/cadastre.js"></script>
+<script src="../js/carnet.js"></script>
+</body>
+</html>
