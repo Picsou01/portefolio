@@ -1,0 +1,13 @@
+# Portfolio E5 de Maël Davidenko.
+#
+# L'exploration reste ouverte : chaque page porte une balise
+# <meta name="robots" content="noindex, follow">, et un robot doit pouvoir
+# lire la page pour en tenir compte. L'interdire ici reviendrait a le rendre
+# aveugle a la consigne.
+#
+# Seul le dossier des preuves est ferme : ce sont des PDF, ils ne peuvent
+# porter aucune balise, et l'un d'eux est un CV nominatif.
+
+User-agent: *
+Disallow: /portefolio/assets/preuves/
+Disallow: /assets/preuves/
